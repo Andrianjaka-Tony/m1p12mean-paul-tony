@@ -5,12 +5,12 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   imports: [RouterOutlet],
   template: `
-    <h1>Welcome to {{title}}!</h1>
+    <div class="h-screen w-screen flex items-center justify-center">
+      <h1 class="text-8xl tracking-tighter">Vroom Vroom🥳</h1>
+    </div>
 
     <router-outlet />
   `,
   styles: [],
 })
-export class AppComponent {
-  title = 'vroom';
-}
+export class AppComponent {}
