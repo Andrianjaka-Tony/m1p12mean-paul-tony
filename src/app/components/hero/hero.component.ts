@@ -2,7 +2,7 @@ import { AfterViewInit, Component } from '@angular/core';
 import gsap from 'gsap';
 import { HeroTitleComponent } from './components/hero-title/hero-title.component';
 import { HeroDescriptiionComponent } from './components/hero-descriptiion/hero-descriptiion.component';
-import { HeroTagsComponent } from './components/hero-tags/hero-descriptiion.component';
+import { HeroTagsComponent } from './components/hero-tags/hero-tags.component';
 import { splitRows } from '../../utils/split-rows';
 
 @Component({
