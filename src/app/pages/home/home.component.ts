@@ -4,10 +4,16 @@ import Lenis from '@studio-freight/lenis';
 import { HeroComponent } from '../../components/hero/hero.component';
 import { NavigationComponent } from '../../components/navigation/navigation.component';
 import { ServicesComponent } from '../../components/services/services.component';
+import { ProcessComponent } from '../../components/process/process.component';
 
 @Component({
   selector: 'app-home',
-  imports: [NavigationComponent, HeroComponent, ServicesComponent],
+  imports: [
+    NavigationComponent,
+    HeroComponent,
+    ServicesComponent,
+    ProcessComponent,
+  ],
   templateUrl: './home.component.html',
 })
 export class HomePage implements AfterViewInit {
