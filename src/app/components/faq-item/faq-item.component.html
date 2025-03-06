@@ -1,0 +1,16 @@
+<div class="w-full border-t border-[#9999996e]">
+  <div
+    (click)="toggleShowed()"
+    class="py-5 w-full flex justify-between items-center cursor-pointer"
+  >
+    <p class="font-light">{{ question().question }}</p>
+    <lucide-angular [img]="plus" class="h-5 w-5 opacity-60" />
+  </div>
+  <div
+    id="faq-{{ index() }}"
+    class="duration-400 text-sm opacity-60 font-light overflow-hidden"
+    style="height: 0"
+  >
+    <p>{{ question().answer }}</p>
+  </div>
+</div>

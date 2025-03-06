@@ -14,6 +14,10 @@ export const publicRoutes: Routes = [
       ),
   },
   {
+    path: 'faq',
+    loadComponent: () => import('./faq/faq.component').then((m) => m.FAQPage),
+  },
+  {
     path: 'sign-in',
     loadComponent: () =>
       import('./sign-in/sign-in.component').then((m) => m.SigninPage),
