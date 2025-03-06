@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
     <nav
       class="fixed z-10 top-0 left-0 w-screen py-6 px-8 flex justify-between items-center"
     >
-      <p class="w-1/3 text-2xl">Vroom</p>
+      <a href="/" routerLink="/" class="w-1/3 text-2xl">Vroom</a>
       <div class="flex gap-8">
         <span>Accueil</span>
         <span>Abonnements</span>

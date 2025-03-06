@@ -1,1 +1,48 @@
-<p>login works!</p>
+<div class="w-screen h-screen flex justify-center items-center">
+  <form class="p-12 flex flex-col rounded-lg border border-[#333]">
+    <h1 class="text-2xl">Connexion</h1>
+    <h1 class="mt-1 opacity-70">Ravis de vous retrouver !</h1>
+
+    <div class="mt-6 flex flex-col gap-2">
+      <label class="opacity-70 text-sm">Adresse email</label>
+      <input
+        type="email"
+        class="w-96 h-12 px-3 rounded-lg border border-[#444] outline-none duration-200 focus:border-[#888]"
+      />
+    </div>
+    <div class="mt-4 flex flex-col gap-2">
+      <label class="opacity-70 text-sm">Mot de passe</label>
+      <input
+        type="password"
+        class="w-96 h-12 px-3 rounded-lg border border-[#444] outline-none duration-200 focus:border-[#888]"
+      />
+      <p class="opacity-60 text-xs">Afficher le mot de passe</p>
+    </div>
+    <div class="mt-6 flex flex-col gap-2">
+      <button
+        type="submit"
+        class="bg-[#ddd] w-full py-2 rounded text-black cursor-pointer"
+      >
+        Se connecter
+      </button>
+    </div>
+    <div
+      class="mt-6 flex items-center w-full uppercase text-xs gap-4 font-light opacity-60"
+    >
+      <div class="flex-1 h-[1px] bg-gradient-to-r from-[#0000] to-white"></div>
+      <p>Ou</p>
+      <div class="flex-1 h-[1px] bg-gradient-to-l from-[#0000] to-white"></div>
+    </div>
+    <div class="mt-6 flex flex-col gap-4">
+      <div
+        class="py-3 w-full flex justify-center items-center gap-3 bg-[#222] rounded-lg cursor-pointer"
+      >
+        <lucide-angular
+          [img]="chrome"
+          class="h-6 w-6 opacity-80"
+        ></lucide-angular>
+        <p class="text-sm opacity-80">Continuer avec Google</p>
+      </div>
+    </div>
+  </form>
+</div>
