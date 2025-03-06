@@ -5,6 +5,7 @@ import { HeroComponent } from '../../components/hero/hero.component';
 import { NavigationComponent } from '../../components/navigation/navigation.component';
 import { ServicesComponent } from '../../components/services/services.component';
 import { ProcessComponent } from '../../components/process/process.component';
+import { SubscriptionComponent } from '../../components/subscription/subscription.component';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +14,7 @@ import { ProcessComponent } from '../../components/process/process.component';
     HeroComponent,
     ServicesComponent,
     ProcessComponent,
+    SubscriptionComponent,
   ],
   templateUrl: './home.component.html',
 })
