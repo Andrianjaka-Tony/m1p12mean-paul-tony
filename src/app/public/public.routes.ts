@@ -14,8 +14,8 @@ export const publicRoutes: Routes = [
       ),
   },
   {
-    path: 'login',
+    path: 'sign-in',
     loadComponent: () =>
-      import('./login/login.component').then((m) => m.LoginPage),
+      import('./sign-in/sign-in.component').then((m) => m.SigninPage),
   },
 ];

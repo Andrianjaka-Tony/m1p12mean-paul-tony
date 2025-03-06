@@ -14,10 +14,11 @@ import { RouterLink } from '@angular/router';
       <div class="flex gap-8">
         <a href="/" routerLink="/">Accueil</a>
         <a href="/subscriptions" routerLink="/subscriptions">Abonnements</a>
-        <span>FAQ</span>
+        <a href="/faq" routerLink="/faq">FAQ</a>
       </div>
-      <div class="w-1/3 flex justify-end">
-        <a href="/login" routerLink="/login">
+      <div class="w-1/3 flex justify-end items-center gap-8">
+        <a href="/sign-up" routerLink="/sign-up">S'inscrire</a>
+        <a href="/sign-in" routerLink="/sign-in">
           <button class="bg-white px-6 py-2 rounded text-black cursor-pointer">
             Se connecter
           </button>
