@@ -18,6 +18,11 @@ export const publicRoutes: Routes = [
     loadComponent: () => import('./faq/faq.component').then((m) => m.FAQPage),
   },
   {
+    path: 'sign-up',
+    loadComponent: () =>
+      import('./sign-up/sign-up.component').then((m) => m.SignupPage),
+  },
+  {
     path: 'sign-in',
     loadComponent: () =>
       import('./sign-in/sign-in.component').then((m) => m.SigninPage),
