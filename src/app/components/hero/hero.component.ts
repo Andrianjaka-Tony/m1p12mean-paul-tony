@@ -1,5 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
 import gsap from 'gsap';
+
 import { HeroTitleComponent } from './components/hero-title/hero-title.component';
 import { HeroDescriptiionComponent } from './components/hero-descriptiion/hero-descriptiion.component';
 import { HeroTagsComponent } from './components/hero-tags/hero-tags.component';
@@ -30,7 +31,7 @@ export class HeroComponent implements AfterViewInit {
     gsap.fromTo(
       '#hero-tags-wrapper div p',
       { y: '150%' },
-      { y: 0, duration: 1, stagger: 0.05, ease: 'power3.out' }
+      { y: 0, duration: 1, stagger: 0.05, ease: 'power3.out', delay: 0.5 }
     );
   }
 
@@ -38,12 +39,12 @@ export class HeroComponent implements AfterViewInit {
     gsap.fromTo(
       '#hero-title',
       { opacity: 0 },
-      { opacity: 1, duration: 1, ease: 'power3.out' }
+      { opacity: 1, duration: 1, ease: 'power3.out', delay: 0.5 }
     );
     gsap.fromTo(
       '#hero-buttons, .hero-description-line',
       { y: '150%' },
-      { y: 0, duration: 1, stagger: 0.1, ease: 'power3.out', delay: 0.1 }
+      { y: 0, duration: 1, stagger: 0.1, ease: 'power3.out', delay: 0.7 }
     );
   }
 

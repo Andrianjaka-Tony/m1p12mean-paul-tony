@@ -76,10 +76,8 @@
     <div class="mt-6 flex flex-col gap-2">
       <button
         type="submit"
-        [ngClass]="[
-          'bg-[#ddd] w-full py-2 rounded text-black duration-200',
-          isSending() ? 'opacity-70' : 'cursor-pointer'
-        ]"
+        [ngClass]="[isSending() ? 'opacity-70' : 'cursor-pointer']"
+        class="bg-[#ddd] w-full py-2 rounded text-black duration-200"
         [disabled]="isSending()"
       >
         S'inscrire

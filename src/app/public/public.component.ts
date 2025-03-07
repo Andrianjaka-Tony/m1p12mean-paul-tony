@@ -1,7 +1,8 @@
-import { Component, AfterViewInit, HostListener } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import Lenis from '@studio-freight/lenis';
+
 import { NavigationComponent } from '../components/navigation/navigation.component';
 
 @Component({
@@ -13,24 +14,14 @@ import { NavigationComponent } from '../components/navigation/navigation.compone
   `,
 })
 export class PublicRoute implements AfterViewInit {
-  private lenis!: Lenis;
-
   ngAfterViewInit(): void {
-    this.lenis = new Lenis({
-      lerp: 0.1,
-      duration: 2,
-    });
+    const lenis = new Lenis({ duration: 2 });
 
-    const raf = (time: number) => {
-      this.lenis.raf(time);
+    function raf(time: number) {
+      lenis.raf(time);
       requestAnimationFrame(raf);
-    };
+    }
 
     requestAnimationFrame(raf);
-  }
-
-  @HostListener('wheel', ['$event'])
-  onScroll(): void {
-    this.lenis.raf(performance.now());
   }
 }
