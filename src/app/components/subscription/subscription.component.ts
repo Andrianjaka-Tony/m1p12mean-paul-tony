@@ -44,7 +44,7 @@ export class SubscriptionComponent implements AfterViewInit {
     gsap.to('#subscriptions > div', {
       y: 0,
       opacity: 1,
-      duration: 0.7,
+      duration: 1,
       ease: 'power3.out',
       delay: this.delay() + 0.2,
       stagger: 0.1,

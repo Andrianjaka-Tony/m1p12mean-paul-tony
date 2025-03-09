@@ -1,6 +1,9 @@
-import { Component, signal } from '@angular/core';
+import { AfterViewInit, Component, signal } from '@angular/core';
+import gsap from 'gsap';
+
 import { FooterComponent } from '../../components/footer/footer.component';
 import { FaqItemComponent } from '../../components/faq-item/faq-item.component';
+import { splitRows } from '../../utils/split-rows';
 
 export type Question = {
   question: string;
@@ -13,7 +16,7 @@ export type Question = {
   templateUrl: './faq.component.html',
   styles: ``,
 })
-export class FAQPage {
+export class FAQPage implements AfterViewInit {
   readonly questions = signal<Question[]>([
     {
       question: 'Comment prendre rendez-vous en ligne ?',
@@ -116,4 +119,62 @@ export class FAQPage {
         'Vous pouvez accéder à l’historique complet de vos réparations en vous connectant à votre espace client sur notre site. Vous y trouverez les détails de chaque intervention, les dates, les coûts et les recommandations d’entretien pour votre véhicule.',
     },
   ]);
+
+  animateTitleAndDescription() {
+    gsap.to('.faq-title-line, .faq-description-line', {
+      y: 0,
+      duration: 1,
+      stagger: 0.1,
+      ease: 'power3.out',
+      delay: 0.5,
+    });
+  }
+
+  animateItems() {
+    gsap.to('.faq-item', {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      stagger: 0.1,
+      ease: 'power3.out',
+      delay: 0.7,
+    });
+  }
+
+  initTitle() {
+    const title = document.getElementById('faq-title');
+    if (title) {
+      const lines = splitRows(title, 'text-5xl');
+      title.innerHTML = '';
+      lines.forEach((line) => {
+        title.innerHTML += `
+          <div class="overflow-hidden">
+            <p style="transform: translateY(100%)" class="faq-title-line">${line}</p>
+          </div>
+        `;
+      });
+    }
+  }
+
+  initDescription() {
+    const description = document.getElementById('faq-description');
+    if (description) {
+      const lines = splitRows(description, 'text-xl');
+      description.innerHTML = '';
+      lines.forEach((line) => {
+        description.innerHTML += `
+          <div class="overflow-hidden">
+            <p style="transform: translateY(100%)" class="faq-description-line">${line}</p>
+          </div>
+        `;
+      });
+    }
+  }
+
+  ngAfterViewInit(): void {
+    this.initTitle();
+    this.initDescription();
+    this.animateTitleAndDescription();
+    this.animateItems();
+  }
 }
