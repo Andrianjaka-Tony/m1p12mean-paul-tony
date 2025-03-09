@@ -1,7 +1,14 @@
 <div class="w-screen h-screen flex justify-center items-center">
-  <form class="p-12 flex flex-col rounded-lg border border-[#333]">
+  <form
+    [formGroup]="signinForm"
+    (ngSubmit)="handleSubmit()"
+    class="p-12 flex flex-col rounded-lg border border-[#333]"
+  >
     <h1 class="text-2xl">Connexion</h1>
     <p class="mt-1 opacity-70">Ravis de vous retrouver !</p>
+    @if (message() !== "") {
+    <p class="text-red-400">{{ message() }}</p>
+    }
 
     <div class="mt-6 flex flex-col gap-2">
       <label for="email" class="opacity-70 text-sm">Adresse email</label>
@@ -9,7 +16,13 @@
         id="email"
         type="email"
         class="w-96 h-12 px-3 rounded-lg border border-[#444] outline-none duration-200 focus:border-[#888]"
+        formControlName="email"
       />
+      @if (isSubmitted() && signinForm.get("email")?.hasError("required")) {
+      <p class="text-sm text-red-400">L'adresse email est requis.</p>
+      } @if (isSubmitted() && signinForm.get("email")?.hasError("email")) {
+      <p class="text-sm text-red-400">L'adresse email est invalide.</p>
+      }
     </div>
 
     <div class="mt-4 flex flex-col gap-2">
@@ -18,14 +31,25 @@
         id="password"
         type="password"
         class="w-96 h-12 px-3 rounded-lg border border-[#444] outline-none duration-200 focus:border-[#888]"
+        formControlName="password"
       />
       <p class="opacity-60 text-xs">Afficher le mot de passe</p>
+      @if (isSubmitted() && signinForm.get("password")?.hasError("required")) {
+      <p class="text-sm text-red-400">Le mot de passe est requis.</p>
+      } @if (isSubmitted() && signinForm.get("password")?.hasError("minlength"))
+      {
+      <p class="text-sm text-red-400">
+        Le mot de passe doit contenir au moins 8 caractères.
+      </p>
+      }
     </div>
 
     <div class="mt-6 flex flex-col gap-2">
       <button
         type="submit"
-        class="bg-[#ddd] w-full py-2 rounded text-black cursor-pointer"
+        [ngClass]="[isSending() ? 'opacity-70' : 'cursor-pointer']"
+        class="bg-[#ddd] w-full py-2 rounded text-black duration-200"
+        [disabled]="isSending()"
       >
         Se connecter
       </button>

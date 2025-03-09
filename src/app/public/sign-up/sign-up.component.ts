@@ -7,12 +7,12 @@ import {
 } from '@angular/forms';
 
 import { LucideAngularModule, Chrome } from 'lucide-angular';
-import { SignUpService } from '../../services/sign-up.service';
+import { SignUpService } from '../../services/auth/sign-up.service';
 import { User } from '../../models/auth/user.model';
 import { NgClass } from '@angular/common';
-import { userDataStoreName, userTokenStoreName } from '../../utils/sotre';
 import { catchError, finalize } from 'rxjs';
 import { Response } from '../../models/response.model';
+import { SignService } from '../../services/auth/sign.service';
 
 @Component({
   selector: 'sign-up',
@@ -22,6 +22,7 @@ import { Response } from '../../models/response.model';
   styles: ``,
 })
 export class SignupPage {
+  readonly signService = inject(SignService);
   readonly signupService = inject(SignUpService);
 
   readonly chrome = Chrome;
@@ -46,7 +47,7 @@ export class SignupPage {
 
       const { value: user } = this.signupForm;
       this.signupService
-        .signupHttp(user as User)
+        .signup(user as User)
         .pipe(
           catchError((e) => {
             const error = e.error as Response<undefined>;
@@ -58,9 +59,7 @@ export class SignupPage {
           })
         )
         .subscribe((response) => {
-          const { data } = response;
-          localStorage.setItem(userDataStoreName, JSON.stringify(data.user));
-          localStorage.setItem(userTokenStoreName, JSON.stringify(data.token));
+          this.signService.saveUserData(response.data, this.message);
 
           // Redirection please
         });
