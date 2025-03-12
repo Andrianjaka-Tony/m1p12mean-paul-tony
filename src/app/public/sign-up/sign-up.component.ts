@@ -13,6 +13,7 @@ import { NgClass } from '@angular/common';
 import { catchError, finalize } from 'rxjs';
 import { Response } from '../../models/response.model';
 import { SignService } from '../../services/auth/sign.service';
+import { toast } from '../../components/toast/toast.component';
 
 @Component({
   selector: 'sign-up',
@@ -60,8 +61,13 @@ export class SignupPage {
         )
         .subscribe((response) => {
           this.signService.saveUserData(response.data, this.message);
+          toast(
+            'success',
+            'Inscription réussie',
+            `Votre inscription à la plateforme est un succès !`
+          );
 
-          // Redirection please
+          this.signService.redirect(response.data);
         });
     }
   }

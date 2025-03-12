@@ -13,6 +13,7 @@ import { User } from '../../models/auth/user.model';
 import { catchError, finalize } from 'rxjs';
 import { Response } from '../../models/response.model';
 import { SignService } from '../../services/auth/sign.service';
+import { toast } from '../../components/toast/toast.component';
 
 @Component({
   selector: 'sign-in',
@@ -56,8 +57,13 @@ export class SigninPage {
         )
         .subscribe((response) => {
           this.signService.saveUserData(response.data, this.message);
+          toast(
+            'success',
+            'Connexion réussie',
+            `Vous êtes maintenant connecté en tant que ${response.data.user.firstname}`
+          );
 
-          // Redirection please
+          this.signService.redirect(response.data);
         });
     }
   }
