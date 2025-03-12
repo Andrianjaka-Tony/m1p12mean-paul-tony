@@ -29,6 +29,14 @@ export class SkillsPage implements OnInit {
   readonly skills = signal<Skill[]>([]);
 
   ngOnInit(): void {
+    this.findAll();
+  }
+
+  toggleSave() {
+    this.isSave.set(!this.isSave());
+  }
+
+  findAll() {
     this.skillService
       .findAll()
       .pipe(
@@ -42,9 +50,5 @@ export class SkillsPage implements OnInit {
       .subscribe((response) => {
         this.skills.set(response.data);
       });
-  }
-
-  toggleSave() {
-    this.isSave.set(!this.isSave());
   }
 }
