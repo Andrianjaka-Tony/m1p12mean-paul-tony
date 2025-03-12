@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
 
 export type PageSidebarItem = {
@@ -10,9 +10,9 @@ export type PageSidebarItem = {
 
 @Component({
   selector: 'page-sidebar-item',
-  imports: [RouterLink, LucideAngularModule],
+  imports: [RouterLink, RouterLinkActive, LucideAngularModule],
   templateUrl: './page-sidebar-item.component.html',
-  styles: ``,
+  styleUrl: `./page-sidebar-item.component.css`,
 })
 export class PageSidebarItemComponent {
   readonly item = input.required<PageSidebarItem>();

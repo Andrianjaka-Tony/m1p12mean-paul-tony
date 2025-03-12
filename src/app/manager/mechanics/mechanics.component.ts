@@ -9,10 +9,11 @@ import {
   LayoutDashboard,
   Wrench,
 } from 'lucide-angular';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'mechanics-page',
-  imports: [PageTitleComponent, PageStructureComponent],
+  imports: [RouterOutlet, PageTitleComponent, PageStructureComponent],
   templateUrl: './mechanics.component.html',
   styles: ``,
 })

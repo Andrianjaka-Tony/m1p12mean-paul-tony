@@ -21,7 +21,7 @@ export class ManagerRoute {
     },
     {
       href: '/manager/dashboard',
-      label: 'Tableau de bord',
+      label: 'Dashboard',
     },
     {
       href: '/manager/clients',

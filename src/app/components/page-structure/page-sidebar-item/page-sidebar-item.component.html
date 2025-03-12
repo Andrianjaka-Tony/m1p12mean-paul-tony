@@ -1,8 +1,9 @@
 <a
   href="{{ item().href }}"
   routerLink="{{ item().href }}"
-  class="flex gap-2 items-center px-3 py-2 duration-200 hover:bg-[#151515] cursor-pointer rounded"
+  routerLinkActive="page-sidebar-item-active"
+  class="page-sidebar-item flex gap-2 items-center px-3 py-2 duration-200 hover:bg-[#151515] cursor-pointer rounded"
 >
-  <lucide-angular [img]="item().icon" class="h-4 w-4 opacity-70" />
-  <p class="opacity-70">{{ item().label }}</p>
+  <lucide-angular [img]="item().icon" class="h-4 w-4" />
+  <p>{{ item().label }}</p>
 </a>

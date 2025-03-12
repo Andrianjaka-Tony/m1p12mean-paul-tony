@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { managerMechanicsRoutes } from './mechanics/mechanics.routes';
 
 export const managerRoutes: Routes = [
   {
@@ -20,5 +21,6 @@ export const managerRoutes: Routes = [
     path: 'mechanics',
     loadComponent: () =>
       import('./mechanics/mechanics.component').then((m) => m.MechanicsPage),
+    children: managerMechanicsRoutes,
   },
 ];
