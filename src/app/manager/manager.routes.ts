@@ -16,4 +16,9 @@ export const managerRoutes: Routes = [
     loadComponent: () =>
       import('./dashboard/dashboard.component').then((m) => m.DashboardPage),
   },
+  {
+    path: 'mechanics',
+    loadComponent: () =>
+      import('./mechanics/mechanics.component').then((m) => m.MechanicsPage),
+  },
 ];

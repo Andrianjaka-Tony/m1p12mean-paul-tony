@@ -1,0 +1,37 @@
+<nav class="w-screen flex flex-col px-5 pt-3 text-[#ccc]">
+  <div class="flex justify-between items-center">
+    <div class="flex items-center gap-3">
+      <div
+        class="relative h-12 w-12 flex items-center justify-center rounded-full bg-[#222] leading-none"
+      >
+        <p class="text-2xl">{{ user()?.firstname?.charAt(0) }}</p>
+        <img
+          class="absolute top-0 left-0 w-full h-full rounded-full"
+          alt="{{ user()?.lastname }} {{ user()?.firstname }}"
+          src="{{ user()?.picture }}"
+        />
+      </div>
+      <div class="flex flex-col">
+        <p class="text-lg">{{ user()?.lastname }} {{ user()?.firstname }}</p>
+        <p class="-mt-0.5 text-sm opacity-80">{{ role() }}</p>
+      </div>
+    </div>
+
+    <div class="flex items-center gap-4 text-sm">
+      <p class="opacity-90 border border-[#444] px-3 py-2 rounded-lg">
+        Centre d'aide
+      </p>
+      <p class="opacity-70">Contact</p>
+      <p class="opacity-70">Déconnexion</p>
+    </div>
+  </div>
+
+  <div
+    class="relative mt-6 pb-3 flex border-b-2 border-b-[#333] text-sm tracking-wider"
+  >
+    @for (link of links(); track $index) {
+    <private-navigation-item [link]="link" />
+    }
+    <!-- <div class="absolute bottom-0 h-0.5 w-full bg-white"></div> -->
+  </div>
+</nav>

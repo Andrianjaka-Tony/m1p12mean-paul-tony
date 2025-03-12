@@ -17,33 +17,37 @@ body {
 @keyframes fade-out {
   from {
     opacity: 1;
-    transform: translateY(0);
+    /* transform: translateY(0); */
   }
 
   to {
     opacity: 0.2;
-    transform: translateY(-60vh);
+    /* transform: translateY(-60vh); */
   }
 }
 
 @keyframes fade-in {
   from {
-    clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
-    transform: translateY(30vh);
+    /* clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%); */
+    /* transform: translateY(30vh); */
+    opacity: 0;
   }
 
   to {
-    clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
-    transform: translateY(0);
+    /* clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%); */
+    /* transform: translateY(0); */
+    opacity: 1;
   }
 }
 
 ::view-transition-old(root) {
   will-change: transform, opacity;
-  animation: 1.2s cubic-bezier(0.48, 0.02, 0.16, 1.01) both fade-out;
+  animation: 0.4s cubic-bezier(0.48, 0.02, 0.16, 1.01) both fade-out;
+  /* animation: 1.2s cubic-bezier(0.48, 0.02, 0.16, 1.01) both fade-out; */
 }
 
 ::view-transition-new(root) {
   will-change: clip-path, transform;
-  animation: 1.2s cubic-bezier(0.48, 0.02, 0.16, 1.01) both fade-in;
+  animation: 0.4s cubic-bezier(0.48, 0.02, 0.16, 1.01) both fade-in;
+  /* animation: 1.2s cubic-bezier(0.48, 0.02, 0.16, 1.01) both fade-in; */
 }
