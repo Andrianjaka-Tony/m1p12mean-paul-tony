@@ -1,85 +1,68 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'table-component',
+  selector: '[tableComponent]',
   template: `
-    <div className="relative w-full overflow-auto">
-      <table class="w-full caption-bottom text-sm">
-        <ng-content />
-      </table>
-    </div>
+    <table class="w-full text-[1rem]">
+      <ng-content />
+    </table>
   `,
+  host: {
+    class: 'relative w-full overflow-auto border border-[#333] rounded-lg',
+  },
 })
 export class TableComponent {}
 
 @Component({
-  selector: 'table-header-component',
-  template: `
-    <thead class="[&_tr]:border-b">
-      <ng-content />
-    </thead>
-  `,
+  selector: '[tableHeader]',
+  template: ` <ng-content /> `,
+  host: { class: '[&_tr]:border-b [&_tr]:border-[#333]' },
 })
 export class TableHeaderComponent {}
 
 @Component({
-  selector: 'table-body-component',
-  template: `
-    <tbody class="[&_tr:last-child]:border-0">
-      <ng-content />
-    </tbody>
-  `,
+  selector: '[tableBody]',
+  template: ` <ng-content /> `,
+  host: { class: '[&_tr:last-child]:border-0' },
 })
 export class TableBodyComponent {}
 
 @Component({
-  selector: 'table-footer-component',
-  template: `
-    <tfoot class="border-t bg-muted/50 font-medium [&>tr]:last:border-b-0">
-      <ng-content />
-    </tfoot>
-  `,
+  selector: '[tableFooter]',
+  template: ` <ng-content /> `,
+  host: { class: 'font-medium [&>tr]:last:border-b-0' },
 })
 export class TableFooterComponent {}
 
 @Component({
-  selector: 'table-row-component',
-  template: `
-    <tr class="border-b">
-      <ng-content />
-    </tr>
-  `,
+  selector: '[tableRow]',
+  template: ` <ng-content /> `,
+  host: { class: 'opacity-70 border-b border-[#333] even:bg-[#151515]' },
 })
 export class TableRowComponent {}
 
 @Component({
-  selector: 'table-head-component',
-  template: `
-    <th
-      class="h-12 px-4 text-left align-middle font-medium &:has([role=checkbox])]:pr-0"
-    >
-      <ng-content />
-    </th>
-  `,
+  selector: '[tableHead]',
+  template: ` <ng-content /> `,
+  host: {
+    class:
+      'px-4 py-3 text-left align-middle font-medium border-[#333] opacity-70 bg-[#050505]',
+  },
 })
 export class TableHeadComponent {}
 
 @Component({
-  selector: 'table-cell-component',
-  template: `
-    <td class="p-4 align-middle [&:has([role=checkbox])]:pr-0">
-      <ng-content />
-    </td>
-  `,
+  selector: '[tableCell]',
+  template: ` <ng-content /> `,
+  host: {
+    class: 'px-4 py-3 align-middle border-[#333]',
+  },
 })
 export class TableCellComponent {}
 
 @Component({
-  selector: 'table-caption-component',
-  template: `
-    <caption class="mt-4 text-sm text-muted-foreground">
-      <ng-content />
-    </caption>
-  `,
+  selector: '[tableCaption]',
+  template: ` <ng-content /> `,
+  host: { class: 'mt-4 text-sm text-muted-foreground' },
 })
 export class TableCaptionComponent {}

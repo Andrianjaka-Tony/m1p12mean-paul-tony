@@ -1,0 +1,21 @@
+<div tableComponent>
+  <thead tableHeader>
+    <tr tableRow>
+      <th tableHead class="w-80">Identifiant</th>
+      <th tableHead>Intitulé</th>
+    </tr>
+  </thead>
+  <tbody tableBody>
+    @if (isLoading()) { @for (skill of ["", "", "", "", "",]; track $index) {
+    <tr tableRow>
+      <td tableCell><skeleton /></td>
+      <td tableCell><skeleton /></td>
+    </tr>
+    } } @else { @for (skill of skills(); track $index) {
+    <tr tableRow>
+      <td tableCell>{{ skill._id }}</td>
+      <td tableCell>{{ skill.label }}</td>
+    </tr>
+    } }
+  </tbody>
+</div>
