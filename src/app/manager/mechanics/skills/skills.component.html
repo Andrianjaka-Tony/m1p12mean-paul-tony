@@ -3,7 +3,20 @@
   <p class="text-sm opacity-70 mt-1">
     Gérez la liste des compétences dans cette section
   </p>
-  <div class="w-full mt-6 mb-2">
+  <div class="w-full mt-6">
     <skills-list [skills]="skills()" [isLoading]="isFindLoading()" />
+    <div class="mt-4"></div>
+    <button-component
+      (click)="toggleSave()"
+      class="w-fit flex gap-1 items-center"
+      variant="default"
+      size="sm"
+    >
+      <lucide-angular [img]="award" class="h-4 w-4" />
+      <p class="leading-none">Enregistrer</p>
+    </button-component>
   </div>
+  @if (isSave()) {
+  <skill-save (close)="toggleSave()" />
+  }
 </div>

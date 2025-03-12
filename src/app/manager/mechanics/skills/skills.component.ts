@@ -4,10 +4,17 @@ import { Skill } from '../../../models/mechanic/skill.model';
 import { SkillService } from '../../../services/mechanic/skill.service';
 import { catchError, finalize } from 'rxjs';
 import { Award, LucideAngularModule } from 'lucide-angular';
+import { ButtonComponent } from '../../../components/button/button.component';
+import { SkillSaveComponent } from './skill-save/skill-save.component';
 
 @Component({
   selector: 'skills',
-  imports: [SkillsListComponent, LucideAngularModule],
+  imports: [
+    SkillsListComponent,
+    LucideAngularModule,
+    ButtonComponent,
+    SkillSaveComponent,
+  ],
   templateUrl: './skills.component.html',
   styles: ``,
 })
@@ -15,6 +22,8 @@ export class SkillsPage implements OnInit {
   readonly award = Award;
 
   readonly skillService = inject(SkillService);
+
+  readonly isSave = signal<boolean>(false);
 
   readonly isFindLoading = signal<boolean>(true);
   readonly skills = signal<Skill[]>([]);
@@ -33,5 +42,9 @@ export class SkillsPage implements OnInit {
       .subscribe((response) => {
         this.skills.set(response.data);
       });
+  }
+
+  toggleSave() {
+    this.isSave.set(!this.isSave());
   }
 }

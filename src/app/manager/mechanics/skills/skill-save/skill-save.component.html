@@ -1,0 +1,41 @@
+<modal (close)="close.emit()">
+  <div class="p-5 pt-4">
+    <h3 class="text-xl">Compétence</h3>
+    <h3 class="w-96 mt-1 text-sm opacity-70">
+      Les compétences sont utilisées pour définir ce que les mécaniciens peuvent
+      faire et déterminent les requis pour chaque type de service
+    </h3>
+    <form>
+      <div class="mt-4 flex flex-col gap-1">
+        <label for="label" class="opacity-70 text-sm w-fit">Intitulé</label>
+        <input
+          id="label"
+          type="text"
+          class="w-96 h-10 px-2.5 rounded-md border border-[#444] outline-none duration-200 focus:border-[#888]"
+          formControlName="label"
+        />
+      </div>
+      <div class="mt-4 w-full flex justify-between items-center">
+        <button-component
+          class="flex items-center gap-1"
+          size="sm"
+          variant="secondary"
+          type="button"
+          (click)="close.emit()"
+        >
+          <lucide-angular [img]="cross" class="h-4 w-4" />
+          Annuler
+        </button-component>
+        <button-component
+          class="flex items-center gap-1"
+          size="sm"
+          variant="default"
+          type="submit"
+        >
+          <lucide-angular [img]="award" class="h-4 w-4" />
+          Valider
+        </button-component>
+      </div>
+    </form>
+  </div>
+</modal>
