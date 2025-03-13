@@ -1,0 +1,50 @@
+<modal (close)="close.emit()">
+  <div class="p-5 pt-4">
+    <h3 class="text-xl">Compétence</h3>
+    <h3 class="w-96 mt-1 text-sm opacity-70">
+      Quand vous modifiez une compétence, essayez de trouver un intitulé à la
+      fois stylé mais compréhensible.
+    </h3>
+    @if (message() !== "") {
+    <p class="text-red-400 text-sm">{{ message() }}</p>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="handleSubmit()">
+      <div class="mt-4 flex flex-col gap-1">
+        <label for="label" class="opacity-70 text-sm w-fit">Intitulé</label>
+        <input
+          id="label"
+          type="text"
+          class="w-96 h-10 px-2.5 rounded-md border border-[#444] outline-none duration-200 focus:border-[#888]"
+          formControlName="label"
+        />
+        @if (isSubmitted() && form.get("email")?.hasError("required")) {
+        <p class="text-sm text-red-400">L'intitulé est requis.</p>
+        }
+      </div>
+      <div class="mt-4 w-full flex justify-between items-center">
+        <button-component
+          class="flex items-center gap-1"
+          size="sm"
+          variant="secondary"
+          type="button"
+          (click)="close.emit()"
+        >
+          <lucide-angular [img]="cross" class="h-4 w-4" />
+          Abandonner
+        </button-component>
+        <button-component
+          class="flex items-center gap-1 duration-200"
+          [ngClass]="[isSending() ? 'opacity-70' : 'cursor-pointer']"
+          size="sm"
+          variant="default"
+          type="submit"
+          [disabled]="isSending()"
+        >
+          <lucide-angular [img]="award" class="h-4 w-4" />
+          Enregistrer
+        </button-component>
+      </div>
+    </form>
+  </div>
+</modal>

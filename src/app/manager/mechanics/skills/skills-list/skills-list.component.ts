@@ -3,6 +3,7 @@ import {
   inject,
   input,
   output,
+  signal,
   WritableSignal,
 } from '@angular/core';
 
@@ -25,11 +26,17 @@ import {
   PopoverItemComponent,
   PopoverCloseComponent,
 } from '../../../../components/popover/popover.component';
-import { Settings, Trash2 } from 'lucide-angular';
+import {
+  Ellipsis,
+  LucideAngularModule,
+  Settings,
+  Trash2,
+} from 'lucide-angular';
 import { SkillService } from '../../../../services/mechanic/skill.service';
 import { catchError } from 'rxjs';
 import { Response } from '../../../../models/response.model';
 import { toast } from '../../../../components/toast/toast.component';
+import { SkillUpdateComponent } from '../skill-update/skill-update.component';
 
 @Component({
   selector: 'skills-list',
@@ -47,6 +54,8 @@ import { toast } from '../../../../components/toast/toast.component';
     PopoverItemsContainerComponent,
     PopoverItemComponent,
     PopoverCloseComponent,
+    LucideAngularModule,
+    SkillUpdateComponent,
   ],
   templateUrl: './skills-list.component.html',
   styles: ``,
@@ -57,15 +66,15 @@ export class SkillsListComponent {
   readonly Math = Math;
   readonly settings = Settings;
   readonly trash = Trash2;
+  readonly ellipsis = Ellipsis;
 
   readonly isLoading = input.required<boolean>();
   readonly skills = input.required<Skill[]>();
 
-  readonly afterDelete = output();
+  readonly isUpdating = signal<boolean>(false);
+  readonly defaultSkillToUpdate = signal<Skill>({} as Skill);
 
-  hello() {
-    console.log('hello');
-  }
+  readonly afterChange = output();
 
   handleDelete(skill: Skill) {
     this.skillService
@@ -83,7 +92,18 @@ export class SkillsListComponent {
           'Compétence supprimée',
           `La compétence a bien ètè supprimée`
         );
-        this.afterDelete.emit();
+        this.afterChange.emit();
       });
+  }
+
+  openUpdate(skill: Skill) {
+    this.defaultSkillToUpdate.set(skill);
+    this.isUpdating.set(true);
+    console.log(this.defaultSkillToUpdate());
+  }
+
+  closeUpdate() {
+    this.defaultSkillToUpdate.set({} as Skill);
+    this.isUpdating.set(false);
   }
 }

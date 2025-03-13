@@ -1,4 +1,11 @@
-import { Component, ElementRef, input, OnInit, output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  input,
+  OnInit,
+  output,
+} from '@angular/core';
 import { PopoverService } from './popover.service';
 import { NgClass, NgStyle } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
@@ -35,14 +42,16 @@ export class PopoverComponent implements OnInit {
 
 @Component({
   selector: 'popover-trigger',
+  imports: [NgClass],
   template: `
-    <div class="cursor-pointer">
+    <div [ngClass]="[class()]" class="cursor-pointer">
       <ng-content></ng-content>
     </div>
   `,
 })
 export class PopoverTriggerComponent implements OnInit {
   isOpen = false;
+  readonly class = input<string>('');
 
   constructor(
     private popoverService: PopoverService,

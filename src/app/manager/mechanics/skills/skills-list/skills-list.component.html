@@ -17,13 +17,20 @@
     <tr tableRow>
       <td tableCell>{{ skill._id }}</td>
       <td tableCell>{{ skill.label }}</td>
-      <td tableCell class="flex justify-end">
+      <td tableCell class="flex items-center justify-end">
         <popover [id]="'skill-popover-' + skill._id">
-          <popover-trigger>Menu</popover-trigger>
-          <popover-content class="w-40" origin="right">
+          <popover-trigger class="flex items-center mt-0.5">
+            <lucide-angular [img]="ellipsis" class="h-4 w-4 scale-120" />
+          </popover-trigger>
+          <popover-content class="w-40 mt-1" origin="right">
             <div popoverItemsContainer>
               <popover-close>
-                <div popoverItem [icon]="settings" label="Modifier"></div>
+                <div
+                  popoverItem
+                  (click)="openUpdate(skill)"
+                  [icon]="settings"
+                  label="Modifier"
+                ></div>
               </popover-close>
               <div
                 (click)="handleDelete(skill)"
@@ -39,3 +46,10 @@
     } }
   </tbody>
 </div>
+@if (isUpdating() && defaultSkillToUpdate()) {
+<skill-update
+  (close)="closeUpdate()"
+  (afterSubmit)="afterChange.emit()"
+  [skill]="defaultSkillToUpdate()"
+/>
+}

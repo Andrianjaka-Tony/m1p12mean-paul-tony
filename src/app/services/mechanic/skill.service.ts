@@ -5,8 +5,6 @@ import { Response } from '../../models/response.model';
 import { apiUrl } from '../../utils/url';
 import { createHeaders } from '../../utils/headers';
 
-type FindAllResponse = Response<Skill[]>;
-
 @Injectable({
   providedIn: 'root',
 })
@@ -15,7 +13,7 @@ export class SkillService {
 
   findAll() {
     const headers = createHeaders();
-    return this.http.get<FindAllResponse>(`${apiUrl}/api/skill`, { headers });
+    return this.http.get<Response<Skill[]>>(`${apiUrl}/api/skill`, { headers });
   }
 
   save(skill: Skill) {
@@ -23,6 +21,17 @@ export class SkillService {
     return this.http.post<Response<Skill>>(`${apiUrl}/api/skill`, skill, {
       headers,
     });
+  }
+
+  update(skill: Skill) {
+    const headers = createHeaders();
+    return this.http.put<Response<undefined>>(
+      `${apiUrl}/api/skill/${skill._id}`,
+      skill,
+      {
+        headers,
+      }
+    );
   }
 
   delete(id: string) {
