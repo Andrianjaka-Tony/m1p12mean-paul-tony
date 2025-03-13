@@ -24,4 +24,11 @@ export class SkillService {
       headers,
     });
   }
+
+  delete(id: string) {
+    const headers = createHeaders();
+    return this.http.delete<Response<undefined>>(`${apiUrl}/api/skill/${id}`, {
+      headers,
+    });
+  }
 }

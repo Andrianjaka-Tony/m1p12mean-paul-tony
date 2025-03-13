@@ -1,4 +1,4 @@
-import { Component, ElementRef, input, OnInit } from '@angular/core';
+import { Component, ElementRef, input, OnInit, output } from '@angular/core';
 import { PopoverService } from './popover.service';
 import { NgClass, NgStyle } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
@@ -7,25 +7,36 @@ import { LucideAngularModule } from 'lucide-angular';
   selector: 'popover',
   imports: [],
   template: `
-    <div class="relative">
+    <div
+      [id]="id()"
+      tabindex="0"
+      (focus)="togglePopover()"
+      (blur)="togglePopover()"
+      class="relative"
+    >
       <ng-content></ng-content>
     </div>
   `,
   providers: [PopoverService],
 })
-export class PopoverComponent {
+export class PopoverComponent implements OnInit {
+  readonly id = input<string>('');
+
   constructor(private popoverService: PopoverService) {}
+
+  ngOnInit(): void {
+    this.popoverService.setId(this.id());
+  }
+
+  togglePopover() {
+    this.popoverService.toggle();
+  }
 }
 
 @Component({
   selector: 'popover-trigger',
   template: `
-    <div
-      tabindex="1"
-      (focus)="togglePopover()"
-      (blur)="togglePopover()"
-      class="cursor-pointer"
-    >
+    <div class="cursor-pointer">
       <ng-content></ng-content>
     </div>
   `,
@@ -45,10 +56,6 @@ export class PopoverTriggerComponent implements OnInit {
   ngOnInit(): void {
     const rect = this.elementRef.nativeElement.getBoundingClientRect();
     this.popoverService.setRectangle(rect);
-  }
-
-  togglePopover() {
-    this.popoverService.toggle();
   }
 }
 
@@ -115,4 +122,30 @@ export class PopoverItemsContainerComponent {}
 export class PopoverItemComponent {
   label = input<string>('');
   icon = input<any>();
+}
+
+@Component({
+  selector: 'popover-close',
+  imports: [],
+  template: `
+    <div (click)="blurPopover($event)">
+      <ng-content></ng-content>
+    </div>
+  `,
+})
+export class PopoverCloseComponent {
+  popoverId = '';
+
+  constructor(private popoverService: PopoverService) {
+    this.popoverService.popoverId$.subscribe((state) => {
+      this.popoverId = state;
+    });
+  }
+
+  blurPopover(event: Event) {
+    event.preventDefault();
+    if (this.popoverId) {
+      document.getElementById(this.popoverId)?.blur();
+    }
+  }
 }

@@ -68,7 +68,7 @@ export class SkillSaveComponent {
         .subscribe(() => {
           toast(
             'success',
-            'Sauvegarde réussie',
+            'Compétence enregistrée',
             `La compétence a bien été sauvegardée`
           );
           this.handleClose();

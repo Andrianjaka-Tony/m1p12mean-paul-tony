@@ -3,6 +3,9 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class PopoverService {
+  private popoverIdSubject = new BehaviorSubject<string>('');
+  popoverId$ = this.popoverIdSubject.asObservable();
+
   private isOpenSubject = new BehaviorSubject<boolean>(false);
   isOpen$ = this.isOpenSubject.asObservable();
 
@@ -11,12 +14,8 @@ export class PopoverService {
   );
   rectangle$ = this.rectangleSubject.asObservable();
 
-  open() {
-    this.isOpenSubject.next(true);
-  }
-
-  close() {
-    this.isOpenSubject.next(false);
+  setId(id: string) {
+    this.popoverIdSubject.next(id);
   }
 
   toggle() {

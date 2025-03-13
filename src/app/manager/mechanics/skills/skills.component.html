@@ -4,7 +4,11 @@
     Gérez la liste des compétences dans cette section
   </p>
   <div class="w-full mt-6">
-    <skills-list [skills]="skills()" [isLoading]="isFindLoading()" />
+    <skills-list
+      [skills]="skills()"
+      [isLoading]="isFindLoading()"
+      (afterDelete)="findAll()"
+    />
     <div class="mt-4"></div>
     <button-component
       (click)="toggleSave()"
