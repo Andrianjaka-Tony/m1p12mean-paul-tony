@@ -99,7 +99,6 @@ export class SkillsListComponent {
   openUpdate(skill: Skill) {
     this.defaultSkillToUpdate.set(skill);
     this.isUpdating.set(true);
-    console.log(this.defaultSkillToUpdate());
   }
 
   closeUpdate() {

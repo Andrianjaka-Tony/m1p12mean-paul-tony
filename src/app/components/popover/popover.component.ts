@@ -74,7 +74,7 @@ export class PopoverTriggerComponent implements OnInit {
   template: `
     @if (isOpen) {
     <div
-      class="fixed z-100 max-w-96 bg-[#111] border border-[#333] rounded-lg shadow-md"
+      class="fixed z-100 translate-y-1 max-w-96 bg-[#111] border border-[#333] rounded-lg shadow-md"
       [ngStyle]="style"
       [ngClass]="[class()]"
     >
