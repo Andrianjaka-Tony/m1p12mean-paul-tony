@@ -17,6 +17,6 @@
     </button-component>
   </div>
   @if (isSave()) {
-  <skill-save (close)="toggleSave()" />
+  <skill-save (close)="toggleSave()" (afterSubmit)="findAll()" />
   }
 </div>

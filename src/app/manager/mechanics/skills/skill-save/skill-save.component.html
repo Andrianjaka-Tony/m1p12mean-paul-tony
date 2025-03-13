@@ -5,7 +5,11 @@
       Les compétences sont utilisées pour définir ce que les mécaniciens peuvent
       faire et déterminent les requis pour chaque type de service
     </h3>
-    <form>
+    @if (message() !== "") {
+    <p class="text-red-400 text-sm">{{ message() }}</p>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="handleSubmit()">
       <div class="mt-4 flex flex-col gap-1">
         <label for="label" class="opacity-70 text-sm w-fit">Intitulé</label>
         <input
@@ -14,6 +18,9 @@
           class="w-96 h-10 px-2.5 rounded-md border border-[#444] outline-none duration-200 focus:border-[#888]"
           formControlName="label"
         />
+        @if (isSubmitted() && form.get("email")?.hasError("required")) {
+        <p class="text-sm text-red-400">L'intitulé est requis.</p>
+        }
       </div>
       <div class="mt-4 w-full flex justify-between items-center">
         <button-component
@@ -27,10 +34,12 @@
           Abandonner
         </button-component>
         <button-component
-          class="flex items-center gap-1"
+          class="flex items-center gap-1 duration-200"
+          [ngClass]="[isSending() ? 'opacity-70' : 'cursor-pointer']"
           size="sm"
           variant="default"
           type="submit"
+          [disabled]="isSending()"
         >
           <lucide-angular [img]="award" class="h-4 w-4" />
           Enregistrer

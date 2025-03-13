@@ -10,11 +10,23 @@
     <tr tableRow>
       <td tableCell><skeleton /></td>
       <td tableCell><skeleton /></td>
+      <td tableCell></td>
     </tr>
     } } @else { @for (skill of skills(); track $index) {
     <tr tableRow>
       <td tableCell>{{ skill._id }}</td>
       <td tableCell>{{ skill.label }}</td>
+      <td tableCell class="flex justify-end">
+        <popover>
+          <popover-trigger>Menu</popover-trigger>
+          <popover-content class="w-40" origin="right">
+            <div popoverItemsContainer>
+              <div popoverItem [icon]="settings" label="Modifier"></div>
+              <div popoverItem [icon]="trash" label="Supprimer"></div>
+            </div>
+          </popover-content>
+        </popover>
+      </td>
     </tr>
     } }
   </tbody>

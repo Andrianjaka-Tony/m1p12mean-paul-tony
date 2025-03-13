@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Skill } from '../../models/mechanic/skill.model';
 import { Response } from '../../models/response.model';
 import { apiUrl } from '../../utils/url';
-import { userTokenStoreName } from '../../utils/sotre';
+import { createHeaders } from '../../utils/headers';
 
 type FindAllResponse = Response<Skill[]>;
 
@@ -14,11 +14,14 @@ export class SkillService {
   readonly http = inject(HttpClient);
 
   findAll() {
-    const token = localStorage.getItem(userTokenStoreName);
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`,
-    });
-
+    const headers = createHeaders();
     return this.http.get<FindAllResponse>(`${apiUrl}/api/skill`, { headers });
+  }
+
+  save(skill: Skill) {
+    const headers = createHeaders();
+    return this.http.post<Response<Skill>>(`${apiUrl}/api/skill`, skill, {
+      headers,
+    });
   }
 }

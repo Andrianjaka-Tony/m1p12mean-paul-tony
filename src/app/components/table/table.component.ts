@@ -37,7 +37,7 @@ export class TableFooterComponent {}
 @Component({
   selector: '[tableRow]',
   template: ` <ng-content /> `,
-  host: { class: 'opacity-70 border-b border-[#333] even:bg-[#151515]' },
+  host: { class: 'border-b border-[#333] even:bg-[#151515] text-[#ffffff95]' },
 })
 export class TableRowComponent {}
 
