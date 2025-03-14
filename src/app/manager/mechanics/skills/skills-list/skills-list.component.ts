@@ -1,11 +1,4 @@
-import {
-  Component,
-  inject,
-  input,
-  output,
-  signal,
-  WritableSignal,
-} from '@angular/core';
+import { Component, inject, input, output, signal } from '@angular/core';
 
 import {
   TableBodyComponent,

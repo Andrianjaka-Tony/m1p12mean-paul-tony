@@ -32,12 +32,14 @@
                   label="Modifier"
                 ></div>
               </popover-close>
-              <div
-                (click)="handleDelete(skill)"
-                popoverItem
-                [icon]="trash"
-                label="Supprimer"
-              ></div>
+              <popover-close>
+                <div
+                  (click)="handleDelete(skill)"
+                  popoverItem
+                  [icon]="trash"
+                  label="Supprimer"
+                ></div>
+              </popover-close>
             </div>
           </popover-content>
         </popover>

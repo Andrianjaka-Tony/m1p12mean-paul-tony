@@ -1,10 +1,10 @@
 import {
   Component,
+  contentChild,
   ElementRef,
-  Input,
   input,
+  OnDestroy,
   OnInit,
-  output,
 } from '@angular/core';
 import { PopoverService } from './popover.service';
 import { NgClass, NgStyle } from '@angular/common';
@@ -17,8 +17,8 @@ import { LucideAngularModule } from 'lucide-angular';
     <div
       [id]="id()"
       tabindex="0"
-      (focus)="togglePopover()"
-      (blur)="togglePopover()"
+      (focus)="openPopover()"
+      (blur)="closePopover()"
       class="relative"
     >
       <ng-content></ng-content>
@@ -26,8 +26,10 @@ import { LucideAngularModule } from 'lucide-angular';
   `,
   providers: [PopoverService],
 })
-export class PopoverComponent implements OnInit {
+export class PopoverComponent implements OnInit, OnDestroy {
+  readonly trigger = contentChild(PopoverTriggerComponent);
   readonly id = input<string>('');
+  private scrollHandler: (() => void) | null = null;
 
   constructor(private popoverService: PopoverService) {}
 
@@ -35,8 +37,32 @@ export class PopoverComponent implements OnInit {
     this.popoverService.setId(this.id());
   }
 
-  togglePopover() {
+  ngOnDestroy(): void {
+    if (this.scrollHandler) {
+      window.removeEventListener('scroll', this.scrollHandler);
+    }
+  }
+
+  openPopover() {
+    if (this.trigger()) {
+      this.trigger()?.updatePosition();
+
+      this.scrollHandler = () => {
+        this.trigger()?.updatePosition();
+      };
+
+      window.addEventListener('scroll', this.scrollHandler);
+    }
     this.popoverService.toggle();
+  }
+
+  closePopover() {
+    this.popoverService.toggle();
+
+    if (this.scrollHandler) {
+      window.removeEventListener('scroll', this.scrollHandler);
+      this.scrollHandler = null;
+    }
   }
 }
 
@@ -49,7 +75,7 @@ export class PopoverComponent implements OnInit {
     </div>
   `,
 })
-export class PopoverTriggerComponent implements OnInit {
+export class PopoverTriggerComponent {
   isOpen = false;
   readonly class = input<string>('');
 
@@ -62,9 +88,10 @@ export class PopoverTriggerComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    const rect = this.elementRef.nativeElement.getBoundingClientRect();
+  updatePosition() {
+    const rect: DOMRect = this.elementRef.nativeElement.getBoundingClientRect();
     this.popoverService.setRectangle(rect);
+    console.log(rect);
   }
 }
 
@@ -101,6 +128,7 @@ export class PopoverContentComponent {
           right: `${window.innerWidth - rect.left - rect.width}px`,
         };
       }
+      this.style.top = rect.top + rect.height + 'px';
     });
   }
 }
