@@ -4,6 +4,14 @@ import { Skill } from '../../models/mechanic/skill.model';
 import { Response } from '../../models/response.model';
 import { apiUrl } from '../../utils/url';
 import { createHeaders } from '../../utils/headers';
+import { pageSize } from '../../utils/page-size';
+
+type SkillPage = {
+  skills: Skill[];
+  totalPages: number;
+  page: number;
+  limit: number;
+};
 
 @Injectable({
   providedIn: 'root',
@@ -11,9 +19,14 @@ import { createHeaders } from '../../utils/headers';
 export class SkillService {
   readonly http = inject(HttpClient);
 
-  findAll() {
+  find(page: number) {
     const headers = createHeaders();
-    return this.http.get<Response<Skill[]>>(`${apiUrl}/api/skill`, { headers });
+    return this.http.get<Response<SkillPage>>(
+      `${apiUrl}/api/skill?page=${page}&limit=${pageSize}`,
+      {
+        headers,
+      }
+    );
   }
 
   save(skill: Skill) {

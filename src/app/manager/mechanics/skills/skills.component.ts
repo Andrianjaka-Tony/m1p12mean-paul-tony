@@ -38,7 +38,7 @@ export class SkillsPage implements OnInit {
 
   findAll() {
     this.skillService
-      .findAll()
+      .find(1)
       .pipe(
         catchError((e) => {
           throw e;
@@ -48,7 +48,7 @@ export class SkillsPage implements OnInit {
         })
       )
       .subscribe((response) => {
-        this.skills.set(response.data);
+        this.skills.set(response.data.skills);
       });
   }
 }
