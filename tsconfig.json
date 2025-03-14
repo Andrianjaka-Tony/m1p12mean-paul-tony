@@ -19,7 +19,7 @@
     "module": "ES2022",
     "baseUrl": "./",
     "paths": {
-      "zone.js/node": ["node_modules/zone.js/dist/zone-node.js"]
+      "zone.js/node": ["node_modules/zone.js/fesm2015/zone-node.js"]
     }
   },
   "angularCompilerOptions": {
