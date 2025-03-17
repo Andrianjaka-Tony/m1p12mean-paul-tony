@@ -5,10 +5,11 @@ import {
   PrivateNacigationLink,
   PrivateNavigationItemComponent,
 } from './private-navigation-item/private-navigation-item.component';
+import { AvatarComponent } from '../avatar/avatar.component';
 
 @Component({
   selector: 'private-navigation',
-  imports: [PrivateNavigationItemComponent],
+  imports: [PrivateNavigationItemComponent, AvatarComponent],
   templateUrl: './private-navigation.component.html',
   styles: ``,
 })
