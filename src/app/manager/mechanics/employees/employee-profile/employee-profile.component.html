@@ -25,8 +25,8 @@
         </tr>
       </thead>
       <tbody tableBody>
-        @if (isLoading()) { @for (skill of ["", "", "", "", "",]; track $index)
-        {
+        @if (skills().length === 0) { @for (skill of ["", "", "", "", "",];
+        track $index) {
         <tr tableRow>
           <td tableCell><skeleton /></td>
           <td tableCell><skeleton class="ml-auto" /></td>
@@ -35,7 +35,7 @@
         <tr tableRow>
           <td tableCell>{{ skill.label }}</td>
           <td tableCell class="flex items-center justify-end">
-            <switch />
+            <switch [checked]="checkedSwitch(skill)" />
           </td>
         </tr>
         } }

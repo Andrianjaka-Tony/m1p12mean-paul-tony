@@ -32,6 +32,7 @@ import { StatePaginationComponent } from '../../../../components/state-paginatio
     TableCellComponent,
     SwitchComponent,
     StatePaginationComponent,
+    SkeletonComponent,
   ],
   templateUrl: './employee-profile.component.html',
   styles: ``,
@@ -44,6 +45,7 @@ export class EmployeeProfilePage implements OnInit {
 
   readonly isLoading = signal<boolean>(true);
   readonly employee = signal<Employee>({} as Employee);
+  readonly employeeSkillsId = signal<string[]>([]);
 
   readonly skillPage = signal<number>(1);
   readonly skillPageable = signal<Pageable>({} as Pageable);
@@ -56,14 +58,18 @@ export class EmployeeProfilePage implements OnInit {
         this.id = id;
         this.employeeService.findById(this.id).subscribe((response) => {
           this.employee.set(response.data.employe);
-          this.isLoading.set(false);
+          this.employeeSkillsId.set(
+            this.employee().skills.map((s) => s._id || '')
+          );
           this.findSkills();
+          this.isLoading.set(false);
         });
       }
     });
   }
 
   findSkills() {
+    this.skills.set([]);
     this.skillService
       .find(this.skillPage() || 1)
       .pipe(
@@ -78,5 +84,10 @@ export class EmployeeProfilePage implements OnInit {
         this.skills.set(response.data.skills);
         this.skillPageable.set(response.data as Pageable);
       });
+  }
+
+  checkedSwitch(skill: Skill) {
+    console.log(this.employeeSkillsId().includes(skill._id || ''));
+    return this.employeeSkillsId().includes(skill._id || '');
   }
 }

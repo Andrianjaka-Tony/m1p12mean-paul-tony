@@ -15,7 +15,7 @@ import {
   styles: ``,
 })
 export class SwitchComponent {
-  readonly checked = input<boolean>(false);
+  readonly checked = input<boolean>(true);
   readonly checkState = signal<boolean>(this.checked());
   readonly toggle = output<boolean>();
 
