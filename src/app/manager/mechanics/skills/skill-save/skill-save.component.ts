@@ -2,18 +2,15 @@ import { Component, inject, output, signal } from '@angular/core';
 import { ModalComponent } from '../../../../components/modal/modal.component';
 import { ButtonComponent } from '../../../../components/button/button.component';
 import { Award, LucideAngularModule, X } from 'lucide-angular';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { SkillService } from '../../../../services/mechanic/skill.service';
 import { Skill } from '../../../../models/mechanic/skill.model';
 import { catchError, finalize } from 'rxjs';
 import { Response } from '../../../../models/response.model';
 import { toast } from '../../../../components/toast/toast.component';
+import { createForm } from 'src/app/utils/create-form';
+import { ControlledInputComponent } from 'src/app/components/controlled-input/controlled-input.component';
 
 @Component({
   selector: 'skill-save',
@@ -23,6 +20,7 @@ import { toast } from '../../../../components/toast/toast.component';
     LucideAngularModule,
     ReactiveFormsModule,
     NgClass,
+    ControlledInputComponent,
   ],
   templateUrl: './skill-save.component.html',
   styles: ``,
@@ -36,33 +34,42 @@ export class SkillSaveComponent {
   readonly close = output();
   readonly afterSubmit = output();
 
-  readonly isSubmitted = signal<boolean>(false);
-  readonly isSending = signal<boolean>(false);
-  readonly message = signal<string>('');
-  readonly form = new FormGroup({
-    label: new FormControl('', [Validators.required]),
-  });
+  readonly fields = [
+    { name: 'label', defaultValue: '', validators: [Validators.required] },
+  ];
+  readonly form = createForm(this.fields);
+  readonly fieldsControls = [
+    {
+      id: 'label',
+      label: 'Intitulé',
+      type: 'text',
+      controleName: 'label',
+      isSubmitted: this.form.isSubmitted,
+      form: this.form.formGroup,
+      messages: [{ message: "L'intitulé est requis.", validator: 'required' }],
+    },
+  ];
 
   handleClose() {
     this.close.emit();
   }
 
   async handleSubmit() {
-    this.isSubmitted.set(true);
-    if (this.form.valid) {
-      this.isSending.set(true);
+    this.form.isSubmitted.set(true);
+    if (this.form.formGroup.valid) {
+      this.form.isSending.set(true);
 
-      const { value: skill } = this.form;
+      const { value: skill } = this.form.formGroup;
       this.skillService
         .save(skill as Skill)
         .pipe(
           catchError((e) => {
             const error = e.error as Response<undefined>;
-            this.message.set(error.message);
+            this.form.message.set(error.message);
             throw e;
           }),
           finalize(() => {
-            this.isSending.set(false);
+            this.form.isSending.set(false);
           })
         )
         .subscribe(() => {

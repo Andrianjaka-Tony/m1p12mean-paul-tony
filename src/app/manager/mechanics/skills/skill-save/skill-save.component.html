@@ -5,21 +5,22 @@
       Les compétences sont utilisées pour définir ce que les mécaniciens peuvent
       faire et déterminent les requis pour chaque type de service
     </h3>
-    @if (message() !== "") {
-    <p class="text-red-400 text-sm">{{ message() }}</p>
+    @if (form.message() !== "") {
+    <p class="text-red-400 text-sm">{{ form.message() }}</p>
     }
 
-    <form [formGroup]="form" (ngSubmit)="handleSubmit()">
-      <div class="mt-4 flex flex-col gap-1">
-        <label for="label" class="opacity-70 text-sm w-fit">Intitulé</label>
-        <input
-          id="label"
-          type="text"
-          class="w-96 h-10 px-2.5 rounded-md border border-[#444] outline-none duration-200 focus:border-[#888]"
-          formControlName="label"
-        />
-        @if (isSubmitted() && form.get("label")?.hasError("required")) {
-        <p class="text-sm text-red-400">L'intitulé est requis.</p>
+    <form [formGroup]="form.formGroup" (ngSubmit)="handleSubmit()">
+      <div class="mt-4 flex flex-col gap-2">
+        @for (control of fieldsControls; track $index) {
+        <controlled-input
+          [id]="control.id"
+          [label]="control.label"
+          [type]="control.type"
+          [controlName]="control.controleName"
+          [isSubmitted]="control.isSubmitted()"
+          [form]="control.form"
+          [messages]="control.messages"
+        ></controlled-input>
         }
       </div>
       <div class="mt-4 w-full flex justify-between items-center">
@@ -35,11 +36,11 @@
         </button-component>
         <button-component
           class="flex items-center gap-1 duration-200"
-          [ngClass]="[isSending() ? 'opacity-70' : 'cursor-pointer']"
+          [ngClass]="[form.isSending() ? 'opacity-70' : 'cursor-pointer']"
           size="sm"
           variant="default"
           type="submit"
-          [disabled]="isSending()"
+          [disabled]="form.isSending()"
         >
           <lucide-angular [img]="award" class="h-4 w-4" />
           Enregistrer
