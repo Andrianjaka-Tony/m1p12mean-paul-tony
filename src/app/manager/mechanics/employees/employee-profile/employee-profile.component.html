@@ -42,4 +42,11 @@
       </tbody>
     </div>
   </div>
+  <div class="w-full mt-4">
+    <state-pagination
+      (change)="findSkills()"
+      [pageSignal]="skillPage"
+      [pageable]="skillPageable()"
+    />
+  </div>
 </div>

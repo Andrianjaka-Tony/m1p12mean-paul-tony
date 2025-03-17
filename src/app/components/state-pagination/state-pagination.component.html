@@ -1,0 +1,24 @@
+<div class="flex items-center gap-4 text-sm">
+  <div>{{ pageSignal()() }} sur {{ pageable().totalPages }}</div>
+  <div class="flex gap-1.5">
+    <div
+      (click)="previousPage()"
+      class="p-2 bg-[#222] rounded cursor-pointer"
+      [ngClass]="{ 'opacity-50 pointer-events-none': pageSignal()() === 1 }"
+      [attr.tabindex]="pageSignal()() === 1 ? '-1' : null"
+    >
+      <lucide-angular [img]="chevronLeft" class="h-4 w-4"></lucide-angular>
+    </div>
+    <a
+      (click)="nextPage()"
+      class="p-2 bg-[#222] rounded cursor-pointer"
+      [ngClass]="{
+        'opacity-50 pointer-events-none':
+          pageSignal()() === pageable().totalPages
+      }"
+      [attr.tabindex]="pageSignal()() === pageable().totalPages ? '-1' : null"
+    >
+      <lucide-angular [img]="chevronRight" class="h-4 w-4"></lucide-angular>
+    </a>
+  </div>
+</div>

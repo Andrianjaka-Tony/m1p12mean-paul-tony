@@ -14,6 +14,10 @@ import {
   TableRowComponent,
 } from 'src/app/components/table/table.component';
 import { SwitchComponent } from '../../../../components/switch/switch.component';
+import { SkillService } from 'src/app/services/mechanic/skill.service';
+import { Pageable } from 'src/app/models/pageable.model';
+import { catchError, finalize } from 'rxjs';
+import { StatePaginationComponent } from '../../../../components/state-pagination/state-pagination.component';
 
 @Component({
   selector: 'employee-profile',
@@ -27,17 +31,22 @@ import { SwitchComponent } from '../../../../components/switch/switch.component'
     TableRowComponent,
     TableCellComponent,
     SwitchComponent,
+    StatePaginationComponent,
   ],
   templateUrl: './employee-profile.component.html',
   styles: ``,
 })
 export class EmployeeProfilePage implements OnInit {
   readonly employeeService = inject(EmployeeService);
+  readonly skillService = inject(SkillService);
   readonly route = inject(ActivatedRoute);
   id: string = '';
 
   readonly isLoading = signal<boolean>(true);
   readonly employee = signal<Employee>({} as Employee);
+
+  readonly skillPage = signal<number>(1);
+  readonly skillPageable = signal<Pageable>({} as Pageable);
   readonly skills = signal<Skill[]>([]);
 
   ngOnInit(): void {
@@ -47,10 +56,27 @@ export class EmployeeProfilePage implements OnInit {
         this.id = id;
         this.employeeService.findById(this.id).subscribe((response) => {
           this.employee.set(response.data.employe);
-          this.skills.set(response.data.all_skills);
           this.isLoading.set(false);
+          this.findSkills();
         });
       }
     });
+  }
+
+  findSkills() {
+    this.skillService
+      .find(this.skillPage() || 1)
+      .pipe(
+        catchError((e) => {
+          throw e;
+        }),
+        finalize(() => {
+          // this.isFindLoading.set(false);
+        })
+      )
+      .subscribe((response) => {
+        this.skills.set(response.data.skills);
+        this.skillPageable.set(response.data as Pageable);
+      });
   }
 }
