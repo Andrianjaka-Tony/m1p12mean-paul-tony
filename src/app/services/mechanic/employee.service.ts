@@ -13,6 +13,11 @@ type EmployeePage = Pageable & {
   employes: Employee[];
 };
 
+type EmployeeById = {
+  employe: Employee;
+  all_skills: Skill[];
+};
+
 export type EmployeeSave = {
   user: User;
   employe: {
@@ -31,6 +36,16 @@ export class EmployeeService {
     const headers = createHeaders();
     return this.http.get<Response<EmployeePage>>(
       `${apiUrl}/api/employe?page=${page}&limit=${pageSize - 2}`,
+      {
+        headers,
+      }
+    );
+  }
+
+  findById(id: string) {
+    const headers = createHeaders();
+    return this.http.get<Response<EmployeeById>>(
+      `${apiUrl}/api/employe/${id}`,
       {
         headers,
       }

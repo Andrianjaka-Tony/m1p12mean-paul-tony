@@ -1,1 +1,45 @@
-<p>employee-profile works!</p>
+<div class="flex items-center gap-2">
+  <avatar
+    [character]="employee().id_user.firstname[0]"
+    [image]="employee().id_user.picture"
+    class="h-8 text-xs"
+  />
+  <div class="text-sm">
+    {{ employee().id_user.lastname }} {{ employee().id_user.firstname }}
+  </div>
+</div>
+<div class="mt-5 px-6 py-5 border border-[#333] rounded-lg">
+  <h3 class="text-xl">Compétences du mécanicien</h3>
+  <p class="text-sm opacity-70 mt-1">
+    Vous pouvez voir ci-dessous la liste des compétences du mécanicien.
+  </p>
+  <p class="text-sm opacity-70">
+    Notez que vous pouvez les modifier en cochant ou décochant les cases.
+  </p>
+  <div class="mt-6">
+    <div tableComponent>
+      <thead tableHeader>
+        <tr tableRow>
+          <th tableHead>Intitulé</th>
+          <th tableHead class="w-30"></th>
+        </tr>
+      </thead>
+      <tbody tableBody>
+        @if (isLoading()) { @for (skill of ["", "", "", "", "",]; track $index)
+        {
+        <tr tableRow>
+          <td tableCell><skeleton /></td>
+          <td tableCell><skeleton class="ml-auto" /></td>
+        </tr>
+        } } @else { @for (skill of skills(); track $index) {
+        <tr tableRow>
+          <td tableCell>{{ skill.label }}</td>
+          <td tableCell class="flex items-center justify-end">
+            <switch />
+          </td>
+        </tr>
+        } }
+      </tbody>
+    </div>
+  </div>
+</div>

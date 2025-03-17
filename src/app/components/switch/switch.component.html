@@ -1,0 +1,13 @@
+<div
+  (click)="handleToggle()"
+  class="w-10 h-6 rounded-xl border cursor-pointer duration-200"
+  [ngClass]="[
+    !checkState() ? 'bg-[#222]' : 'bg-blue-500',
+    !checkState() ? 'border-[#333]' : 'border-blue-400'
+  ]"
+>
+  <div
+    class="h-full rounded-full aspect-square bg-[#ddd] duration-200"
+    [ngClass]="[checkState() ? 'ml-4' : 'ml-0']"
+  ></div>
+</div>
