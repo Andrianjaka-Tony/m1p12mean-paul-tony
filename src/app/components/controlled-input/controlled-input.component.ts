@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
@@ -8,12 +9,13 @@ type ErrorMessage = {
 
 @Component({
   selector: 'controlled-input',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, NgClass],
   templateUrl: './controlled-input.component.html',
   styles: ``,
 })
 export class ControlledInputComponent {
   readonly id = input.required<string>();
+  readonly class = input<string>();
   readonly label = input.required<string>();
   readonly type = input<string>('text');
 

@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <tbody tableBody>
-    @if (isLoading()) { @for (skill of ["", "", "", "", "",]; track $index) {
+    @if (isLoading()) { @for (element of ["", "", "", "", "",]; track $index) {
     <tr tableRow>
       <td tableCell class="flex items-center gap-2">
         <skeleton class="!h-10 !w-10 rounded-full" />

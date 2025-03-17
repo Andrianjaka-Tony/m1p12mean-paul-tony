@@ -5,6 +5,7 @@
     type="{{ type() }}"
     class="w-96 h-10 px-2.5 rounded-md border border-[#444] outline-none duration-200 focus:border-[#888]"
     formControlName="{{ controlName() }}"
+    [ngClass]="class()"
   />
   @for (message of messages(); track $index) { @if (isSubmitted() &&
   form().get(controlName())?.hasError(message.validator)) {

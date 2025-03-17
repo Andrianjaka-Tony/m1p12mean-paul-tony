@@ -21,7 +21,7 @@
       </button-component>
       @if (!isFindLoading()) {
       <page-pagination
-        prefix="/manager/mechanics/skills"
+        prefix="/manager/mechanics/employees"
         [pageable]="pageable()"
         [currentPage]="page"
       />
@@ -29,6 +29,6 @@
     </div>
   </div>
   @if (isSave()) {
-  <skill-save (close)="toggleSave()" (afterSubmit)="findAll()" />
+  <employee-save (close)="toggleSave()" (afterSubmit)="findAll()" />
   }
 </div>

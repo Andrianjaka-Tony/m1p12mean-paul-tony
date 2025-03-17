@@ -9,7 +9,6 @@ import {
   TableRowComponent,
 } from '../../../../components/table/table.component';
 
-import { Skill } from '../../../../models/mechanic/skill.model';
 import { SkeletonComponent } from '../../../../components/skeleton/skeleton.component';
 import {
   PopoverComponent,
@@ -26,11 +25,9 @@ import {
   Trash2,
   User,
 } from 'lucide-angular';
-import { SkillService } from '../../../../services/mechanic/skill.service';
 import { catchError } from 'rxjs';
 import { Response } from '../../../../models/response.model';
 import { toast } from '../../../../components/toast/toast.component';
-import { SkillUpdateComponent } from '../employee-update/employee-update.component';
 import { EmployeeService } from 'src/app/services/mechanic/employee.service';
 import { Employee } from 'src/app/models/mechanic/employee.model';
 import { AvatarComponent } from '../../../../components/avatar/avatar.component';
@@ -72,17 +69,12 @@ export class EmployeesListComponent {
   readonly employees = input.required<Employee[]>();
 
   readonly isUpdating = signal<boolean>(false);
-  readonly defaultSkillToUpdate = signal<Skill>({} as Skill);
+  readonly defaultEmployeeToUpdate = signal<Employee>({} as Employee);
 
   readonly afterChange = output();
 
-  // openUpdate(employee: Employee) {
-  //   this.defaultSkillToUpdate.set(employee);
-  //   this.isUpdating.set(true);
-  // }
-
   closeUpdate() {
-    this.defaultSkillToUpdate.set({} as Skill);
+    this.defaultEmployeeToUpdate.set({} as Employee);
     this.isUpdating.set(false);
   }
 }

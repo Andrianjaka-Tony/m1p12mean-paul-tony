@@ -1,17 +1,31 @@
 <modal (close)="close.emit()">
   <div class="p-5 pt-4">
-    <h3 class="text-xl">Compétence</h3>
+    <h3 class="text-xl">Employé</h3>
     <h3 class="w-96 mt-1 text-sm opacity-70">
-      Les compétences sont utilisées pour définir ce que les mécaniciens peuvent
-      faire et déterminent les requis pour chaque type de service
+      Il est important d'enregistrer les employés pour avoir une bonne gestion
+      du personnel et de l'éfficacité
     </h3>
     @if (form.message() !== "") {
-    <p class="text-red-400 text-sm">{{ form.message() }}</p>
+    <p class="text-red-400 w-96 text-sm">{{ form.message() }}</p>
     }
 
     <form [formGroup]="form.formGroup" (ngSubmit)="handleSubmit()">
-      <div class="mt-4 flex flex-col gap-2">
-        @for (control of fieldsControls; track $index) {
+      <div class="mt-4 flex gap-3">
+        @for (control of names; track $index) {
+        <controlled-input
+          [id]="control.id"
+          [label]="control.label"
+          [type]="control.type"
+          [controlName]="control.controleName"
+          [isSubmitted]="control.isSubmitted()"
+          [form]="control.form"
+          [messages]="control.messages"
+          class="!w-fit"
+        ></controlled-input>
+        }
+      </div>
+      <div class="mt-3 flex flex-col gap-3">
+        @for (control of informations; track $index) {
         <controlled-input
           [id]="control.id"
           [label]="control.label"

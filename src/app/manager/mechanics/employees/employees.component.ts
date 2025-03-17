@@ -3,7 +3,7 @@ import { EmployeesListComponent } from './employees-list/employees-list.componen
 import { catchError, finalize } from 'rxjs';
 import { Award, LucideAngularModule } from 'lucide-angular';
 import { ButtonComponent } from '../../../components/button/button.component';
-import { SkillSaveComponent } from './employee-save/employee-save.component';
+import { EmployeeSaveComponent } from './employee-save/employee-save.component';
 import { PagePaginationComponent } from 'src/app/components/page-pagination/page-pagination.component';
 import { Pageable } from 'src/app/models/pageable.model';
 import { ActivatedRoute } from '@angular/router';
@@ -16,8 +16,9 @@ import { Employee } from 'src/app/models/mechanic/employee.model';
     EmployeesListComponent,
     LucideAngularModule,
     ButtonComponent,
-    SkillSaveComponent,
+    EmployeeSaveComponent,
     PagePaginationComponent,
+    EmployeeSaveComponent,
   ],
   templateUrl: './employees.component.html',
   styles: ``,

@@ -7,9 +7,18 @@ import { createHeaders } from '../../utils/headers';
 import { pageSize } from '../../utils/page-size';
 import { Pageable } from 'src/app/models/pageable.model';
 import { Employee } from 'src/app/models/mechanic/employee.model';
+import { User } from 'src/app/models/auth/user.model';
 
 type EmployeePage = Pageable & {
   employes: Employee[];
+};
+
+export type EmployeeSave = {
+  user: User;
+  employe: {
+    salary: number;
+    skills?: string[];
+  };
 };
 
 @Injectable({
@@ -21,18 +30,22 @@ export class EmployeeService {
   find(page: number) {
     const headers = createHeaders();
     return this.http.get<Response<EmployeePage>>(
-      `${apiUrl}/api/employe?page=${page}&limit=${pageSize}`,
+      `${apiUrl}/api/employe?page=${page}&limit=${pageSize - 2}`,
       {
         headers,
       }
     );
   }
 
-  save(skill: Skill) {
+  save(employee: EmployeeSave) {
     const headers = createHeaders();
-    return this.http.post<Response<Skill>>(`${apiUrl}/api/skill`, skill, {
-      headers,
-    });
+    return this.http.post<Response<EmployeeSave>>(
+      `${apiUrl}/auth/emp/register`,
+      employee,
+      {
+        headers,
+      }
+    );
   }
 
   update(skill: Skill) {
