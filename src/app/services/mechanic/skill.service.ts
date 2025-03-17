@@ -5,12 +5,10 @@ import { Response } from '../../models/response.model';
 import { apiUrl } from '../../utils/url';
 import { createHeaders } from '../../utils/headers';
 import { pageSize } from '../../utils/page-size';
+import { Pageable } from 'src/app/models/pageable.model';
 
-type SkillPage = {
+type SkillPage = Pageable & {
   skills: Skill[];
-  totalPages: number;
-  page: number;
-  limit: number;
 };
 
 @Injectable({

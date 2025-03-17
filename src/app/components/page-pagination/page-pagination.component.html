@@ -1,0 +1,26 @@
+<div class="flex items-center gap-4 text-sm">
+  <div>{{ currentPage() }} sur {{ pageable().totalPages }}</div>
+  <div class="flex gap-1.5">
+    <a
+      href="{{ prefix() }}/{{ currentPage() - 1 }}"
+      routerLink="{{ prefix() }}/{{ currentPage() - 1 }}"
+      class="p-2 bg-[#222] rounded"
+      [ngClass]="{ 'opacity-50 pointer-events-none': currentPage() === 1 }"
+      [attr.tabindex]="currentPage() === 1 ? '-1' : null"
+    >
+      <lucide-angular [img]="chevronLeft" class="h-4 w-4"></lucide-angular>
+    </a>
+    <a
+      href="{{ prefix() }}/{{ currentPage() + 1 }}"
+      routerLink="{{ prefix() }}/{{ currentPage() + 1 }}"
+      class="p-2 bg-[#222] rounded"
+      [ngClass]="{
+        'opacity-50 pointer-events-none':
+          currentPage() === pageable().totalPages
+      }"
+      [attr.tabindex]="currentPage() === pageable().totalPages ? '-1' : null"
+    >
+      <lucide-angular [img]="chevronRight" class="h-4 w-4"></lucide-angular>
+    </a>
+  </div>
+</div>

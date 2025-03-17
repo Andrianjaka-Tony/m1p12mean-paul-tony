@@ -6,6 +6,9 @@ import { catchError, finalize } from 'rxjs';
 import { Award, LucideAngularModule } from 'lucide-angular';
 import { ButtonComponent } from '../../../components/button/button.component';
 import { SkillSaveComponent } from './skill-save/skill-save.component';
+import { PagePaginationComponent } from 'src/app/components/page-pagination/page-pagination.component';
+import { Pageable } from 'src/app/models/pageable.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'skills',
@@ -14,11 +17,15 @@ import { SkillSaveComponent } from './skill-save/skill-save.component';
     LucideAngularModule,
     ButtonComponent,
     SkillSaveComponent,
+    PagePaginationComponent,
   ],
   templateUrl: './skills.component.html',
   styles: ``,
 })
 export class SkillsPage implements OnInit {
+  readonly route = inject(ActivatedRoute);
+  page: number = 1;
+
   readonly award = Award;
 
   readonly skillService = inject(SkillService);
@@ -27,9 +34,17 @@ export class SkillsPage implements OnInit {
 
   readonly isFindLoading = signal<boolean>(true);
   readonly skills = signal<Skill[]>([]);
+  readonly pageable = signal<Pageable>({} as Pageable);
 
   ngOnInit(): void {
-    this.findAll();
+    this.route.paramMap.subscribe((params) => {
+      const page = params.get('page');
+      if (page != null) {
+        this.page = parseInt(page);
+        this.isFindLoading.set(true);
+        this.findAll();
+      }
+    });
   }
 
   toggleSave() {
@@ -38,7 +53,7 @@ export class SkillsPage implements OnInit {
 
   findAll() {
     this.skillService
-      .find(1)
+      .find(this.page || 1)
       .pipe(
         catchError((e) => {
           throw e;
@@ -49,6 +64,7 @@ export class SkillsPage implements OnInit {
       )
       .subscribe((response) => {
         this.skills.set(response.data.skills);
+        this.pageable.set(response.data as Pageable);
       });
   }
 }

@@ -18,7 +18,7 @@
           class="w-96 h-10 px-2.5 rounded-md border border-[#444] outline-none duration-200 focus:border-[#888]"
           formControlName="label"
         />
-        @if (isSubmitted() && form.get("email")?.hasError("required")) {
+        @if (isSubmitted() && form.get("label")?.hasError("required")) {
         <p class="text-sm text-red-400">L'intitulé est requis.</p>
         }
       </div>
