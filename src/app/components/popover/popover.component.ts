@@ -91,7 +91,6 @@ export class PopoverTriggerComponent {
   updatePosition() {
     const rect: DOMRect = this.elementRef.nativeElement.getBoundingClientRect();
     this.popoverService.setRectangle(rect);
-    console.log(rect);
   }
 }
 

@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const managerMechanicsRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'skills',
+    redirectTo: 'employees',
     pathMatch: 'full',
   },
   {
@@ -16,6 +16,14 @@ export const managerMechanicsRoutes: Routes = [
     loadComponent: () =>
       import('./employees/employees.component').then((m) => m.EmployeesPage),
   },
+  {
+    path: 'employees/profile/:id',
+    loadComponent: () =>
+      import('./employees/employee-profile/employee-profile.component').then(
+        (m) => m.EmployeeProfilePage
+      ),
+  },
+
   {
     path: 'skills',
     redirectTo: 'skills/1',

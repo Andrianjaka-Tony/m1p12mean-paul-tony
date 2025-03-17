@@ -19,6 +19,7 @@
       </td>
       <td tableCell><skeleton class="ml-auto" /></td>
       <td tableCell><skeleton class="ml-auto" /></td>
+      <td tableCell><skeleton class="ml-auto" /></td>
     </tr>
     } } @else { @for (employee of employees(); track $index) {
     <tr tableRow>
@@ -40,26 +41,33 @@
       </td>
       <td tableCell class="text-right">{{ employee.skills.length }}</td>
       <td tableCell>
-        <popover [id]="'employee-popover-' + employee._id">
-          <popover-trigger class="flex items-center mt-0.5">
-            <lucide-angular [img]="ellipsis" class="h-4 w-4 scale-120" />
-          </popover-trigger>
-          <popover-content class="w-40" origin="right">
-            <div popoverItemsContainer>
-              <popover-close>
-                <div popoverItem [icon]="user" label="Profil"></div>
-              </popover-close>
-              <!-- <popover-close>
-                <div
-                  popoverItem
-                  (click)="openUpdate(employee)"
-                  [icon]="settings"
-                  label="Modifier"
-                ></div>
-              </popover-close> -->
-            </div>
-          </popover-content>
-        </popover>
+        <div class="-mt-1">
+          <popover [id]="'employee-popover-' + employee._id">
+            <popover-trigger class="flex items-center mt-0.5">
+              <lucide-angular [img]="ellipsis" class="h-4 w-4 scale-120" />
+            </popover-trigger>
+            <popover-content class="w-40" origin="right">
+              <div popoverItemsContainer>
+                <popover-close>
+                  <div
+                    (click)="goToProfile(employee._id)"
+                    popoverItem
+                    [icon]="user"
+                    label="Profil"
+                  ></div>
+                </popover-close>
+                <!-- <popover-close>
+                  <div
+                    popoverItem
+                    (click)="openUpdate(employee)"
+                    [icon]="settings"
+                    label="Modifier"
+                  ></div>
+                </popover-close> -->
+              </div>
+            </popover-content>
+          </popover>
+        </div>
       </td>
     </tr>
     } }

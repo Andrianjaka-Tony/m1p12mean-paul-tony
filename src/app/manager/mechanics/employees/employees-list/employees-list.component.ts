@@ -25,13 +25,11 @@ import {
   Trash2,
   User,
 } from 'lucide-angular';
-import { catchError } from 'rxjs';
-import { Response } from '../../../../models/response.model';
-import { toast } from '../../../../components/toast/toast.component';
 import { EmployeeService } from 'src/app/services/mechanic/employee.service';
 import { Employee } from 'src/app/models/mechanic/employee.model';
 import { AvatarComponent } from '../../../../components/avatar/avatar.component';
 import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'employees-list',
@@ -58,6 +56,7 @@ import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';
 })
 export class EmployeesListComponent {
   readonly employeeService = inject(EmployeeService);
+  readonly router = inject(Router);
 
   readonly Math = Math;
   readonly user = User;
@@ -76,5 +75,9 @@ export class EmployeesListComponent {
   closeUpdate() {
     this.defaultEmployeeToUpdate.set({} as Employee);
     this.isUpdating.set(false);
+  }
+
+  goToProfile(id: string | undefined) {
+    this.router.navigate([`/manager/mechanics/employees/profile/${id}`]);
   }
 }
