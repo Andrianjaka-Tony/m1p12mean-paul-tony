@@ -1,0 +1,74 @@
+<div tableComponent>
+  <thead tableHeader>
+    <tr tableRow>
+      <th tableHead class="w-sm">Employé</th>
+      <th tableHead class="text-right">Salaire</th>
+      <th tableHead class="text-right">Compétences</th>
+      <th tableHead class="w-10"></th>
+    </tr>
+  </thead>
+  <tbody tableBody>
+    @if (isLoading()) { @for (skill of ["", "", "", "", "",]; track $index) {
+    <tr tableRow>
+      <td tableCell class="flex items-center gap-2">
+        <skeleton class="!h-10 !w-10 rounded-full" />
+        <div class="flex flex-1 flex-col gap-2">
+          <skeleton class="!h-3" />
+          <skeleton class="!h-2" />
+        </div>
+      </td>
+      <td tableCell><skeleton class="ml-auto" /></td>
+      <td tableCell><skeleton class="ml-auto" /></td>
+    </tr>
+    } } @else { @for (employee of employees(); track $index) {
+    <tr tableRow>
+      <td tableCell class="flex items-center gap-2">
+        <avatar
+          [character]="employee.id_user.firstname[0]"
+          [image]="employee.id_user.picture"
+          class="h-10 text-sm"
+        />
+        <div class="flex flex-col">
+          <p>
+            {{ employee.id_user.lastname }} {{ employee.id_user.firstname }}
+          </p>
+          <p class="text-xs">{{ employee.id_user.email }}</p>
+        </div>
+      </td>
+      <td tableCell class="text-right">
+        {{ employee.salary | numberFormat }} $
+      </td>
+      <td tableCell class="text-right">{{ employee.skills.length }}</td>
+      <td tableCell>
+        <popover [id]="'employee-popover-' + employee._id">
+          <popover-trigger class="flex items-center mt-0.5">
+            <lucide-angular [img]="ellipsis" class="h-4 w-4 scale-120" />
+          </popover-trigger>
+          <popover-content class="w-40" origin="right">
+            <div popoverItemsContainer>
+              <popover-close>
+                <div popoverItem [icon]="user" label="Profil"></div>
+              </popover-close>
+              <!-- <popover-close>
+                <div
+                  popoverItem
+                  (click)="openUpdate(employee)"
+                  [icon]="settings"
+                  label="Modifier"
+                ></div>
+              </popover-close> -->
+            </div>
+          </popover-content>
+        </popover>
+      </td>
+    </tr>
+    } }
+  </tbody>
+</div>
+<!-- @if (isUpdating() && defaultSkillToUpdate()) {
+<skill-update
+  (close)="closeUpdate()"
+  (afterSubmit)="afterChange.emit()"
+  [skill]="defaultSkillToUpdate()"
+/>
+} -->

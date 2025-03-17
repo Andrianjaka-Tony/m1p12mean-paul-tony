@@ -30,7 +30,7 @@ export class AvatarImageComponent {
   imports: [],
   template: `
     <div
-      class="absolute inset-0 rounded-full flex items-center justify-center bg-[#222] text-white"
+      class="absolute inset-0 rounded-full flex items-center justify-center bg-[#222]"
     >
       {{ character() }}
     </div>

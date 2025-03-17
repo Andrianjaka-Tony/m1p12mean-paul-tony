@@ -7,6 +7,16 @@ export const managerMechanicsRoutes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'employees',
+    redirectTo: 'employees/1',
+    pathMatch: 'full',
+  },
+  {
+    path: 'employees/:page',
+    loadComponent: () =>
+      import('./employees/employees.component').then((m) => m.EmployeesPage),
+  },
+  {
     path: 'skills',
     redirectTo: 'skills/1',
     pathMatch: 'full',

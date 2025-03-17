@@ -38,7 +38,7 @@ export class MechanicsPage {
       title: 'Mécaniciens',
       items: [
         {
-          href: '/manager/mechanics/staff',
+          href: '/manager/mechanics/employees',
           label: 'Mécaniciens',
           icon: Wrench,
         },
