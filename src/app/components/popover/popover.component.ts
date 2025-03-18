@@ -10,6 +10,8 @@ import { PopoverService } from './popover.service';
 import { NgClass, NgStyle } from '@angular/common';
 import { LucideAngularModule } from 'lucide-angular';
 
+import gsap from 'gsap';
+
 @Component({
   selector: 'popover',
   imports: [],
@@ -54,15 +56,37 @@ export class PopoverComponent implements OnInit, OnDestroy {
       window.addEventListener('scroll', this.scrollHandler);
     }
     this.popoverService.toggle();
+
+    setTimeout(() => {
+      gsap.fromTo(
+        `#${this.id()} .popover-content`,
+        { opacity: 0, y: 10 },
+        { opacity: 1, y: 0, duration: 0.2, ease: 'power1.inOut' }
+      );
+    }, 10);
   }
 
   closePopover() {
-    this.popoverService.toggle();
+    setTimeout(() => {
+      gsap.fromTo(
+        `#${this.id()} .popover-content`,
+        { opacity: 1, y: 0 },
+        {
+          opacity: 0,
+          y: 10,
+          duration: 0.2,
+          ease: 'power1.inOut',
+          onComplete: () => {
+            this.popoverService.toggle();
 
-    if (this.scrollHandler) {
-      window.removeEventListener('scroll', this.scrollHandler);
-      this.scrollHandler = null;
-    }
+            if (this.scrollHandler) {
+              window.removeEventListener('scroll', this.scrollHandler);
+              this.scrollHandler = null;
+            }
+          },
+        }
+      );
+    }, 10);
   }
 }
 
@@ -100,7 +124,7 @@ export class PopoverTriggerComponent {
   template: `
     @if (isOpen) {
     <div
-      class="fixed z-100 translate-y-1 max-w-96 bg-[#111] border border-[#333] rounded-lg shadow-md"
+      class="popover-content opacity-0 fixed z-100 translate-y-1 max-w-96 bg-[#111] border border-[#333] rounded-lg shadow-md"
       [ngStyle]="style"
       [ngClass]="[class()]"
     >
