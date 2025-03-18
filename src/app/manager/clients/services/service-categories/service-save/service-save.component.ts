@@ -8,7 +8,6 @@ import {
   ControlledInputComponent,
   SelectOption,
 } from 'src/app/components/controlled-input/controlled-input.component';
-import { Employee } from 'src/app/models/mechanic/employee.model';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { toast } from 'src/app/components/toast/toast.component';
@@ -17,9 +16,10 @@ import {
   ServiceFromForm,
   ServicesService,
 } from 'src/app/services/mechanic/services.service';
+import { ServiceCategory } from 'src/app/models/mechanic/services.model';
 
 @Component({
-  selector: 'service-save',
+  selector: 'service-category-save',
   imports: [
     ModalComponent,
     ButtonComponent,
@@ -31,7 +31,7 @@ import {
   templateUrl: './service-save.component.html',
   styles: ``,
 })
-export class EmployeeSaveComponent implements OnInit {
+export class ServiceCategorySaveComponent implements OnInit {
   readonly servicesService = inject(ServicesService);
 
   readonly cross = X;
@@ -44,22 +44,6 @@ export class EmployeeSaveComponent implements OnInit {
 
   readonly fields = [
     { name: 'label', defaultValue: '', validators: [Validators.required] },
-    {
-      name: 'description',
-      defaultValue: '',
-      validators: [Validators.required],
-    },
-    {
-      name: 'price',
-      defaultValue: '',
-      validators: [Validators.required, Validators.min(0)],
-    },
-    {
-      name: 'default_duration',
-      defaultValue: '',
-      validators: [Validators.required, Validators.min(0)],
-    },
-    { name: 'category', defaultValue: '', validators: [Validators.required] },
   ];
   readonly form = createForm(this.fields);
   readonly fieldsControls = [
@@ -72,67 +56,9 @@ export class EmployeeSaveComponent implements OnInit {
       form: this.form.formGroup,
       messages: [{ message: "L'intitulé est requis.", validator: 'required' }],
     },
-    {
-      id: 'description',
-      label: 'Description',
-      type: 'text-area',
-      controleName: 'description',
-      isSubmitted: this.form.isSubmitted,
-      form: this.form.formGroup,
-      messages: [
-        { message: 'La description est requise.', validator: 'required' },
-      ],
-    },
-    {
-      id: 'price',
-      label: 'Prix',
-      type: 'number',
-      controleName: 'price',
-      isSubmitted: this.form.isSubmitted,
-      form: this.form.formGroup,
-      messages: [
-        { message: 'Le prix est requis.', validator: 'required' },
-        { message: 'Le prix doit être un nombre positif.', validator: 'min' },
-      ],
-    },
-    {
-      id: 'default_duration',
-      label: 'Durée (heure)',
-      type: 'number',
-      controleName: 'default_duration',
-      isSubmitted: this.form.isSubmitted,
-      form: this.form.formGroup,
-      messages: [
-        { message: 'La durée est requise.', validator: 'required' },
-        {
-          message: 'La durée doit être un nombre positif.',
-          validator: 'min',
-        },
-      ],
-    },
-    {
-      id: 'category',
-      label: 'Catégorie de service',
-      type: 'select',
-      controleName: 'category',
-      isSubmitted: this.form.isSubmitted,
-      form: this.form.formGroup,
-      messages: [
-        {
-          message: 'La categorié de service est requise.',
-          validator: 'required',
-        },
-      ],
-    },
   ];
   readonly names = this.fieldsControls.filter(
-    (element) => element.id === 'label' || element.id === 'description'
-  );
-  readonly numbers = this.fieldsControls.filter(
-    (element) => element.id === 'price' || element.id === 'default_duration'
-  );
-  readonly category = this.fieldsControls.filter(
-    (element) => element.id === 'category'
+    (element) => element.id === 'label'
   );
 
   ngOnInit(): void {
@@ -150,9 +76,9 @@ export class EmployeeSaveComponent implements OnInit {
     if (this.form.formGroup.valid) {
       this.form.isSending.set(true);
 
-      const service = this.form.formGroup.value as ServiceFromForm;
+      const category = this.form.formGroup.value as ServiceCategory;
       this.servicesService
-        .saveService(service)
+        .saveServiceCategory(category)
         .pipe(
           catchError((e) => {
             const error = e.error as Response<undefined>;
@@ -166,8 +92,8 @@ export class EmployeeSaveComponent implements OnInit {
         .subscribe(() => {
           toast(
             'success',
-            'Service enregistré',
-            `Le service a bien été sauvegardé`
+            'Catégorie de service enregistrée',
+            `La catégorie de service a bien été sauvegardée`
           );
           this.handleClose();
           this.afterSubmit.emit();

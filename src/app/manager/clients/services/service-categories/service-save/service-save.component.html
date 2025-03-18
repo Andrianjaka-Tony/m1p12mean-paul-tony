@@ -2,8 +2,8 @@
   <div class="p-5 pt-4">
     <h3 class="text-xl">Service</h3>
     <h3 class="w-96 mt-1 text-sm opacity-70">
-      Ajouter des services. Plus ils sont nombreux, plus le garage offrira plus
-      de choix aux clients
+      Ajouter une catégorie de service pour améliorer la gestion des services et
+      attirer les clients.
     </h3>
     @if (form.message() !== "") {
     <p class="text-red-400 w-96 text-sm">{{ form.message() }}</p>
@@ -23,35 +23,7 @@
         ></controlled-input>
         }
       </div>
-      <div class="mt-4 flex gap-3">
-        @for (control of numbers; track $index) {
-        <controlled-input
-          [id]="control.id"
-          [label]="control.label"
-          [type]="control.type"
-          [controlName]="control.controleName"
-          [isSubmitted]="control.isSubmitted()"
-          [form]="control.form"
-          [messages]="control.messages"
-          class="!w-fit"
-        ></controlled-input>
-        }
-      </div>
-      <div class="mt-4">
-        @for (control of category; track $index) {
-        <controlled-input
-          [id]="control.id"
-          [label]="control.label"
-          [type]="control.type"
-          [controlName]="control.controleName"
-          [isSubmitted]="control.isSubmitted()"
-          [form]="control.form"
-          [messages]="control.messages"
-          [options]="serviceCategories"
-          placeholder="Choisissez une catégorie"
-        ></controlled-input>
-        }
-      </div>
+
       <div class="mt-4 w-full flex justify-between items-center">
         <button-component
           class="flex items-center gap-1"

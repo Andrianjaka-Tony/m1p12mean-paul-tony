@@ -1,12 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Skill } from '../../models/mechanic/skill.model';
 import { Response } from '../../models/response.model';
 import { apiUrl } from '../../utils/url';
 import { createHeaders } from '../../utils/headers';
 import { pageSize } from '../../utils/page-size';
 import { Pageable } from 'src/app/models/pageable.model';
-import { Employee } from 'src/app/models/mechanic/employee.model';
 import {
   Service,
   ServiceCategory,
@@ -18,11 +16,6 @@ type ServiceCategoryPage = Pageable & {
 
 type ServicePage = Pageable & {
   services: Service[];
-};
-
-type EmployeeById = {
-  employe: Employee;
-  all_skills: Skill[];
 };
 
 type UpdateSkillsBody = {
@@ -75,13 +68,12 @@ export class ServicesService {
     );
   }
 
-  findById(id: string) {
+  saveServiceCategory(category: ServiceCategory) {
     const headers = createHeaders();
-    return this.http.get<Response<EmployeeById>>(
-      `${apiUrl}/api/employe/${id}`,
-      {
-        headers,
-      }
+    return this.http.post<Response<undefined>>(
+      `${apiUrl}/api/service_categories`,
+      category,
+      { headers }
     );
   }
 
