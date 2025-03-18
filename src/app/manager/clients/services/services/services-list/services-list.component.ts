@@ -71,7 +71,7 @@ export class ServicesListComponent {
   //   this.isUpdating.set(false);
   // }
 
-  // goToProfile(id: string | undefined) {
-  //   this.router.navigate([`/manager/mechanics/employees/profile/${id}`]);
-  // }
+  goToDetails(id: string | undefined) {
+    this.router.navigate([`/manager/clients/services/details/${id}`]);
+  }
 }

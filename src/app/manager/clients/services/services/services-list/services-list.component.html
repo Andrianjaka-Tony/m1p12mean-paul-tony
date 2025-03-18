@@ -40,7 +40,12 @@
             <popover-content class="w-40" origin="right">
               <div popoverItemsContainer>
                 <popover-close>
-                  <div popoverItem [icon]="eye" label="Détails"></div>
+                  <div
+                    (click)="goToDetails(service._id)"
+                    popoverItem
+                    [icon]="eye"
+                    label="Détails"
+                  ></div>
                 </popover-close>
                 <!-- <popover-close>
                     <div
