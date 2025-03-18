@@ -1,9 +1,9 @@
 <div
-  (click)="close.emit()"
-  class="z-100 fixed top-0 left-0 h-screen w-screen bg-[#111111ac] backdrop-blur-xs"
+  (click)="handleClose()"
+  class="z-100 fixed top-0 left-0 h-screen w-screen bg-[#111111ac] backdrop-blur-xs modal-overlay"
 ></div>
 <div
-  class="z-100 fixed top-1/2 left-1/2 -translate-1/2 bg-[#111] rounded-lg border border-[#444]"
+  class="z-100 fixed top-1/2 left-1/2 -translate-1/2 bg-[#111] rounded-lg border border-[#444] modal-content"
 >
   <ng-content />
 </div>
