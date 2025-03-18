@@ -20,6 +20,7 @@ import { SkeletonComponent } from 'src/app/components/skeleton/skeleton.componen
 import { SwitchComponent } from 'src/app/components/switch/switch.component';
 import { StatePaginationComponent } from 'src/app/components/state-pagination/state-pagination.component';
 import { ButtonComponent } from 'src/app/components/button/button.component';
+import { toast } from 'src/app/components/toast/toast.component';
 
 @Component({
   selector: 'service-details',
@@ -110,27 +111,26 @@ export class ServiceDetailsPage implements OnInit {
 
   doUpdate() {
     this.isCommitable.set(false);
-    // this.employeeService
-    //   .updateSkills({
-    //     id_employe: this.employee()._id || '',
-    //     skills: this.serviceRequiredSkillsId(),
-    //   })
-    //   .pipe(
-    //     catchError((e) => {
-    //       toast(
-    //         'error',
-    //         'Modification échouée',
-    //         'Une erreur est survenue lors de la modification'
-    //       );
-    //       throw e;
-    //     })
-    //   )
-    //   .subscribe((response) => {
-    //     toast(
-    //       'success',
-    //       'Modification réussie',
-    //       'Les compétences requises ont été mises à jour'
-    //     );
-    //   });
+    this.servicesService
+      .updateServiceRequiredSkills(this.service()._id || '', {
+        skills: this.serviceRequiredSkillsId(),
+      })
+      .pipe(
+        catchError((e) => {
+          toast(
+            'error',
+            'Modification échouée',
+            'Une erreur est survenue lors de la modification'
+          );
+          throw e;
+        })
+      )
+      .subscribe((response) => {
+        toast(
+          'success',
+          'Modification réussie',
+          'Les compétences requises ont été mises à jour'
+        );
+      });
   }
 }

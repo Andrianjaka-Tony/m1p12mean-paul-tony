@@ -19,12 +19,12 @@ export class StatePaginationComponent {
   readonly change = output();
 
   nextPage() {
-    this.pageSignal().set(this.pageSignal()() + 1);
+    this.pageSignal().update((value) => value + 1);
     this.change.emit();
   }
 
   previousPage() {
-    this.pageSignal().set(this.pageSignal()() - 1);
+    this.pageSignal().update((value) => value - 1);
     this.change.emit();
   }
 }

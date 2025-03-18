@@ -19,7 +19,6 @@ type ServicePage = Pageable & {
 };
 
 type UpdateSkillsBody = {
-  id_employe: string;
   skills: string[];
 };
 
@@ -92,15 +91,15 @@ export class ServicesService {
 
   findServiceById(id: string) {
     const headers = createHeaders();
-    return this.http.get<Response<Service>>(`${apiUrl}/api/service`, {
+    return this.http.get<Response<Service>>(`${apiUrl}/api/service/${id}`, {
       headers,
     });
   }
 
-  updateSkills(newSkills: UpdateSkillsBody) {
+  updateServiceRequiredSkills(id: string, newSkills: UpdateSkillsBody) {
     const headers = createHeaders();
     return this.http.put<Response<undefined>>(
-      `${apiUrl}/api/employe/skills`,
+      `${apiUrl}/api/service/${id}/skills`,
       newSkills,
       { headers }
     );
