@@ -7,6 +7,25 @@
     formControlName="{{ controlName() }}"
     [ngClass]="class()"
   ></textarea>
+  } @else if (type() === "select") {
+  <div class="relative w-96">
+    <select
+      id="{{ id() }}"
+      class="w-full h-10 px-2.5 rounded-md border border-[#444] outline-none duration-200 focus:border-[#888] appearance-none"
+      formControlName="{{ controlName() }}"
+      [ngClass]="class()"
+    >
+      @for (option of options(); track $index) {
+      <option [value]="option._id">
+        {{ option.label }}
+      </option>
+      }
+    </select>
+    <lucide-angular
+      [img]="chevronDown"
+      class="absolute h-4 w-4 right-1.5 top-1/2 -translate-y-1/2 pointer-events-none"
+    />
+  </div>
   } @else {
   <input
     id="{{ id() }}"

@@ -1,4 +1,4 @@
-import { Component, inject, output } from '@angular/core';
+import { Component, inject, OnInit, output } from '@angular/core';
 import { Award, LucideAngularModule, X } from 'lucide-angular';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
@@ -14,6 +14,8 @@ import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { toast } from 'src/app/components/toast/toast.component';
 import { Response } from 'src/app/models/response.model';
+import { ServiceCategory } from 'src/app/models/mechanic/services.model';
+import { ServicesService } from 'src/app/services/mechanic/services.service';
 
 @Component({
   selector: 'service-save',
@@ -28,11 +30,14 @@ import { Response } from 'src/app/models/response.model';
   templateUrl: './service-save.component.html',
   styles: ``,
 })
-export class EmployeeSaveComponent {
+export class EmployeeSaveComponent implements OnInit {
   readonly employeeService = inject(EmployeeService);
+  readonly servicesService = inject(ServicesService);
 
   readonly cross = X;
   readonly award = Award;
+
+  readonly serviceCategories: ServiceCategory[] = [] as ServiceCategory[];
 
   readonly close = output();
   readonly afterSubmit = output();
@@ -129,6 +134,8 @@ export class EmployeeSaveComponent {
   readonly category = this.fieldsControls.filter(
     (element) => element.id === 'category'
   );
+
+  ngOnInit(): void {}
 
   handleClose() {
     this.close.emit();
