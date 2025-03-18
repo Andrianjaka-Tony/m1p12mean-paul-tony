@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { catchError, finalize } from 'rxjs';
-import { LucideAngularModule, Wrench } from 'lucide-angular';
+import { BriefcaseBusiness, LucideAngularModule, Wrench } from 'lucide-angular';
 import { Pageable } from 'src/app/models/pageable.model';
 import { ServiceCategory } from 'src/app/models/mechanic/services.model';
 import { ServicesService } from 'src/app/services/mechanic/services.service';
@@ -23,6 +23,7 @@ import { ServiceCategorySaveComponent } from './service-save/service-save.compon
 })
 export class ServiceCategorisSection implements OnInit {
   readonly wrench = Wrench;
+  readonly briefCase = BriefcaseBusiness;
 
   readonly servicesService = inject(ServicesService);
 
