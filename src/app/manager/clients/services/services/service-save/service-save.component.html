@@ -37,8 +37,21 @@
         ></controlled-input>
         }
       </div>
+      <div class="mt-4">
+        @for (control of category; track $index) {
+        <controlled-input
+          [id]="control.id"
+          [label]="control.label"
+          [type]="control.type"
+          [controlName]="control.controleName"
+          [isSubmitted]="control.isSubmitted()"
+          [form]="control.form"
+          [messages]="control.messages"
+        ></controlled-input>
+        }
+      </div>
       <div class="mt-4 w-full flex justify-between items-center">
-        <!-- <button-component
+        <button-component
           class="flex items-center gap-1"
           size="sm"
           variant="secondary"
@@ -47,8 +60,8 @@
         >
           <lucide-angular [img]="cross" class="h-4 w-4" />
           Abandonner
-        </button-component> -->
-        <!-- <button-component
+        </button-component>
+        <button-component
           class="flex items-center gap-1 duration-200"
           [ngClass]="[form.isSending() ? 'opacity-70' : 'cursor-pointer']"
           size="sm"
@@ -58,7 +71,7 @@
         >
           <lucide-angular [img]="award" class="h-4 w-4" />
           Enregistrer
-        </button-component> -->
+        </button-component>
       </div>
     </form>
   </div>

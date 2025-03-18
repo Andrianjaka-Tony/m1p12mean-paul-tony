@@ -92,7 +92,7 @@ export class EmployeeSaveComponent {
     },
     {
       id: 'default_duration',
-      label: 'Durée',
+      label: 'Durée (heure)',
       type: 'number',
       controleName: 'default_duration',
       isSubmitted: this.form.isSubmitted,
