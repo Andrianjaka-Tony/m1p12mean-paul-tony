@@ -70,7 +70,7 @@ export class EmployeeSaveComponent {
     {
       id: 'description',
       label: 'Description',
-      type: 'text',
+      type: 'text-area',
       controleName: 'description',
       isSubmitted: this.form.isSubmitted,
       form: this.form.formGroup,

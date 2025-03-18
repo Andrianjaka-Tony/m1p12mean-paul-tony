@@ -1,5 +1,13 @@
 <div [formGroup]="form()" class="flex flex-col gap-1">
   <label for="{{ id() }}" class="opacity-70 text-sm w-fit">{{ label() }}</label>
+  @if (type() === "text-area") {
+  <textarea
+    id="{{ id() }}"
+    class="w-96 h-20 px-2.5 py-2 rounded-md border border-[#444] outline-none duration-200 focus:border-[#888] resize-none"
+    formControlName="{{ controlName() }}"
+    [ngClass]="class()"
+  ></textarea>
+  } @else {
   <input
     id="{{ id() }}"
     type="{{ type() }}"
@@ -7,7 +15,7 @@
     formControlName="{{ controlName() }}"
     [ngClass]="class()"
   />
-  @for (message of messages(); track $index) { @if (isSubmitted() &&
+  } @for (message of messages(); track $index) { @if (isSubmitted() &&
   form().get(controlName())?.hasError(message.validator)) {
   <p class="text-sm text-red-400">{{ message.message }}</p>
   } }
