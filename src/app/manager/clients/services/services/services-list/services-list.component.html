@@ -13,12 +13,12 @@
   <tbody tableBody>
     @if (isLoading()) { @for (element of ["", "", "", "", "",]; track $index) {
     <tr tableRow>
-      <td tableCell><skeleton /></td>
-      <td tableCell><skeleton class="ml-auto" /></td>
-      <td tableCell><skeleton class="ml-auto" /></td>
-      <td tableCell><skeleton /></td>
-      <td tableCell><skeleton class="ml-auto" /></td>
-      <td tableCell><skeleton class="ml-auto" /></td>
+      <td tableCell><skeleton class="my-1 !h-4" /></td>
+      <td tableCell><skeleton class="ml-auto my-1 !h-4" /></td>
+      <td tableCell><skeleton class="ml-auto my-1 !h-4" /></td>
+      <td tableCell><skeleton class="my-1 !h-4" /></td>
+      <td tableCell><skeleton class="ml-auto my-1 !h-4" /></td>
+      <td tableCell><skeleton class="ml-auto my-1 !h-4" /></td>
     </tr>
     } } @else { @for (service of services(); track $index) {
     <tr tableRow>

@@ -10,8 +10,8 @@
   <tbody tableBody>
     @if (isLoading()) { @for (element of ["", "", "", "", "",]; track $index) {
     <tr tableRow>
-      <td tableCell><skeleton /></td>
-      <td tableCell><skeleton /></td>
+      <td tableCell><skeleton class="my-1 !h-4" /></td>
+      <td tableCell><skeleton class="my-1 !h-4" /></td>
       <td tableCell><skeleton class="ml-auto" /></td>
     </tr>
     } } @else { @for (service of serviceCategories(); track $index) {
