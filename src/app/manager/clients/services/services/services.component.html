@@ -19,7 +19,11 @@
         <lucide-angular [img]="wrench" class="h-4 w-4" />
         <p class="leading-none">Enregistrer</p>
       </button-component>
-      <state-pagination [pageSignal]="page" [pageable]="pageable()" />
+      <state-pagination
+        (change)="findAll()"
+        [pageSignal]="page"
+        [pageable]="pageable()"
+      />
     </div>
   </div>
   @if (isSave()) {

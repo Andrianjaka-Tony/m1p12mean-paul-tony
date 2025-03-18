@@ -7,7 +7,6 @@ import { createHeaders } from '../../utils/headers';
 import { pageSize } from '../../utils/page-size';
 import { Pageable } from 'src/app/models/pageable.model';
 import { Employee } from 'src/app/models/mechanic/employee.model';
-import { User } from 'src/app/models/auth/user.model';
 import {
   Service,
   ServiceCategory,
@@ -30,12 +29,13 @@ type UpdateSkillsBody = {
   skills: string[];
 };
 
-export type EmployeeSave = {
-  user: User;
-  employe: {
-    salary: number;
-    skills?: string[];
-  };
+export type ServiceFromForm = {
+  label: string;
+  description: string;
+  category: string;
+  price: number;
+  default_duration: number;
+  required_skills: string[];
 };
 
 @Injectable({
@@ -74,11 +74,15 @@ export class ServicesService {
     );
   }
 
-  save(employee: EmployeeSave) {
+  saveService(service: ServiceFromForm) {
+    service.price = parseFloat(service.price.toString());
+    service.default_duration = parseFloat(service.default_duration.toString());
+    service.required_skills = [];
+
     const headers = createHeaders();
-    return this.http.post<Response<EmployeeSave>>(
-      `${apiUrl}/auth/emp/register`,
-      employee,
+    return this.http.post<Response<undefined>>(
+      `${apiUrl}/api/service`,
+      service,
       { headers }
     );
   }

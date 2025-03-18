@@ -167,7 +167,7 @@ export class EmployeeSaveComponent {
           toast(
             'success',
             'Employé enregistrée',
-            `L'employé a bien été sauvegardée`
+            `L'employé a bien été sauvegardé`
           );
           this.handleClose();
           this.afterSubmit.emit();

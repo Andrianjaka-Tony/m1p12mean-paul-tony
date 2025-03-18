@@ -8,17 +8,15 @@ import {
   ControlledInputComponent,
   SelectOption,
 } from 'src/app/components/controlled-input/controlled-input.component';
-import {
-  EmployeeSave,
-  EmployeeService,
-} from 'src/app/services/mechanic/employee.service';
 import { Employee } from 'src/app/models/mechanic/employee.model';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { toast } from 'src/app/components/toast/toast.component';
 import { Response } from 'src/app/models/response.model';
-import { ServiceCategory } from 'src/app/models/mechanic/services.model';
-import { ServicesService } from 'src/app/services/mechanic/services.service';
+import {
+  ServiceFromForm,
+  ServicesService,
+} from 'src/app/services/mechanic/services.service';
 
 @Component({
   selector: 'service-save',
@@ -34,7 +32,6 @@ import { ServicesService } from 'src/app/services/mechanic/services.service';
   styles: ``,
 })
 export class EmployeeSaveComponent implements OnInit {
-  readonly employeeService = inject(EmployeeService);
   readonly servicesService = inject(ServicesService);
 
   readonly cross = X;
@@ -106,9 +103,9 @@ export class EmployeeSaveComponent implements OnInit {
       isSubmitted: this.form.isSubmitted,
       form: this.form.formGroup,
       messages: [
-        { message: 'La durée des travaux est requise.', validator: 'required' },
+        { message: 'La durée est requise.', validator: 'required' },
         {
-          message: 'La durée des travaux doit être un nombre positif.',
+          message: 'La durée doit être un nombre positif.',
           validator: 'min',
         },
       ],
@@ -148,26 +145,14 @@ export class EmployeeSaveComponent implements OnInit {
     this.close.emit();
   }
 
-  getEmploye() {
-    const { value } = this.form.formGroup;
-    const employee: unknown = {
-      user: value as Employee,
-      employe: {
-        salary: this.form.formGroup.get('salary')?.value || 0,
-        skills: [],
-      },
-    };
-    return employee as EmployeeSave;
-  }
-
   handleSubmit() {
     this.form.isSubmitted.set(true);
     if (this.form.formGroup.valid) {
       this.form.isSending.set(true);
 
-      const employee = this.getEmploye();
-      this.employeeService
-        .save(employee)
+      const service = this.form.formGroup.value as ServiceFromForm;
+      this.servicesService
+        .saveService(service)
         .pipe(
           catchError((e) => {
             const error = e.error as Response<undefined>;
@@ -181,8 +166,8 @@ export class EmployeeSaveComponent implements OnInit {
         .subscribe(() => {
           toast(
             'success',
-            'Employé enregistrée',
-            `L'employé a bien été sauvegardée`
+            'Service enregistré',
+            `Le service a bien été sauvegardé`
           );
           this.handleClose();
           this.afterSubmit.emit();
