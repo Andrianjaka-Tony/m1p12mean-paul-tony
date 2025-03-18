@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, input, signal, WritableSignal } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ChevronDown, LucideAngularModule } from 'lucide-angular';
 
@@ -8,7 +8,7 @@ type ErrorMessage = {
   message: string;
 };
 
-type SelectDataType = {
+export type SelectOption = {
   _id: string;
   label: string;
 };
@@ -32,5 +32,6 @@ export class ControlledInputComponent {
   readonly form = input.required<FormGroup>();
   readonly messages = input<ErrorMessage[]>([]);
 
-  readonly options = input<SelectDataType[]>([]);
+  readonly options = input<WritableSignal<SelectOption[]>>(signal([]));
+  readonly placeholder = input<string>('');
 }

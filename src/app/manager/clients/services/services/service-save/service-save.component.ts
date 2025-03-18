@@ -1,10 +1,13 @@
-import { Component, inject, OnInit, output } from '@angular/core';
+import { Component, inject, OnInit, output, signal } from '@angular/core';
 import { Award, LucideAngularModule, X } from 'lucide-angular';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { catchError, finalize } from 'rxjs';
 import { createForm } from 'src/app/utils/create-form';
-import { ControlledInputComponent } from 'src/app/components/controlled-input/controlled-input.component';
+import {
+  ControlledInputComponent,
+  SelectOption,
+} from 'src/app/components/controlled-input/controlled-input.component';
 import {
   EmployeeSave,
   EmployeeService,
@@ -37,7 +40,7 @@ export class EmployeeSaveComponent implements OnInit {
   readonly cross = X;
   readonly award = Award;
 
-  readonly serviceCategories: ServiceCategory[] = [] as ServiceCategory[];
+  readonly serviceCategories = signal<SelectOption[]>([]);
 
   readonly close = output();
   readonly afterSubmit = output();
@@ -135,7 +138,11 @@ export class EmployeeSaveComponent implements OnInit {
     (element) => element.id === 'category'
   );
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.servicesService.findAllCategories().subscribe((response) => {
+      this.serviceCategories.set(response.data.categories as SelectOption[]);
+    });
+  }
 
   handleClose() {
     this.close.emit();

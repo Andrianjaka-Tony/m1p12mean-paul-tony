@@ -8,8 +8,14 @@ import { pageSize } from '../../utils/page-size';
 import { Pageable } from 'src/app/models/pageable.model';
 import { Employee } from 'src/app/models/mechanic/employee.model';
 import { User } from 'src/app/models/auth/user.model';
-import { Service } from 'src/app/models/mechanic/services.model';
+import {
+  Service,
+  ServiceCategory,
+} from 'src/app/models/mechanic/services.model';
 
+type ServiceCategoryPage = Pageable & {
+  categories: ServiceCategory[];
+};
 type ServicePage = Pageable & {
   services: Service[];
 };
@@ -37,6 +43,16 @@ export type EmployeeSave = {
 })
 export class ServicesService {
   readonly http = inject(HttpClient);
+
+  findAllCategories() {
+    const headers = createHeaders();
+    return this.http.get<Response<ServiceCategoryPage>>(
+      `${apiUrl}/api/service_categories?page=${1}&limit=${100}`,
+      {
+        headers,
+      }
+    );
+  }
 
   findServices(page: number) {
     const headers = createHeaders();
