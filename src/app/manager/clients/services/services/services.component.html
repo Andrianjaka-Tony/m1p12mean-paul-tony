@@ -1,0 +1,28 @@
+<div class="px-6 py-5 border border-[#333] rounded-lg">
+  <h3 class="text-xl">Services</h3>
+  <p class="text-sm opacity-70 mt-1">
+    Gérer dans cette section la liste des services du garage
+  </p>
+  <div class="w-full mt-6">
+    <services-list
+      [services]="services()"
+      [isLoading]="isFindLoading()"
+      (afterChange)="findAll()"
+    />
+    <div class="mt-4 w-full flex justify-between items-center">
+      <button-component
+        (click)="toggleSave()"
+        class="w-fit flex gap-2 items-center"
+        variant="default"
+        size="sm"
+      >
+        <lucide-angular [img]="wrench" class="h-4 w-4" />
+        <p class="leading-none">Enregistrer</p>
+      </button-component>
+      <state-pagination [pageSignal]="page" [pageable]="pageable()" />
+    </div>
+  </div>
+  @if (isSave()) {
+  <!-- <employee-save (close)="toggleSave()" (afterSubmit)="findAll()" /> -->
+  }
+</div>

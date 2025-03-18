@@ -1,0 +1,69 @@
+<!-- <div class="w-full overflow-auto"> -->
+<div tableComponent>
+  <thead tableHeader>
+    <tr tableRow>
+      <th tableHead class="w-sm">Intitulé</th>
+      <th tableHead class="text-right w-30">Prix</th>
+      <th tableHead class="text-right w-30">Durée</th>
+      <th tableHead class="w-xs">Catégorie</th>
+      <th tableHead class="text-right w-30">Compétences</th>
+      <th tableHead class="w-10"></th>
+    </tr>
+  </thead>
+  <tbody tableBody>
+    @if (isLoading()) { @for (element of ["", "", "", "", "",]; track $index) {
+    <tr tableRow>
+      <td tableCell><skeleton /></td>
+      <td tableCell><skeleton class="ml-auto" /></td>
+      <td tableCell><skeleton class="ml-auto" /></td>
+      <td tableCell><skeleton /></td>
+      <td tableCell><skeleton class="ml-auto" /></td>
+      <td tableCell><skeleton class="ml-auto" /></td>
+    </tr>
+    } } @else { @for (service of services(); track $index) {
+    <tr tableRow>
+      <td tableCell class="flex items-center gap-2">{{ service.label }}</td>
+      <td tableCell class="text-right">{{ service.price | numberFormat }} $</td>
+      <td tableCell class="text-right">
+        {{ service.default_duration }} heures
+      </td>
+      <td tableCell>{{ service.category.label }}</td>
+      <td tableCell class="text-right">
+        {{ service.required_skills.length }}
+      </td>
+      <td tableCell>
+        <div class="-mt-1">
+          <popover [id]="'service-popover-' + service._id">
+            <popover-trigger class="flex items-center mt-0.5">
+              <lucide-angular [img]="ellipsis" class="h-4 w-4 scale-120" />
+            </popover-trigger>
+            <popover-content class="w-40" origin="right">
+              <div popoverItemsContainer>
+                <popover-close>
+                  <div popoverItem [icon]="eye" label="Détails"></div>
+                </popover-close>
+                <!-- <popover-close>
+                    <div
+                      popoverItem
+                      (click)="openUpdate(employee)"
+                      [icon]="settings"
+                      label="Modifier"
+                    ></div>
+                  </popover-close> -->
+              </div>
+            </popover-content>
+          </popover>
+        </div>
+      </td>
+    </tr>
+    } }
+  </tbody>
+</div>
+<!-- </div> -->
+<!-- @if (isUpdating() && defaultSkillToUpdate()) {
+<skill-update
+  (close)="closeUpdate()"
+  (afterSubmit)="afterChange.emit()"
+  [skill]="defaultSkillToUpdate()"
+/>
+} -->
