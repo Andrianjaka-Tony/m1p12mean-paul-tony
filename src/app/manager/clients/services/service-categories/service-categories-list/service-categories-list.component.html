@@ -2,11 +2,8 @@
 <div tableComponent>
   <thead tableHeader>
     <tr tableRow>
-      <th tableHead class="w-sm">Intitulé</th>
-      <th tableHead class="text-right w-30">Prix</th>
-      <th tableHead class="text-right w-40">Durée</th>
-      <th tableHead class="w-xs">Catégorie</th>
-      <th tableHead class="text-right w-30">Compétences</th>
+      <th tableHead class="w-80">Identifiant</th>
+      <th tableHead>Intitulé</th>
       <th tableHead class="w-10"></th>
     </tr>
   </thead>
@@ -14,23 +11,13 @@
     @if (isLoading()) { @for (element of ["", "", "", "", "",]; track $index) {
     <tr tableRow>
       <td tableCell><skeleton /></td>
-      <td tableCell><skeleton class="ml-auto" /></td>
-      <td tableCell><skeleton class="ml-auto" /></td>
       <td tableCell><skeleton /></td>
       <td tableCell><skeleton class="ml-auto" /></td>
-      <td tableCell><skeleton class="ml-auto" /></td>
     </tr>
-    } } @else { @for (service of services(); track $index) {
+    } } @else { @for (service of serviceCategories(); track $index) {
     <tr tableRow>
-      <td tableCell class="flex items-center gap-2">{{ service.label }}</td>
-      <td tableCell class="text-right">{{ service.price | numberFormat }} $</td>
-      <td tableCell class="text-right">
-        {{ service.default_duration }} heures
-      </td>
-      <td tableCell>{{ service.category.label }}</td>
-      <td tableCell class="text-right">
-        {{ service.required_skills.length }}
-      </td>
+      <td tableCell>{{ service._id }}</td>
+      <td tableCell>{{ service.label }}</td>
       <td tableCell>
         <div class="-mt-1">
           <popover [id]="'service-popover-' + service._id">

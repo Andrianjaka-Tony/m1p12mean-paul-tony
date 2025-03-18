@@ -10,7 +10,7 @@ import {
 import { EmployeeService } from 'src/app/services/mechanic/employee.service';
 import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';
 import { Router } from '@angular/router';
-import { Service } from 'src/app/models/mechanic/services.model';
+import { ServiceCategory } from 'src/app/models/mechanic/services.model';
 import { SkeletonComponent } from 'src/app/components/skeleton/skeleton.component';
 import {
   TableBodyComponent,
@@ -61,7 +61,7 @@ export class ServiceCategoriesListComponent {
   readonly ellipsis = Ellipsis;
 
   readonly isLoading = input.required<boolean>();
-  readonly services = input.required<Service[]>();
+  readonly serviceCategories = input.required<ServiceCategory[]>();
 
   // readonly isUpdating = signal<boolean>(false);
   // readonly defaultEmployeeToUpdate = signal<Employee>({} as Employee);

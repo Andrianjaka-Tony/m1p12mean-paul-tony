@@ -15,6 +15,7 @@ import {
 type ServiceCategoryPage = Pageable & {
   categories: ServiceCategory[];
 };
+
 type ServicePage = Pageable & {
   services: Service[];
 };
@@ -43,6 +44,16 @@ export type ServiceFromForm = {
 })
 export class ServicesService {
   readonly http = inject(HttpClient);
+
+  findServiceCategories(page: number) {
+    const headers = createHeaders();
+    return this.http.get<Response<ServiceCategoryPage>>(
+      `${apiUrl}/api/service_categories?page=${page}&limit=${pageSize}`,
+      {
+        headers,
+      }
+    );
+  }
 
   findAllCategories() {
     const headers = createHeaders();

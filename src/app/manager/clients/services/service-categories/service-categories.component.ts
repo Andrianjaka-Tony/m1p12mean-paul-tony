@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { catchError, finalize } from 'rxjs';
 import { LucideAngularModule, Wrench } from 'lucide-angular';
 import { Pageable } from 'src/app/models/pageable.model';
-import { Service } from 'src/app/models/mechanic/services.model';
+import { ServiceCategory } from 'src/app/models/mechanic/services.model';
 import { ServicesService } from 'src/app/services/mechanic/services.service';
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { StatePaginationComponent } from 'src/app/components/state-pagination/state-pagination.component';
@@ -30,7 +30,7 @@ export class ServiceCategorisSection implements OnInit {
 
   readonly isFindLoading = signal<boolean>(true);
   readonly page = signal<number>(1);
-  readonly services = signal<Service[]>([]);
+  readonly serviceCategories = signal<ServiceCategory[]>([]);
   readonly pageable = signal<Pageable>({} as Pageable);
 
   ngOnInit(): void {
@@ -44,7 +44,7 @@ export class ServiceCategorisSection implements OnInit {
   findAll() {
     this.isFindLoading.set(true);
     this.servicesService
-      .findServices(this.page() || 1)
+      .findServiceCategories(this.page() || 1)
       .pipe(
         catchError((e) => {
           throw e;
@@ -54,7 +54,7 @@ export class ServiceCategorisSection implements OnInit {
         })
       )
       .subscribe((response) => {
-        this.services.set(response.data.services);
+        this.serviceCategories.set(response.data.categories);
         this.pageable.set(response.data as Pageable);
       });
   }
