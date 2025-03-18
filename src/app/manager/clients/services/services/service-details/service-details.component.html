@@ -1,0 +1,59 @@
+<div class="flex items-center gap-2"></div>
+<div class="mt-5 px-6 py-5 border border-[#333] rounded-lg">
+  <h3 class="text-xl">Compétences requises du service</h3>
+  <p class="text-sm opacity-70 mt-1">
+    Vous pouvez voir ci-dessous la liste des compétences requises pour le
+    service.
+  </p>
+  <p class="text-sm opacity-70">
+    Notez que vous pouvez les modifier en cochant ou décochant les cases.
+  </p>
+  <div class="mt-6">
+    <div tableComponent>
+      <thead tableHeader>
+        <tr tableRow>
+          <th tableHead>Intitulé</th>
+          <th tableHead class="w-30"></th>
+        </tr>
+      </thead>
+      <tbody tableBody>
+        @if (skills().length === 0) { @for (skill of ["", "", "", "", "",];
+        track $index) {
+        <tr tableRow>
+          <td tableCell><skeleton class="my-1 !h-4" /></td>
+          <td tableCell><skeleton class="ml-auto my-1 !h-4" /></td>
+        </tr>
+        } } @else { @for (skill of skills(); track $index) {
+        <tr tableRow>
+          <td tableCell>{{ skill.label }}</td>
+          <td tableCell class="flex items-center justify-end">
+            <switch
+              (toggle)="toggleSkill($event, skill)"
+              [checked]="checkedSwitch(skill)"
+            />
+          </td>
+        </tr>
+        } }
+      </tbody>
+    </div>
+  </div>
+  <div class="w-full mt-4 flex justify-between">
+    <button-component
+      class="flex items-center gap-1 duration-200"
+      [ngClass]="[!isCommitable() ? 'opacity-100' : 'cursor-pointer']"
+      size="sm"
+      variant="default"
+      type="button"
+      [disabled]="!isCommitable()"
+      (click)="doUpdate()"
+    >
+      <lucide-angular [img]="award" class="h-4 w-4" />
+      Appliquer
+    </button-component>
+    <state-pagination
+      (change)="findSkills()"
+      [pageSignal]="skillPage"
+      [pageable]="skillPageable()"
+    />
+  </div>
+</div>

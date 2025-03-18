@@ -90,6 +90,13 @@ export class ServicesService {
     );
   }
 
+  findServiceById(id: string) {
+    const headers = createHeaders();
+    return this.http.get<Response<Service>>(`${apiUrl}/api/service`, {
+      headers,
+    });
+  }
+
   updateSkills(newSkills: UpdateSkillsBody) {
     const headers = createHeaders();
     return this.http.put<Response<undefined>>(
