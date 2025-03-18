@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 export const managerMechanicsRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'employees',
+    redirectTo: 'employees/1',
     pathMatch: 'full',
   },
   {
