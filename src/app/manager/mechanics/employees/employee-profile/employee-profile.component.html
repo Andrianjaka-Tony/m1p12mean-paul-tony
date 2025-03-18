@@ -35,14 +35,29 @@
         <tr tableRow>
           <td tableCell>{{ skill.label }}</td>
           <td tableCell class="flex items-center justify-end">
-            <switch [checked]="checkedSwitch(skill)" />
+            <switch
+              (toggle)="toggleSkill($event, skill)"
+              [checked]="checkedSwitch(skill)"
+            />
           </td>
         </tr>
         } }
       </tbody>
     </div>
   </div>
-  <div class="w-full mt-4">
+  <div class="w-full mt-4 flex justify-between">
+    <button-component
+      class="flex items-center gap-1 duration-200"
+      [ngClass]="[!isCommitable() ? 'opacity-100' : 'cursor-pointer']"
+      size="sm"
+      variant="default"
+      type="button"
+      [disabled]="!isCommitable()"
+      (click)="doUpdate()"
+    >
+      <lucide-angular [img]="award" class="h-4 w-4" />
+      Appliquer
+    </button-component>
     <state-pagination
       (change)="findSkills()"
       [pageSignal]="skillPage"

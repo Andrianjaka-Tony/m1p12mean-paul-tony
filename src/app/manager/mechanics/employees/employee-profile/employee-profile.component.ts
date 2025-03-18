@@ -18,6 +18,10 @@ import { SkillService } from 'src/app/services/mechanic/skill.service';
 import { Pageable } from 'src/app/models/pageable.model';
 import { catchError, finalize } from 'rxjs';
 import { StatePaginationComponent } from '../../../../components/state-pagination/state-pagination.component';
+import { Award, LucideAngularModule } from 'lucide-angular';
+import { ButtonComponent } from '../../../../components/button/button.component';
+import { NgClass } from '@angular/common';
+import { toast } from 'src/app/components/toast/toast.component';
 
 @Component({
   selector: 'employee-profile',
@@ -33,11 +37,16 @@ import { StatePaginationComponent } from '../../../../components/state-paginatio
     SwitchComponent,
     StatePaginationComponent,
     SkeletonComponent,
+    LucideAngularModule,
+    ButtonComponent,
+    NgClass,
   ],
   templateUrl: './employee-profile.component.html',
   styles: ``,
 })
 export class EmployeeProfilePage implements OnInit {
+  readonly award = Award;
+
   readonly employeeService = inject(EmployeeService);
   readonly skillService = inject(SkillService);
   readonly route = inject(ActivatedRoute);
@@ -50,6 +59,7 @@ export class EmployeeProfilePage implements OnInit {
   readonly skillPage = signal<number>(1);
   readonly skillPageable = signal<Pageable>({} as Pageable);
   readonly skills = signal<Skill[]>([]);
+  readonly isCommitable = signal<boolean>(false);
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -75,9 +85,6 @@ export class EmployeeProfilePage implements OnInit {
       .pipe(
         catchError((e) => {
           throw e;
-        }),
-        finalize(() => {
-          // this.isFindLoading.set(false);
         })
       )
       .subscribe((response) => {
@@ -87,7 +94,43 @@ export class EmployeeProfilePage implements OnInit {
   }
 
   checkedSwitch(skill: Skill) {
-    console.log(this.employeeSkillsId().includes(skill._id || ''));
     return this.employeeSkillsId().includes(skill._id || '');
+  }
+
+  toggleSkill(checked: boolean, skill: Skill) {
+    this.isCommitable.set(true);
+    if (checked) {
+      this.employeeSkillsId.set([...this.employeeSkillsId(), skill._id || '']);
+      return;
+    }
+    this.employeeSkillsId.set(
+      this.employeeSkillsId().filter((s) => s !== skill._id)
+    );
+  }
+
+  doUpdate() {
+    this.isCommitable.set(false);
+    this.employeeService
+      .updateSkills({
+        id_employe: this.employee()._id || '',
+        skills: this.employeeSkillsId(),
+      })
+      .pipe(
+        catchError((e) => {
+          toast(
+            'error',
+            'Modification échouée',
+            'Une erreur est survenue lors de la modification'
+          );
+          throw e;
+        })
+      )
+      .subscribe((response) => {
+        toast(
+          'success',
+          'Modification réussie',
+          'Les compétences du mécaniciens ont été  mises à jour'
+        );
+      });
   }
 }

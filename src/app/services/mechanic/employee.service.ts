@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Skill } from '../../models/mechanic/skill.model';
 import { Response } from '../../models/response.model';
@@ -18,6 +18,11 @@ type EmployeeById = {
   all_skills: Skill[];
 };
 
+type UpdateSkillsBody = {
+  id_employe: string;
+  skills: string[];
+};
+
 export type EmployeeSave = {
   user: User;
   employe: {
@@ -35,7 +40,7 @@ export class EmployeeService {
   find(page: number) {
     const headers = createHeaders();
     return this.http.get<Response<EmployeePage>>(
-      `${apiUrl}/api/employe?page=${page}&limit=${pageSize - 2}`,
+      `${apiUrl}/api/employe?page=${page}&limit=${pageSize}`,
       {
         headers,
       }
@@ -57,27 +62,34 @@ export class EmployeeService {
     return this.http.post<Response<EmployeeSave>>(
       `${apiUrl}/auth/emp/register`,
       employee,
-      {
-        headers,
-      }
+      { headers }
     );
   }
 
-  update(skill: Skill) {
+  updateSkills(newSkills: UpdateSkillsBody) {
     const headers = createHeaders();
     return this.http.put<Response<undefined>>(
-      `${apiUrl}/api/skill/${skill._id}`,
-      skill,
-      {
-        headers,
-      }
+      `${apiUrl}/api/employe/skills`,
+      newSkills,
+      { headers }
     );
   }
 
-  delete(id: string) {
-    const headers = createHeaders();
-    return this.http.delete<Response<undefined>>(`${apiUrl}/api/skill/${id}`, {
-      headers,
-    });
-  }
+  // update(skill: Skill) {
+  //   const headers = createHeaders();
+  //   return this.http.put<Response<undefined>>(
+  //     `${apiUrl}/api/skill/${skill._id}`,
+  //     skill,
+  //     {
+  //       headers,
+  //     }
+  //   );
+  // }
+
+  // delete(id: string) {
+  //   const headers = createHeaders();
+  //   return this.http.delete<Response<undefined>>(`${apiUrl}/api/skill/${id}`, {
+  //     headers,
+  //   });
+  // }
 }
