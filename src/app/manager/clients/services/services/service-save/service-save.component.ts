@@ -1,12 +1,8 @@
-import { Component, inject, output, signal } from '@angular/core';
-import { ModalComponent } from '../../../../components/modal/modal.component';
-import { ButtonComponent } from '../../../../components/button/button.component';
+import { Component, inject, output } from '@angular/core';
 import { Award, LucideAngularModule, X } from 'lucide-angular';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { catchError, finalize } from 'rxjs';
-import { Response } from '../../../../models/response.model';
-import { toast } from '../../../../components/toast/toast.component';
 import { createForm } from 'src/app/utils/create-form';
 import { ControlledInputComponent } from 'src/app/components/controlled-input/controlled-input.component';
 import {
@@ -14,6 +10,10 @@ import {
   EmployeeService,
 } from 'src/app/services/mechanic/employee.service';
 import { Employee } from 'src/app/models/mechanic/employee.model';
+import { ModalComponent } from 'src/app/components/modal/modal.component';
+import { ButtonComponent } from 'src/app/components/button/button.component';
+import { toast } from 'src/app/components/toast/toast.component';
+import { Response } from 'src/app/models/response.model';
 
 @Component({
   selector: 'service-save',
@@ -38,95 +38,96 @@ export class EmployeeSaveComponent {
   readonly afterSubmit = output();
 
   readonly fields = [
-    { name: 'lastname', defaultValue: '', validators: [Validators.required] },
-    { name: 'firstname', defaultValue: '', validators: [Validators.required] },
+    { name: 'label', defaultValue: '', validators: [Validators.required] },
     {
-      name: 'email',
+      name: 'description',
       defaultValue: '',
-      validators: [Validators.required, Validators.email],
+      validators: [Validators.required],
     },
     {
-      name: 'password',
-      defaultValue: '',
-      validators: [Validators.required, Validators.minLength(8)],
-    },
-    {
-      name: 'salary',
+      name: 'price',
       defaultValue: '',
       validators: [Validators.required, Validators.min(0)],
     },
+    {
+      name: 'default_duration',
+      defaultValue: '',
+      validators: [Validators.required, Validators.min(0)],
+    },
+    { name: 'category', defaultValue: '', validators: [Validators.required] },
   ];
   readonly form = createForm(this.fields);
   readonly fieldsControls = [
     {
-      id: 'lastname',
-      label: 'Nom',
+      id: 'label',
+      label: 'Intitulé',
       type: 'text',
-      controleName: 'lastname',
+      controleName: 'label',
       isSubmitted: this.form.isSubmitted,
       form: this.form.formGroup,
-      messages: [{ message: 'Le nom est requis.', validator: 'required' }],
+      messages: [{ message: "L'intitulé est requis.", validator: 'required' }],
     },
     {
-      id: 'firstname',
-      label: 'Prénom',
+      id: 'description',
+      label: 'Description',
       type: 'text',
-      controleName: 'firstname',
-      isSubmitted: this.form.isSubmitted,
-      form: this.form.formGroup,
-      messages: [{ message: 'Le prénom est requis.', validator: 'required' }],
-    },
-    {
-      id: 'email',
-      label: 'Adresse email',
-      type: 'email',
-      controleName: 'email',
+      controleName: 'description',
       isSubmitted: this.form.isSubmitted,
       form: this.form.formGroup,
       messages: [
-        { message: "L'email est requis.", validator: 'required' },
-        { message: "L'email est invalide.", validator: 'email' },
+        { message: 'La description est requise.', validator: 'required' },
       ],
     },
     {
-      id: 'password',
-      label: 'Mot de passe',
-      type: 'password',
-      controleName: 'password',
+      id: 'price',
+      label: 'Prix',
+      type: 'number',
+      controleName: 'price',
       isSubmitted: this.form.isSubmitted,
       form: this.form.formGroup,
       messages: [
-        { message: 'Le mot de passe est requis.', validator: 'required' },
+        { message: 'Le prix est requis.', validator: 'required' },
+        { message: 'Le prix doit être un nombre positif.', validator: 'min' },
+      ],
+    },
+    {
+      id: 'default_duration',
+      label: 'Durée',
+      type: 'number',
+      controleName: 'default_duration',
+      isSubmitted: this.form.isSubmitted,
+      form: this.form.formGroup,
+      messages: [
+        { message: 'La durée des travaux est requise.', validator: 'required' },
         {
-          message: 'Le mot de passe doit contenir au moins 8 caractères.',
-          validator: 'minlength',
+          message: 'La durée des travaux doit être un nombre positif.',
+          validator: 'min',
         },
       ],
     },
     {
-      id: 'salary',
-      label: 'Salaire',
-      type: 'number',
-      controleName: 'salary',
+      id: 'category',
+      label: 'Catégorie de service',
+      type: 'select',
+      controleName: 'category',
       isSubmitted: this.form.isSubmitted,
       form: this.form.formGroup,
       messages: [
-        { message: 'Le salaire est requis.', validator: 'required' },
         {
-          message: 'Le salaire doit être un nombre positif.',
-          validator: 'min',
+          message: 'La categorié de service est requise.',
+          validator: 'required',
         },
       ],
     },
   ];
   readonly names = this.fieldsControls.filter(
-    (element) => element.id === 'lastname' || element.id === 'firstname'
+    (element) => element.id === 'label' || element.id === 'description'
   );
-  readonly informations = this.fieldsControls.filter(
-    (element) =>
-      element.id === 'email' ||
-      element.id === 'password' ||
-      element.id === 'salary'
+  readonly numbers = this.fieldsControls.filter(
+    (element) => element.id === 'price' || element.id === 'default_duration'
+  );
+  readonly category = this.fieldsControls.filter(
+    (element) => element.id === 'category'
   );
 
   handleClose() {
