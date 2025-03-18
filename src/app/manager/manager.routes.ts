@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+
+import { managerClientsRoutes } from './clients/clients.routes';
 import { managerMechanicsRoutes } from './mechanics/mechanics.routes';
 
 export const managerRoutes: Routes = [
@@ -16,6 +18,12 @@ export const managerRoutes: Routes = [
     path: 'dashboard',
     loadComponent: () =>
       import('./dashboard/dashboard.component').then((m) => m.DashboardPage),
+  },
+  {
+    path: 'clients',
+    loadComponent: () =>
+      import('./clients/clients.component').then((m) => m.ClientsPage),
+    children: managerClientsRoutes,
   },
   {
     path: 'mechanics',

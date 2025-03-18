@@ -2,60 +2,49 @@ import { Component } from '@angular/core';
 import { PageTitleComponent } from '../../components/page-title/page-title.component';
 import { PageStructureComponent } from '../../components/page-structure/page-structure.component';
 import { PageSidebarSection } from '../../components/page-structure/page-sidebar-section/page-sidebar-section.component';
-import {
-  Award,
-  ChartSpline,
-  DollarSign,
-  LayoutDashboard,
-  User,
-} from 'lucide-angular';
+import { Car, LayoutDashboard, User, Wrench } from 'lucide-angular';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-  selector: 'mechanics-page',
+  selector: 'client-page',
   imports: [RouterOutlet, PageTitleComponent, PageStructureComponent],
-  templateUrl: './mechanics.component.html',
+  templateUrl: './clients.component.html',
   styles: ``,
 })
-export class MechanicsPage {
+export class ClientsPage {
   readonly sections: PageSidebarSection[] = [
     {
       title: "Vue d'ensemble",
       items: [
         {
-          href: '/manager/mechanics/dashboard',
+          href: '/manager/clients/dashboard',
           label: 'Dashboard',
           icon: LayoutDashboard,
         },
-        {
-          href: '/manager/mechanics/performances',
-          label: 'Performances',
-          icon: ChartSpline,
-        },
       ],
     },
     {
-      title: 'Mécaniciens',
+      title: 'Clients',
       items: [
         {
-          href: '/manager/mechanics/employees',
-          label: 'Mécaniciens',
+          href: '/manager/clients/customers',
+          label: 'Clients',
           icon: User,
         },
         {
-          href: '/manager/mechanics/skills',
-          label: 'Compétences',
-          icon: Award,
+          href: '/manager/clients/services',
+          label: 'Services',
+          icon: Wrench,
         },
       ],
     },
     {
-      title: 'Salaires',
+      title: 'Véhicules',
       items: [
         {
-          href: '/manager/mechanics/salaries',
-          label: 'Salaires',
-          icon: DollarSign,
+          href: '/manager/clients/salaries',
+          label: 'Marques',
+          icon: Car,
         },
       ],
     },
