@@ -6,9 +6,7 @@ import {
   LucideAngularModule,
   Settings,
   Trash2,
-  User,
 } from 'lucide-angular';
-import { EmployeeService } from 'src/app/services/mechanic/employee.service';
 import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';
 import { Router } from '@angular/router';
 import { Service } from 'src/app/models/mechanic/services.model';
@@ -29,7 +27,6 @@ import {
   PopoverItemsContainerComponent,
   PopoverTriggerComponent,
 } from 'src/app/components/popover/popover.component';
-import { AvatarComponent } from 'src/app/components/avatar/avatar.component';
 
 @Component({
   selector: 'services-list',
@@ -54,7 +51,6 @@ import { AvatarComponent } from 'src/app/components/avatar/avatar.component';
   styles: ``,
 })
 export class ServicesListComponent {
-  readonly employeeService = inject(EmployeeService);
   readonly router = inject(Router);
 
   readonly eye = Eye;

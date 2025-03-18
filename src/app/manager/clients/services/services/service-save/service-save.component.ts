@@ -8,7 +8,6 @@ import {
   ControlledInputComponent,
   SelectOption,
 } from 'src/app/components/controlled-input/controlled-input.component';
-import { Employee } from 'src/app/models/mechanic/employee.model';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { toast } from 'src/app/components/toast/toast.component';
@@ -31,7 +30,7 @@ import {
   templateUrl: './service-save.component.html',
   styles: ``,
 })
-export class EmployeeSaveComponent implements OnInit {
+export class ServiceSaveComponent implements OnInit {
   readonly servicesService = inject(ServicesService);
 
   readonly cross = X;

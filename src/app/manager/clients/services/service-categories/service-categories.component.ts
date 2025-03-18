@@ -6,14 +6,14 @@ import { Service } from 'src/app/models/mechanic/services.model';
 import { ServicesService } from 'src/app/services/mechanic/services.service';
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { StatePaginationComponent } from 'src/app/components/state-pagination/state-pagination.component';
-import { ServicesListComponent } from './services-list/services-list.component';
+import { ServiceCategoriesListComponent } from './service-categories-list/service-categories-list.component';
 import { EmployeeSaveComponent } from './service-save/service-save.component';
 
 @Component({
   selector: 'service-categories-section',
   imports: [
     LucideAngularModule,
-    ServicesListComponent,
+    ServiceCategoriesListComponent,
     ButtonComponent,
     StatePaginationComponent,
     EmployeeSaveComponent,

@@ -7,7 +7,7 @@ import { ServicesService } from 'src/app/services/mechanic/services.service';
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { StatePaginationComponent } from 'src/app/components/state-pagination/state-pagination.component';
 import { ServicesListComponent } from './services-list/services-list.component';
-import { EmployeeSaveComponent } from './service-save/service-save.component';
+import { ServiceSaveComponent } from './service-save/service-save.component';
 
 @Component({
   selector: 'services-section',
@@ -16,7 +16,7 @@ import { EmployeeSaveComponent } from './service-save/service-save.component';
     ServicesListComponent,
     ButtonComponent,
     StatePaginationComponent,
-    EmployeeSaveComponent,
+    ServiceSaveComponent,
   ],
   templateUrl: './services.component.html',
   styles: ``,
