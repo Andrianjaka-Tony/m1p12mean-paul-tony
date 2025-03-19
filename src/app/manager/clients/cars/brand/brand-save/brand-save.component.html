@@ -1,0 +1,51 @@
+<modal (close)="close.emit()">
+  <div class="p-5 pt-4">
+    <h3 class="text-xl">Marque</h3>
+    <h3 class="w-96 mt-1 text-sm opacity-70">
+      Ajouter des marques pour diviersifier.
+    </h3>
+    @if (form.message() !== "") {
+    <p class="text-red-400 w-96 text-sm">{{ form.message() }}</p>
+    }
+
+    <form [formGroup]="form.formGroup" (ngSubmit)="handleSubmit()">
+      <div class="mt-3 flex flex-col gap-3">
+        @for (control of names; track $index) {
+        <controlled-input
+          [id]="control.id"
+          [label]="control.label"
+          [type]="control.type"
+          [controlName]="control.controleName"
+          [isSubmitted]="control.isSubmitted()"
+          [form]="control.form"
+          [messages]="control.messages"
+        ></controlled-input>
+        }
+      </div>
+
+      <div class="mt-4 w-full flex justify-between items-center">
+        <button-component
+          class="flex items-center gap-1"
+          size="sm"
+          variant="secondary"
+          type="button"
+          (click)="close.emit()"
+        >
+          <lucide-angular [img]="cross" class="h-4 w-4" />
+          Abandonner
+        </button-component>
+        <button-component
+          class="flex items-center gap-1 duration-200"
+          [ngClass]="[form.isSending() ? 'opacity-70' : 'cursor-pointer']"
+          size="sm"
+          variant="default"
+          type="submit"
+          [disabled]="form.isSending()"
+        >
+          <lucide-angular [img]="award" class="h-4 w-4" />
+          Enregistrer
+        </button-component>
+      </div>
+    </form>
+  </div>
+</modal>

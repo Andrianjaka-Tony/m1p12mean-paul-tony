@@ -1,0 +1,56 @@
+<!-- <div class="w-full overflow-auto"> -->
+<div tableComponent>
+  <thead tableHeader>
+    <tr tableRow>
+      <th tableHead class="w-80">Identifiant</th>
+      <th tableHead>Intitulé</th>
+      <th tableHead class="w-10"></th>
+    </tr>
+  </thead>
+  <tbody tableBody>
+    @if (isLoading()) { @for (element of ["", "", "", "", "",]; track $index) {
+    <tr tableRow>
+      <td tableCell><skeleton class="my-1 !h-4" /></td>
+      <td tableCell><skeleton class="my-1 !h-4" /></td>
+      <td tableCell><skeleton class="ml-auto" /></td>
+    </tr>
+    } } @else { @for (brand of brands(); track $index) {
+    <tr tableRow>
+      <td tableCell>{{ brand._id }}</td>
+      <td tableCell>{{ brand.label }}</td>
+      <td tableCell>
+        <div class="-mt-1">
+          <popover [id]="'car-type-popover-' + brand._id">
+            <popover-trigger class="flex items-center mt-0.5">
+              <lucide-angular [img]="ellipsis" class="h-4 w-4 scale-120" />
+            </popover-trigger>
+            <popover-content class="w-40" origin="right">
+              <div popoverItemsContainer>
+                <popover-close>
+                  <div popoverItem [icon]="eye" label="Détails"></div>
+                </popover-close>
+                <!-- <popover-close>
+                    <div
+                      popoverItem
+                      (click)="openUpdate(employee)"
+                      [icon]="settings"
+                      label="Modifier"
+                    ></div>
+                  </popover-close> -->
+              </div>
+            </popover-content>
+          </popover>
+        </div>
+      </td>
+    </tr>
+    } }
+  </tbody>
+</div>
+<!-- </div> -->
+<!-- @if (isUpdating() && defaultSkillToUpdate()) {
+<skill-update
+  (close)="closeUpdate()"
+  (afterSubmit)="afterChange.emit()"
+  [skill]="defaultSkillToUpdate()"
+/>
+} -->

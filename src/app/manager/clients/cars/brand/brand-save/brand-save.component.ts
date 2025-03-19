@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, output, signal } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { Award, LucideAngularModule, X } from 'lucide-angular';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
@@ -9,11 +9,11 @@ import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { toast } from 'src/app/components/toast/toast.component';
 import { Response } from 'src/app/models/response.model';
-import { CarTypeService } from 'src/app/services/clients/car-type.service';
-import { CarType } from 'src/app/models/clients/car-type.model';
+import { BrandService } from 'src/app/services/clients/brand.service';
+import { Brand } from 'src/app/models/clients/brand.model';
 
 @Component({
-  selector: 'cars-type-save',
+  selector: 'brand-save',
   imports: [
     ModalComponent,
     ButtonComponent,
@@ -22,11 +22,11 @@ import { CarType } from 'src/app/models/clients/car-type.model';
     NgClass,
     ControlledInputComponent,
   ],
-  templateUrl: './cars-type-save.component.html',
+  templateUrl: './brand-save.component.html',
   styles: ``,
 })
-export class CarsTypeSaveComponent {
-  readonly carTypeService = inject(CarTypeService);
+export class BrandSaveComponent {
+  readonly brandService = inject(BrandService);
 
   readonly cross = X;
   readonly award = Award;
@@ -62,9 +62,9 @@ export class CarsTypeSaveComponent {
     if (this.form.formGroup.valid) {
       this.form.isSending.set(true);
 
-      const carType = this.form.formGroup.value as CarType;
-      this.carTypeService
-        .save(carType)
+      const brand = this.form.formGroup.value as Brand;
+      this.brandService
+        .save(brand)
         .pipe(
           catchError((e) => {
             const error = e.error as Response<undefined>;
@@ -78,8 +78,8 @@ export class CarsTypeSaveComponent {
         .subscribe(() => {
           toast(
             'success',
-            'Type de véhicule enregistré',
-            `La type de véhicule a bien été sauvegardé`
+            'Marque enregistrée',
+            `La marque a bien été sauvegardée`
           );
           this.handleClose();
           this.afterSubmit.emit();
