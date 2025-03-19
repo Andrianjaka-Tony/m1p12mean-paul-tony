@@ -1,21 +1,15 @@
-import { Component, inject, OnInit, output, signal } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import { Award, LucideAngularModule, X } from 'lucide-angular';
 import { ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgClass } from '@angular/common';
 import { catchError, finalize } from 'rxjs';
 import { createForm } from 'src/app/utils/create-form';
-import {
-  ControlledInputComponent,
-  SelectOption,
-} from 'src/app/components/controlled-input/controlled-input.component';
+import { ControlledInputComponent } from 'src/app/components/controlled-input/controlled-input.component';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { ButtonComponent } from 'src/app/components/button/button.component';
 import { toast } from 'src/app/components/toast/toast.component';
 import { Response } from 'src/app/models/response.model';
-import {
-  ServiceFromForm,
-  ServicesService,
-} from 'src/app/services/mechanic/services.service';
+import { ServicesService } from 'src/app/services/mechanic/services.service';
 import { ServiceCategory } from 'src/app/models/mechanic/services.model';
 
 @Component({
@@ -31,13 +25,11 @@ import { ServiceCategory } from 'src/app/models/mechanic/services.model';
   templateUrl: './service-save.component.html',
   styles: ``,
 })
-export class ServiceCategorySaveComponent implements OnInit {
+export class ServiceCategorySaveComponent {
   readonly servicesService = inject(ServicesService);
 
   readonly cross = X;
   readonly award = Award;
-
-  readonly serviceCategories = signal<SelectOption[]>([]);
 
   readonly close = output();
   readonly afterSubmit = output();
@@ -60,12 +52,6 @@ export class ServiceCategorySaveComponent implements OnInit {
   readonly names = this.fieldsControls.filter(
     (element) => element.id === 'label'
   );
-
-  ngOnInit(): void {
-    this.servicesService.findAllCategories().subscribe((response) => {
-      this.serviceCategories.set(response.data.categories as SelectOption[]);
-    });
-  }
 
   handleClose() {
     this.close.emit();
