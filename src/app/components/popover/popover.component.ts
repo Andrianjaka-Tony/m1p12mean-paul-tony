@@ -21,7 +21,7 @@ import gsap from 'gsap';
       tabindex="0"
       (focus)="openPopover()"
       (blur)="closePopover()"
-      class="relative"
+      class="relative h-fit"
     >
       <ng-content></ng-content>
     </div>
