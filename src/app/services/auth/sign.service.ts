@@ -27,4 +27,10 @@ export class SignService {
     const { role } = data.user;
     this.router.navigate([`/${role?.label}`]);
   }
+
+  signOut(): void {
+    localStorage.removeItem(userDataStoreName);
+    localStorage.removeItem(userTokenStoreName);
+    this.router.navigate(['/']);
+  }
 }

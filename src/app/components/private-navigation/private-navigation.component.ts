@@ -1,4 +1,4 @@
-import { Component, input, signal } from '@angular/core';
+import { Component, inject, input, signal } from '@angular/core';
 import { User } from '../../models/auth/user.model';
 import { userDataStoreName } from '../../utils/sotre';
 import {
@@ -6,6 +6,7 @@ import {
   PrivateNavigationItemComponent,
 } from './private-navigation-item/private-navigation-item.component';
 import { AvatarComponent } from '../avatar/avatar.component';
+import { SignService } from 'src/app/services/auth/sign.service';
 
 @Component({
   selector: 'private-navigation',
@@ -14,6 +15,8 @@ import { AvatarComponent } from '../avatar/avatar.component';
   styles: ``,
 })
 export class PrivateNavigationComponent {
+  readonly signService = inject(SignService);
+
   readonly role = input.required<string>();
   readonly links = input.required<PrivateNacigationLink[]>();
 

@@ -17,7 +17,9 @@
         Centre d'aide
       </p>
       <p class="opacity-70">Contact</p>
-      <p class="opacity-70">Déconnexion</p>
+      <p (click)="signService.signOut()" class="opacity-70 cursor-pointer">
+        Déconnexion
+      </p>
     </div>
   </div>
 
