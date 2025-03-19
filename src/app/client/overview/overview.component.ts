@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { CarListComponent } from './car-list/car-list.component';
-import { QuoteCardComponent } from '../../components/quote-card/quote-card.component';
+import { QuoteListComponent } from './quote-list/quote-list.component';
 
 @Component({
   selector: 'overview-page',
-  imports: [CarListComponent, QuoteCardComponent],
+  imports: [CarListComponent, QuoteListComponent],
   templateUrl: './overview.component.html',
   styles: ``,
 })
