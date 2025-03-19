@@ -18,4 +18,10 @@ export const managerClientsRoutes: Routes = [
         './services/services/service-details/service-details.component'
       ).then((m) => m.ServiceDetailsPage),
   },
+
+  {
+    path: 'cars',
+    loadComponent: () =>
+      import('./cars/cars.component').then((m) => m.CarsPage),
+  },
 ];

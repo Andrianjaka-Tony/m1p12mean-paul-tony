@@ -42,8 +42,8 @@ export class ClientsPage {
       title: 'Véhicules',
       items: [
         {
-          href: '/manager/clients/salaries',
-          label: 'Marques',
+          href: '/manager/clients/cars',
+          label: 'Types & Marques',
           icon: Car,
         },
       ],
