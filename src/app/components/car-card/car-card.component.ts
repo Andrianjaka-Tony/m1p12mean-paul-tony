@@ -7,10 +7,11 @@ import {
   Star,
   Tag,
 } from 'lucide-angular';
+import { BadgeComponent } from '../badge/badge.component';
 
 @Component({
   selector: 'car-card',
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule, BadgeComponent],
   templateUrl: './car-card.component.html',
   styles: ``,
 })

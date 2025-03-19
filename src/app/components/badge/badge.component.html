@@ -1,0 +1,7 @@
+<div [ngClass]="[class()]" class="text-xs flex items-center gap-1.5">
+  <div
+    [ngClass]="[backgrounds[color()]]"
+    class="h-2 aspect-square rounded-full"
+  ></div>
+  <p class="opacity-60">{{ text() }}</p>
+</div>
