@@ -24,10 +24,6 @@ export class ClientRoute {
       label: 'Dashboard',
     },
     {
-      href: '/client/cars',
-      label: 'Véhicules',
-    },
-    {
       href: '/client/profile',
       label: 'Profil',
     },
