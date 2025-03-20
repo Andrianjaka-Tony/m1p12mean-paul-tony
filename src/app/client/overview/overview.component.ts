@@ -15,13 +15,16 @@ export class OverviewPage implements OnInit {
   readonly carService = inject(CarService);
 
   readonly cars = signal<CarFromClient[]>([]);
+  readonly isLoadingCars = signal<boolean>(true);
 
   ngOnInit(): void {
     this.findCars();
   }
 
   findCars() {
+    this.isLoadingCars.set(true);
     this.carService.findCarsByClient().subscribe((response) => {
+      this.isLoadingCars.set(false);
       this.cars.set(response.data);
     });
   }

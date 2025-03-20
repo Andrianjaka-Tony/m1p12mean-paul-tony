@@ -1,6 +1,10 @@
 <div class="w-full grid grid-cols-2 gap-5">
-  @for (car of cars()(); track $index) {
+  @if (!isLoading()()) { @for (car of cars()(); track $index) {
   <car-card [car]="car" />
-  }
+  } } @if (isLoading()()) {
   <car-skeleton />
+  <car-skeleton />
+  <car-skeleton />
+  <car-skeleton />
+  }
 </div>
