@@ -35,9 +35,7 @@ export class CarCardComponent {
       class="relative p-4 text-sm bg-[#111] border border-[#333] rounded-lg cursor-pointer duration-200"
     >
       <div class="w-full flex items-center gap-4">
-        <skeleton
-          class="h-12 !w-12 rounded-full bg-[#222] flex items-center justify-center"
-        />
+        <skeleton class="h-12 !w-12 rounded-full" />
         <div class="w-full flex flex-col mt-1 gap-2.5">
           <skeleton class="!h-4 !w-36" />
           <skeleton class="!h-2 !w-24" />
@@ -57,6 +55,5 @@ export class CarCardComponent {
       </div>
     </div>
   `,
-  styles: ``,
 })
-export class CarSkeleton {}
+export class CarSkeletonComponent {}
