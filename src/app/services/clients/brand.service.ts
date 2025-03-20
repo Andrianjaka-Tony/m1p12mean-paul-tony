@@ -27,6 +27,16 @@ export class BrandService {
     );
   }
 
+  findAll() {
+    const headers = createHeaders();
+    return this.http.get<Response<BrandPage>>(
+      `${apiUrl}/api/brand_vehicle?page=${1}&limit=${1000}`,
+      {
+        headers,
+      }
+    );
+  }
+
   save(brand: Brand) {
     const headers = createHeaders();
     return this.http.post<Response<Brand>>(

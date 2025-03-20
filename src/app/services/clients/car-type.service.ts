@@ -27,6 +27,16 @@ export class CarTypeService {
     );
   }
 
+  findAll() {
+    const headers = createHeaders();
+    return this.http.get<Response<CarTypePage>>(
+      `${apiUrl}/api/type_vehicle?page=${1}&limit=${1000}`,
+      {
+        headers,
+      }
+    );
+  }
+
   save(carType: CarType) {
     const headers = createHeaders();
     return this.http.post<Response<CarType>>(
