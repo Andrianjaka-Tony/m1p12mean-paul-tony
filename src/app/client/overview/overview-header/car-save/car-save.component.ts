@@ -20,6 +20,11 @@ import { CarType } from 'src/app/models/clients/car-type.model';
 import { Brand } from 'src/app/models/clients/brand.model';
 import { CarTypeService } from 'src/app/services/clients/car-type.service';
 import { BrandService } from 'src/app/services/clients/brand.service';
+import { CarService } from 'src/app/services/clients/car.service';
+import { CarFromForm } from 'src/app/models/clients/car.model';
+import { catchError, finalize } from 'rxjs';
+import { Response } from 'src/app/models/response.model';
+import { toast } from 'src/app/components/toast/toast.component';
 
 @Component({
   selector: 'car-save',
@@ -37,6 +42,7 @@ import { BrandService } from 'src/app/services/clients/brand.service';
 export class CarSaveComponent implements OnInit {
   readonly carTypeService = inject(CarTypeService);
   readonly brandService = inject(BrandService);
+  readonly carService = inject(CarService);
 
   readonly cross = X;
   readonly award = Award;
@@ -163,31 +169,32 @@ export class CarSaveComponent implements OnInit {
   }
 
   handleSubmit() {
-    // this.form.isSubmitted.set(true);
-    // if (this.form.formGroup.valid) {
-    //   this.form.isSending.set(true);
-    //   const service = this.form.formGroup.value as ServiceFromForm;
-    //   this.servicesService
-    //     .saveService(service)
-    //     .pipe(
-    //       catchError((e) => {
-    //         const error = e.error as Response<undefined>;
-    //         this.form.message.set(error.message);
-    //         throw e;
-    //       }),
-    //       finalize(() => {
-    //         this.form.isSending.set(false);
-    //       })
-    //     )
-    //     .subscribe(() => {
-    //       toast(
-    //         'success',
-    //         'Service enregistré',
-    //         `Le service a bien été sauvegardé`
-    //       );
-    //       this.handleClose();
-    //       this.afterSubmit.emit();
-    //     });
-    // }
+    this.form.isSubmitted.set(true);
+    if (this.form.formGroup.valid) {
+      this.form.isSending.set(true);
+      const car = this.form.formGroup.value as CarFromForm;
+      console.log(car);
+      this.carService
+        .save(car)
+        .pipe(
+          catchError((e) => {
+            const error = e.error as Response<undefined>;
+            this.form.message.set(error.message);
+            throw e;
+          }),
+          finalize(() => {
+            this.form.isSending.set(false);
+          })
+        )
+        .subscribe(() => {
+          toast(
+            'success',
+            'Véhicule enregistré',
+            `Le véhicule a bien été sauvegardé`
+          );
+          this.handleClose();
+          this.afterSubmit.emit();
+        });
+    }
   }
 }
