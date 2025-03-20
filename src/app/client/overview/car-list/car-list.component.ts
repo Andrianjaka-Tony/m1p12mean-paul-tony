@@ -1,10 +1,13 @@
 import { Component, input, WritableSignal } from '@angular/core';
-import { CarCardComponent } from '../../../components/car-card/car-card.component';
+import {
+  CarCardComponent,
+  CarSkeleton,
+} from '../../../components/car-card/car-card.component';
 import { CarFromClient } from 'src/app/models/clients/car.model';
 
 @Component({
   selector: 'car-list',
-  imports: [CarCardComponent],
+  imports: [CarCardComponent, CarSkeleton],
   templateUrl: './car-list.component.html',
   styles: ``,
 })
