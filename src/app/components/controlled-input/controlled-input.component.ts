@@ -34,6 +34,4 @@ export class ControlledInputComponent {
 
   readonly options = input<WritableSignal<SelectOption[]>>(signal([]));
   readonly placeholder = input<string>('');
-
-  readonly selectContainerClass = input<string>('w-96');
 }
