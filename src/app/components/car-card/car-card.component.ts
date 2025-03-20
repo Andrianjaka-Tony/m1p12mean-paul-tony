@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import {
   Car,
   Clock,
@@ -8,6 +8,7 @@ import {
   Tag,
 } from 'lucide-angular';
 import { BadgeComponent } from '../badge/badge.component';
+import { CarFromClient } from 'src/app/models/clients/car.model';
 
 @Component({
   selector: 'car-card',
@@ -16,9 +17,11 @@ import { BadgeComponent } from '../badge/badge.component';
   styles: ``,
 })
 export class CarCardComponent {
-  readonly car = Car;
+  readonly carIcon = Car;
   readonly tag = Tag;
   readonly hourglass = Clock;
   readonly ellipsis = Ellipsis;
   readonly star = Star;
+
+  readonly car = input.required<CarFromClient>();
 }

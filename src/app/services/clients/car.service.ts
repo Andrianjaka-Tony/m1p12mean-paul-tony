@@ -33,14 +33,12 @@ export class CarService {
 
   findCarsByClient() {
     const headers = createHeaders();
-    const token = localStorage.getItem(userTokenStoreName);
-    if (!token) {
-      this.signService.signOut();
-      return of(undefined);
-    }
+    const client = JSON.parse(
+      localStorage.getItem(userDataStoreName) || '{}'
+    ) as { _id: string } & User;
 
     return this.http.get<Response<CarFromClient[]>>(
-      `${apiUrl}/api/client_vehicle/user/${token}`,
+      `${apiUrl}/api/client_vehicle/user/${client._id}`,
       { headers }
     );
   }

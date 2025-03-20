@@ -1,6 +1,5 @@
 <div class="w-full grid grid-cols-2 gap-5">
-  <car-card />
-  <car-card />
-  <car-card />
-  <car-card />
+  @for (car of cars()(); track $index) {
+  <car-card [car]="car" />
+  }
 </div>
