@@ -24,7 +24,13 @@
     </div>
   </div>
 
-  <button-component class="h-full flex gap-2 items-center rounded-sm">
+  <button-component
+    (click)="toggleSave()"
+    class="h-full flex gap-2 items-center rounded-sm"
+  >
     <span class="">Nouveau véhicule</span>
   </button-component>
 </div>
+@if (isSave()) {
+<car-save (close)="toggleSave()" />
+}

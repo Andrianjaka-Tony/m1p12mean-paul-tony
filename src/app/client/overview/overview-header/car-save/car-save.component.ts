@@ -85,6 +85,7 @@ export class CarSaveComponent implements OnInit {
           validator: 'required',
         },
       ],
+      placeholder: 'Choisir un type de véhicule',
     },
     {
       id: 'id_brand_vehicle',
@@ -99,6 +100,7 @@ export class CarSaveComponent implements OnInit {
           validator: 'required',
         },
       ],
+      placeholder: 'Choisir une marque',
     },
     {
       id: 'model',
@@ -108,6 +110,7 @@ export class CarSaveComponent implements OnInit {
       isSubmitted: this.form.isSubmitted,
       form: this.form.formGroup,
       messages: [{ message: 'Le modèle est requis.', validator: 'required' }],
+      class: 'w-3/5',
     },
     {
       id: 'registration_number',
@@ -128,6 +131,7 @@ export class CarSaveComponent implements OnInit {
       isSubmitted: this.form.isSubmitted,
       form: this.form.formGroup,
       messages: [{ message: "L'année est requise.", validator: 'required' }],
+      class: 'w-2/5',
     },
   ];
   readonly options = [
@@ -138,11 +142,11 @@ export class CarSaveComponent implements OnInit {
     (element) =>
       element.id === 'id_type_vehicle' || element.id === 'id_brand_vehicle'
   );
+  readonly modelAndYear = this.fieldsControls.filter(
+    (element) => element.id === 'model' || element.id === 'year'
+  );
   readonly others = this.fieldsControls.filter(
-    (element) =>
-      element.id === 'model' ||
-      element.id === 'registration_number' ||
-      element.id === 'year'
+    (element) => element.id === 'registration_number'
   );
 
   ngOnInit(): void {

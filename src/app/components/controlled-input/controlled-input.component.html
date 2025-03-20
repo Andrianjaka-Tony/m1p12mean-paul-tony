@@ -1,19 +1,18 @@
-<div [formGroup]="form()" class="flex flex-col gap-1">
+<div [formGroup]="form()" class="w-full flex text-sm flex-col gap-1">
   <label for="{{ id() }}" class="opacity-70 text-sm w-fit">{{ label() }}</label>
   @if (type() === "text-area") {
   <textarea
     id="{{ id() }}"
-    class="w-96 h-20 px-2.5 py-2 rounded-md border border-[#444] outline-none duration-200 focus:border-[#888] resize-none"
+    class="w-96 h-20 px-3 py-2 rounded-md border border-[#444] outline-none duration-200 focus:border-[#888] resize-none"
     formControlName="{{ controlName() }}"
     [ngClass]="class()"
   ></textarea>
   } @else if (type() === "select") {
-  <div class="relative w-96">
+  <div [ngClass]="class()" class="relative">
     <select
       id="{{ id() }}"
-      class="w-full h-10 px-2.5 rounded-md border text-[#ccccccd7] border-[#444] outline-none duration-200 focus:border-[#888] appearance-none"
+      class="w-full h-11 px-3 rounded-md border text-[#ccccccd7] border-[#444] outline-none duration-200 focus:border-[#888] appearance-none"
       formControlName="{{ controlName() }}"
-      [ngClass]="class()"
     >
       <option value="" disabled>{{ placeholder() }}</option>
       @for (option of options()(); track $index) {
@@ -24,14 +23,14 @@
     </select>
     <lucide-angular
       [img]="chevronDown"
-      class="absolute h-4 w-4 right-1.5 top-1/2 -translate-y-1/2 pointer-events-none"
+      class="absolute h-4 w-4 right-2 top-1/2 -translate-y-1/2 pointer-events-none"
     />
   </div>
   } @else {
   <input
     id="{{ id() }}"
     type="{{ type() }}"
-    class="w-96 h-10 px-2.5 rounded-md border border-[#444] outline-none duration-200 focus:border-[#888]"
+    class="w-96 h-11 px-3 rounded-md border border-[#444] outline-none duration-200 focus:border-[#888]"
     formControlName="{{ controlName() }}"
     [ngClass]="class()"
   />
