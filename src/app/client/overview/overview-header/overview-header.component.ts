@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Grid, List, LucideAngularModule, Search } from 'lucide-angular';
+import { Car, Grid, List, LucideAngularModule, Search } from 'lucide-angular';
 import { ButtonComponent } from '../../../components/button/button.component';
 
 @Component({
@@ -12,4 +12,5 @@ export class OverviewHeaderComponent {
   readonly search = Search;
   readonly grid = Grid;
   readonly list = List;
+  readonly car = Car;
 }
