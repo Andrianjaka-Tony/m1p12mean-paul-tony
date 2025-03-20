@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
-import { LucideAngularModule, Search } from 'lucide-angular';
+import { Grid, List, LucideAngularModule, Search } from 'lucide-angular';
+import { ButtonComponent } from '../../../components/button/button.component';
 
 @Component({
   selector: 'overview-header',
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule, ButtonComponent],
   templateUrl: './overview-header.component.html',
   styles: ``,
 })
 export class OverviewHeaderComponent {
   readonly search = Search;
+  readonly grid = Grid;
+  readonly list = List;
 }

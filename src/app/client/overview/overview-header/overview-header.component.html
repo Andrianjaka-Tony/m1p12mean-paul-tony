@@ -1,14 +1,28 @@
-<div class="w-full flex gap-4 text-sm">
+<div class="w-full h-11 flex gap-2 text-sm">
   <div class="flex-1 relative">
     <div
       class="absolute pointer-events-none top-0 left-0 h-full px-4 flex items-center justify-center"
     >
       <lucide-angular [img]="search" class="h-4 w-4" />
     </div>
-
     <input
-      class="w-full pl-11 h-11 outline-none border border-[#333] duration-200 font-light rounded-lg hover:border-[#555] focus:border-[#777]"
+      class="w-full pl-11 h-full outline-none border border-[#333] duration-200 font-light rounded hover:border-[#555] focus:border-[#777]"
       placeholder="Effectuer une recherche..."
     />
   </div>
+
+  <div class="h-full flex p-1 gap-1 border border-[#333] rounded">
+    <div
+      class="h-full cursor-pointer aspect-square bg-[#222] rounded-sm flex items-center justify-center"
+    >
+      <lucide-angular [img]="grid" class="h-4 w-4" />
+    </div>
+    <div
+      class="h-full opacity-60 cursor-pointer aspect-square rounded-sm flex items-center justify-center"
+    >
+      <lucide-angular [img]="list" class="h-4 w-4" />
+    </div>
+  </div>
+
+  <button-component class="h-full">Hello world</button-component>
 </div>
