@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, output, signal } from '@angular/core';
 import { Grid, List, LucideAngularModule, Search } from 'lucide-angular';
 import { ButtonComponent } from '../../../components/button/button.component';
 import { CarSaveComponent } from './car-save/car-save.component';
@@ -15,6 +15,8 @@ export class OverviewHeaderComponent {
   readonly list = List;
 
   readonly isSave = signal<boolean>(false);
+
+  readonly afterSubmit = output();
 
   toggleSave() {
     this.isSave.set(!this.isSave());

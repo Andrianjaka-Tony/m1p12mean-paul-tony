@@ -173,7 +173,6 @@ export class CarSaveComponent implements OnInit {
     if (this.form.formGroup.valid) {
       this.form.isSending.set(true);
       const car = this.form.formGroup.value as CarFromForm;
-      console.log(car);
       this.carService
         .save(car)
         .pipe(

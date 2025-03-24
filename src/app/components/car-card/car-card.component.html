@@ -7,12 +7,12 @@
     >
       <lucide-angular [img]="carIcon" class="h-5 w-5 opacity-80" />
     </div>
-    <div class="w-full flex flex-col mt-1">
+    <div class="w-full overflow-hidden flex flex-col mt-1">
       <div class="w-full flex items-end gap-4">
         <p>{{ car().model }}</p>
         <badge color="gray" class="mb-[0.39px]" text="Non déposée" />
       </div>
-      <p class="opacity-70">
+      <p class="opacity-70 whitespace-nowrap">
         {{ car().id_brand_vehicle.label }} - {{ car().id_type_vehicle.label }}
       </p>
     </div>
