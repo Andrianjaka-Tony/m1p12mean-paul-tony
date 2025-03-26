@@ -25,7 +25,11 @@
       <td tableCell class="text-right">
         {{ service.default_duration }} heures
       </td>
-      <td tableCell>Quantity</td>
+      <td tableCell>
+        <div class="w-full flex justify-end">
+          <quantity-buttons />
+        </div>
+      </td>
     </tr>
     } }
   </tbody>

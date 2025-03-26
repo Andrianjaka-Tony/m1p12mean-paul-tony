@@ -18,6 +18,7 @@ import {
   TableHeaderComponent,
   TableRowComponent,
 } from 'src/app/components/table/table.component';
+import { QuantityButtonsComponent } from '../quantity-buttons/quantity-buttons.component';
 
 @Component({
   selector: 'services-list',
@@ -31,6 +32,7 @@ import {
     SkeletonComponent,
     LucideAngularModule,
     NumberFormatPipe,
+    QuantityButtonsComponent,
   ],
   templateUrl: './services-list.component.html',
   styles: ``,
