@@ -1,11 +1,10 @@
-<!-- <div class="w-full overflow-auto"> -->
 <div tableComponent>
   <thead tableHeader>
     <tr tableRow>
+      <th tableHead class="w-xs">Catégorie</th>
       <th tableHead class="w-sm">Intitulé</th>
       <th tableHead class="text-right w-30">Prix</th>
       <th tableHead class="text-right w-40">Durée</th>
-      <th tableHead class="w-xs">Catégorie</th>
       <th tableHead class="w-32"></th>
     </tr>
   </thead>
@@ -13,19 +12,19 @@
     @if (isLoading()) { @for (element of ["", "", "", "", "",]; track $index) {
     <tr tableRow>
       <td tableCell><skeleton class="my-1 !h-4" /></td>
-      <td tableCell><skeleton class="ml-auto my-1 !h-4" /></td>
-      <td tableCell><skeleton class="ml-auto my-1 !h-4" /></td>
       <td tableCell><skeleton class="my-1 !h-4" /></td>
+      <td tableCell><skeleton class="ml-auto my-1 !h-4" /></td>
+      <td tableCell><skeleton class="ml-auto my-1 !h-4" /></td>
       <td tableCell><skeleton class="ml-auto my-1 !h-4" /></td>
     </tr>
     } } @else { @for (service of services(); track $index) {
     <tr tableRow>
       <td tableCell class="flex items-center gap-2">{{ service.label }}</td>
+      <td tableCell>{{ service.category.label }}</td>
       <td tableCell class="text-right">{{ service.price | numberFormat }} $</td>
       <td tableCell class="text-right">
         {{ service.default_duration }} heures
       </td>
-      <td tableCell>{{ service.category.label }}</td>
       <td tableCell>Quantity</td>
     </tr>
     } }

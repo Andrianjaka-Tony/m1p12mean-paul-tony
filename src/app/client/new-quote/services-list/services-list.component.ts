@@ -1,4 +1,4 @@
-import { Component, inject, input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 
 import {
   Ellipsis,
@@ -8,7 +8,6 @@ import {
   Trash2,
 } from 'lucide-angular';
 import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';
-import { Router } from '@angular/router';
 import { Service } from 'src/app/models/mechanic/services.model';
 import { SkeletonComponent } from 'src/app/components/skeleton/skeleton.component';
 import {
@@ -19,14 +18,6 @@ import {
   TableHeaderComponent,
   TableRowComponent,
 } from 'src/app/components/table/table.component';
-import {
-  PopoverCloseComponent,
-  PopoverComponent,
-  PopoverContentComponent,
-  PopoverItemComponent,
-  PopoverItemsContainerComponent,
-  PopoverTriggerComponent,
-} from 'src/app/components/popover/popover.component';
 
 @Component({
   selector: 'services-list',
@@ -45,8 +36,6 @@ import {
   styles: ``,
 })
 export class ServicesListComponent {
-  readonly router = inject(Router);
-
   readonly eye = Eye;
   readonly settings = Settings;
   readonly trash = Trash2;
@@ -64,8 +53,4 @@ export class ServicesListComponent {
   //   this.defaultEmployeeToUpdate.set({} as Employee);
   //   this.isUpdating.set(false);
   // }
-
-  goToDetails(id: string | undefined) {
-    this.router.navigate([`/manager/clients/services/details/${id}`]);
-  }
 }
