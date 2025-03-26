@@ -6,6 +6,10 @@ import { ServicesService } from 'src/app/services/mechanic/services.service';
 import { ServicesListComponent } from './services-list/services-list.component';
 import { StatePaginationComponent } from '../../components/state-pagination/state-pagination.component';
 
+export type ServiceQuantity = {
+  [key: string]: number;
+};
+
 @Component({
   selector: 'new-quote',
   imports: [ServicesListComponent, StatePaginationComponent],
@@ -19,6 +23,8 @@ export class NewQuotePage implements OnInit {
   readonly page = signal<number>(1);
   readonly services = signal<Service[]>([] as Service[]);
   readonly pageable = signal<Pageable>({} as Pageable);
+
+  readonly quantities = signal<ServiceQuantity>({} as ServiceQuantity);
 
   ngOnInit(): void {
     this.findServices();
@@ -37,9 +43,35 @@ export class NewQuotePage implements OnInit {
         })
       )
       .subscribe((response) => {
-        console.log(response.data.services);
         this.services.set(response.data.services);
         this.pageable.set(response.data as Pageable);
       });
+  }
+
+  add(service: string) {
+    console.log('Add');
+    const quantity: number | undefined = this.quantities()[service];
+    if (!quantity) {
+      this.quantities.set({ ...this.quantities(), [service]: 1 });
+      return;
+    }
+
+    this.quantities.set({ ...this.quantities(), [service]: quantity + 1 });
+  }
+
+  remove(service: string) {
+    console.log('Remove');
+    const quantity: number | undefined = this.quantities()[service];
+
+    if (!quantity) {
+      return;
+    }
+
+    if (quantity === 1) {
+      this.quantities.set({ ...this.quantities(), [service]: 0 });
+      return;
+    }
+
+    this.quantities.set({ ...this.quantities(), [service]: quantity - 1 });
   }
 }

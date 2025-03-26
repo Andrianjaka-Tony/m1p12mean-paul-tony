@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, WritableSignal } from '@angular/core';
 
 import {
   Ellipsis,
@@ -19,6 +19,7 @@ import {
   TableRowComponent,
 } from 'src/app/components/table/table.component';
 import { QuantityButtonsComponent } from '../quantity-buttons/quantity-buttons.component';
+import { ServiceQuantity } from '../new-quote.component';
 
 @Component({
   selector: 'services-list',
@@ -43,8 +44,12 @@ export class ServicesListComponent {
   readonly trash = Trash2;
   readonly ellipsis = Ellipsis;
 
+  readonly add = output<string>();
+  readonly remove = output<string>();
+
   readonly isLoading = input.required<boolean>();
   readonly services = input.required<Service[]>();
+  readonly quantities = input.required<WritableSignal<ServiceQuantity>>();
 
   // readonly isUpdating = signal<boolean>(false);
   // readonly defaultEmployeeToUpdate = signal<Employee>({} as Employee);

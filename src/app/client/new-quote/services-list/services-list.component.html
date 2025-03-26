@@ -27,7 +27,12 @@
       </td>
       <td tableCell>
         <div class="w-full flex justify-end">
-          <quantity-buttons />
+          <quantity-buttons
+            [quantity]="quantities()()[service._id || ''] || 0"
+            [service]="service._id || ''"
+            (add)="add.emit($event)"
+            (remove)="remove.emit($event)"
+          />
         </div>
       </td>
     </tr>
