@@ -10,10 +10,11 @@ import {
 import { BadgeComponent } from '../badge/badge.component';
 import { CarFromClient } from 'src/app/models/clients/car.model';
 import { SkeletonComponent } from '../skeleton/skeleton.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'car-card',
-  imports: [LucideAngularModule, BadgeComponent],
+  imports: [LucideAngularModule, BadgeComponent, RouterLink],
   templateUrl: './car-card.component.html',
   styles: ``,
 })
