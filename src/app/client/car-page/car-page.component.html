@@ -1,1 +1,37 @@
-<p>car-page works!</p>
+<div class="px-8 py-6">
+  <div class="w-full h-11 flex gap-2 text-sm">
+    <div class="flex-1 relative">
+      <div
+        class="absolute pointer-events-none top-0 left-0 h-full px-4 flex items-center justify-center"
+      >
+        <lucide-angular [img]="search" class="h-4 w-4 opacity-80" />
+      </div>
+      <input
+        class="w-full pl-11 h-full outline-none border border-[#333] duration-200 font-light rounded hover:border-[#555] focus:border-[#777]"
+        placeholder="Effectuer une recherche..."
+      />
+    </div>
+
+    <div class="h-full flex p-1 gap-1 border border-[#333] rounded">
+      <div
+        class="h-full cursor-pointer aspect-square bg-[#222] rounded-sm flex items-center justify-center"
+      >
+        <lucide-angular [img]="grid" class="h-4 w-4" />
+      </div>
+      <div
+        class="h-full opacity-60 cursor-pointer aspect-square rounded-sm flex items-center justify-center"
+      >
+        <lucide-angular [img]="list" class="h-4 w-4" />
+      </div>
+    </div>
+
+    <a
+      href="/client/car/quote/{{ id }}"
+      routerLink="/client/car/quote/{{ id }}"
+    >
+      <button-component class="h-full flex gap-2 items-center rounded-sm">
+        <span class="">Effectuer un devis</span>
+      </button-component>
+    </a>
+  </div>
+</div>
