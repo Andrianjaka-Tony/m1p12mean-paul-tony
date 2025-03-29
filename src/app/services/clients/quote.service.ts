@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { QuoteAdd } from 'src/app/models/clients/quote.model';
+import { QuoteAdd, QuoteFromFind } from 'src/app/models/clients/quote.model';
 import { Response } from 'src/app/models/response.model';
 import { createHeaders } from 'src/app/utils/headers';
 import { userDataStoreName } from 'src/app/utils/sotre';
@@ -27,5 +27,13 @@ export class QuoteService {
     return this.http.post<Response<undefined>>(`${apiUrl}/api/devis/`, quote, {
       headers,
     });
+  }
+
+  findAllByVehicle(vehicle: string) {
+    const headers = createHeaders();
+
+    return this.http.get<Response<QuoteFromFind[]>>(
+      `${apiUrl}/api/devis/client/vehicle/${vehicle}`
+    );
   }
 }

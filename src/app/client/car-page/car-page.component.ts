@@ -1,7 +1,8 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Grid, List, LucideAngularModule, Search } from 'lucide-angular';
 import { ButtonComponent } from 'src/app/components/button/button.component';
+import { CarFromClient } from 'src/app/models/clients/car.model';
 
 @Component({
   selector: 'car-page',
@@ -16,6 +17,8 @@ export class CarPage implements OnInit {
 
   readonly route = inject(ActivatedRoute);
   id: string = '';
+
+  readonly vehicle = signal<CarFromClient>({} as CarFromClient);
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {

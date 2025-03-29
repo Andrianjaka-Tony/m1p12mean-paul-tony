@@ -21,6 +21,7 @@ import { QuoteService } from 'src/app/services/clients/quote.service';
 import { QuoteAdd } from 'src/app/models/clients/quote.model';
 import { Response } from 'src/app/models/response.model';
 import { Router } from '@angular/router';
+import { CarFromClient } from 'src/app/models/clients/car.model';
 
 export type ServiceQuantity = {
   [key: string]: number;
@@ -60,6 +61,7 @@ export class NewQuotePage implements OnInit {
   readonly quantities = signal<ServiceQuantity>({} as ServiceQuantity);
   readonly calculatedPrice = signal<number>(0);
 
+  readonly vehicle = signal<CarFromClient>({} as CarFromClient);
   readonly isSubmitted = signal<boolean>(false);
   readonly isSending = signal<boolean>(false);
   readonly message = signal<string>('');

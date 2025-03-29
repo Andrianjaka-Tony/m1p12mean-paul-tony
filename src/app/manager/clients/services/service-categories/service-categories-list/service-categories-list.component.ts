@@ -46,7 +46,6 @@ import {
     PopoverItemComponent,
     PopoverCloseComponent,
     LucideAngularModule,
-    NumberFormatPipe,
   ],
   templateUrl: './service-categories-list.component.html',
   styles: ``,
