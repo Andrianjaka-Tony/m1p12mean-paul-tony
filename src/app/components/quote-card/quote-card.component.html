@@ -18,14 +18,14 @@
     </div>
     <div class="mt-1">
       <div class="flex items-end gap-4">
-        <p>Réparation de ma Porsche</p>
+        <p>{{ quote().label }}</p>
         <badge color="blue" class="mb-[0.39px]" text="En cours" />
       </div>
-      <p class="opacity-70 mt-0.5">12 mars - 27 mars</p>
+      <p class="opacity-70 mt-0.5">{{ quote().created_at | formatDate }}</p>
     </div>
   </div>
   <div class="mt-6 w-full flex items-end justify-between">
-    <p class="opacity-70 mb-0.5">992 GT3RS</p>
-    <p class="text-xl">1,225.00 $</p>
+    <p class="opacity-70 mb-0.5">{{ quote().id_vehicle.model }}</p>
+    <p class="text-xl">{{ quote().price_total | numberFormat }} $</p>
   </div>
 </div>

@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { BadgeComponent } from '../badge/badge.component';
+import { QuoteFromFind } from 'src/app/models/clients/quote.model';
+import { FormatDatePipe } from 'src/app/pipes/date-format.pipe';
+import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';
 
 @Component({
   selector: 'quote-card',
-  imports: [BadgeComponent],
+  imports: [BadgeComponent, FormatDatePipe, NumberFormatPipe],
   templateUrl: './quote-card.component.html',
   styles: `
     .quote-card-svg {
@@ -14,4 +17,6 @@ import { BadgeComponent } from '../badge/badge.component';
     }
   `,
 })
-export class QuoteCardComponent {}
+export class QuoteCardComponent {
+  readonly quote = input.required<QuoteFromFind>();
+}

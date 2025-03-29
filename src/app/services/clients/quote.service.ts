@@ -33,7 +33,8 @@ export class QuoteService {
     const headers = createHeaders();
 
     return this.http.get<Response<QuoteFromFind[]>>(
-      `${apiUrl}/api/devis/client/vehicle/${vehicle}`
+      `${apiUrl}/api/devis/client/vehicle/${vehicle}`,
+      { headers }
     );
   }
 }

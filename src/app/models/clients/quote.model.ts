@@ -1,4 +1,5 @@
 import { Service } from '../mechanic/services.model';
+import { CarFromClient } from './car.model';
 
 export type QuoteAdd = {
   services: {
@@ -31,4 +32,5 @@ export type QuoteFromFind = {
   expected_duration: number;
   replies: any[];
   payed: number;
+  id_vehicle: CarFromClient;
 };
