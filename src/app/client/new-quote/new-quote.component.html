@@ -70,9 +70,10 @@
 
     <div class="w-full mt-6 flex justify-end">
       <button-component
-        class="flex items-center gap-2"
+        class="flex items-center gap-2 duration-200"
         size="default"
         type="submit"
+        [ngClass]="[isSending() ? 'opacity-70' : 'cursor-pointer']"
       >
         <lucide-angular [img]="check" class="h-4 w-4" />
         <span>Terminer</span>

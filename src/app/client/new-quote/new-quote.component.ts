@@ -15,6 +15,7 @@ import {
 } from '@angular/forms';
 import { toast } from 'src/app/components/toast/toast.component';
 import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';
+import { NgClass } from '@angular/common';
 
 export type ServiceQuantity = {
   [key: string]: number;
@@ -29,6 +30,7 @@ export type ServiceQuantity = {
     ButtonComponent,
     ReactiveFormsModule,
     NumberFormatPipe,
+    NgClass,
   ],
   templateUrl: './new-quote.component.html',
   styles: ``,
@@ -141,13 +143,26 @@ export class NewQuotePage implements OnInit {
   async handleSubmit() {
     this.isSubmitted.set(true);
     if (this.formGroup.get('label')?.hasError('required')) {
-      toast('error', 'Erreur', 'Veuillez entrer un intitulé pour le devis');
+      toast(
+        'error',
+        'Intitulé requis',
+        'Veuillez entrer un intitulé pour le devis'
+      );
       return;
     }
     if (this.formGroup.get('created_at')?.hasError('required')) {
-      toast('error', 'Erreur', 'La date du devis est requise');
+      toast('error', 'Date requise', 'La date du devis est requise');
       return;
     }
+    if (this.calculatedPrice() == 0) {
+      toast(
+        'error',
+        'Aucun service sélectionné',
+        'Veuillez ajouter au moins un service'
+      );
+      return;
+    }
+    this.isSending.set(true);
     // if (this.signinForm.valid) {
     //   this.isSending.set(true);
 
