@@ -37,4 +37,13 @@ export class QuoteService {
       { headers }
     );
   }
+
+  findQuoteById(id: string) {
+    const headers = createHeaders();
+
+    return this.http.get<Response<QuoteFromFind>>(
+      `${apiUrl}/api/devis/details/${id}`,
+      { headers }
+    );
+  }
 }

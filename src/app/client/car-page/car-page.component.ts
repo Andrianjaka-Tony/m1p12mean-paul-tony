@@ -29,6 +29,7 @@ export class CarPage implements OnInit {
 
   readonly vehicle = signal<CarFromClient>({} as CarFromClient);
   readonly quotes = signal<QuoteFromFind[]>([]);
+  readonly selectedQuote = signal<QuoteFromFind>({} as QuoteFromFind);
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -43,6 +44,9 @@ export class CarPage implements OnInit {
   findAllQuotes() {
     this.quoteService.findAllByVehicle(this.id).subscribe((response) => {
       this.quotes.set(response.data);
+      if (response.data.length > 0) {
+        this.selectedQuote.set(response.data[0]);
+      }
     });
   }
 }
