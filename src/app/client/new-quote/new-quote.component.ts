@@ -16,6 +16,11 @@ import {
 import { toast } from 'src/app/components/toast/toast.component';
 import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';
 import { NgClass } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
+import { QuoteService } from 'src/app/services/clients/quote.service';
+import { QuoteAdd } from 'src/app/models/clients/quote.model';
+import { Response } from 'src/app/models/response.model';
+import { Router } from '@angular/router';
 
 export type ServiceQuantity = {
   [key: string]: number;
@@ -40,7 +45,11 @@ export class NewQuotePage implements OnInit {
   readonly calendar = Calendar;
   readonly check = Check;
 
+  readonly quoteService = inject(QuoteService);
   readonly servicesService = inject(ServicesService);
+  readonly route = inject(ActivatedRoute);
+  readonly router = inject(Router);
+  id: string = '';
 
   readonly isLoading = signal<boolean>(true);
   readonly page = signal<number>(1);
@@ -60,6 +69,13 @@ export class NewQuotePage implements OnInit {
   });
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('id');
+      if (id != null) {
+        this.id = id;
+      }
+    });
+
     this.findAllServices();
     this.findServices();
     this.calculatePrice();
@@ -140,6 +156,17 @@ export class NewQuotePage implements OnInit {
     this.calculatedPrice.set(total);
   }
 
+  filterQuantities() {
+    const response: { id: string; quantity: number }[] = [];
+    Object.keys(this.quantities()).forEach((key) => {
+      const quantity = this.quantities()[key];
+      if (quantity > 0) {
+        response.push({ id: key, quantity });
+      }
+    });
+    return response;
+  }
+
   async handleSubmit() {
     this.isSubmitted.set(true);
     if (this.formGroup.get('label')?.hasError('required')) {
@@ -163,32 +190,31 @@ export class NewQuotePage implements OnInit {
       return;
     }
     this.isSending.set(true);
-    // if (this.signinForm.valid) {
-    //   this.isSending.set(true);
+    const data = this.formGroup.value as { created_at: string; label: string };
 
-    //   const { value: user } = this.signinForm;
-    //   this.signinService
-    //     .signin(user as User)
-    //     .pipe(
-    //       catchError((e) => {
-    //         const error = e.error as Response<undefined>;
-    //         this.message.set(error.message);
-    //         throw e;
-    //       }),
-    //       finalize(() => {
-    //         this.isSending.set(false);
-    //       })
-    //     )
-    //     .subscribe((response) => {
-    //       this.signService.saveUserData(response.data, this.message);
-    //       toast(
-    //         'success',
-    //         'Connexion réussie',
-    //         `Vous êtes maintenant connecté en tant que ${response.data.user.firstname}`
-    //       );
+    const quote = { ...data, id_vehicle: this.id } as QuoteAdd;
+    quote.services = this.filterQuantities();
 
-    //       this.signService.redirect(response.data);
-    //     });
-    // }
+    this.quoteService
+      .saveuote(quote)
+      .pipe(
+        catchError((e) => {
+          const error = e.error as Response<undefined>;
+          toast('error', 'Erreur', error.message);
+          throw e;
+        }),
+        finalize(() => {
+          this.isSending.set(false);
+        })
+      )
+      .subscribe((response) => {
+        toast(
+          'success',
+          'Devis enregistré',
+          `Votre demande de devis a bien été enregistrée`
+        );
+
+        this.router.navigate([`/client/car/${this.id}`]);
+      });
   }
 }
