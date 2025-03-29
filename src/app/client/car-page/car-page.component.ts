@@ -6,6 +6,7 @@ import { CarFromClient } from 'src/app/models/clients/car.model';
 import { QuoteFromFind } from 'src/app/models/clients/quote.model';
 import { QuoteService } from 'src/app/services/clients/quote.service';
 import { QuoteListComponent } from '../overview/quote-list/quote-list.component';
+import { QuoteDetailsComponent } from '../../components/quote-details/quote-details.component';
 
 @Component({
   selector: 'car-page',
@@ -14,6 +15,7 @@ import { QuoteListComponent } from '../overview/quote-list/quote-list.component'
     ButtonComponent,
     RouterLink,
     QuoteListComponent,
+    QuoteDetailsComponent,
   ],
   templateUrl: './car-page.component.html',
   styles: ``,
@@ -29,6 +31,7 @@ export class CarPage implements OnInit {
 
   readonly vehicle = signal<CarFromClient>({} as CarFromClient);
   readonly quotes = signal<QuoteFromFind[]>([]);
+  readonly selectedQuoteId = signal<string>('');
   readonly selectedQuote = signal<QuoteFromFind>({} as QuoteFromFind);
 
   ngOnInit(): void {
@@ -37,6 +40,7 @@ export class CarPage implements OnInit {
       if (id != null) {
         this.id = id;
         this.findAllQuotes();
+        // this.findSelectedQuote();
       }
     });
   }
@@ -45,8 +49,17 @@ export class CarPage implements OnInit {
     this.quoteService.findAllByVehicle(this.id).subscribe((response) => {
       this.quotes.set(response.data);
       if (response.data.length > 0) {
-        this.selectedQuote.set(response.data[0]);
+        this.selectedQuoteId.set(response.data[0]._id);
+        this.findSelectedQuote();
       }
     });
+  }
+
+  findSelectedQuote() {
+    this.quoteService
+      .findQuoteById(this.selectedQuoteId())
+      .subscribe((response) => {
+        this.selectedQuote.set(response.data.devis);
+      });
   }
 }

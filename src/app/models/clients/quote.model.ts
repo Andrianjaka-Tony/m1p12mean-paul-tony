@@ -17,7 +17,7 @@ export type ServiceDetail = {
   status: 'pending' | '';
   begin_at: string | null;
   workers: any[];
-  service: Service[];
+  service: Service;
   quantity: number;
   id_devis: string;
 };
