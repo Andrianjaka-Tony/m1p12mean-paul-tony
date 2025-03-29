@@ -67,6 +67,16 @@ export class ServicesService {
     );
   }
 
+  findAllServices() {
+    const headers = createHeaders();
+    return this.http.get<Response<ServicePage>>(
+      `${apiUrl}/api/service?page=${1}&limit=${1000}`,
+      {
+        headers,
+      }
+    );
+  }
+
   saveServiceCategory(category: ServiceCategory) {
     const headers = createHeaders();
     return this.http.post<Response<undefined>>(
