@@ -15,6 +15,13 @@ export const managerRoutes: Routes = [
       import('./overview/overview.component').then((m) => m.OverviewPage),
   },
   {
+    path: 'overview/:id',
+    loadComponent: () =>
+      import('./overview/quote-page/quote-page.component').then(
+        (m) => m.QuotePage
+      ),
+  },
+  {
     path: 'dashboard',
     loadComponent: () =>
       import('./dashboard/dashboard.component').then((m) => m.DashboardPage),

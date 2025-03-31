@@ -35,4 +35,11 @@ export type QuoteFromFind = {
   replies: any[];
   payed: number;
   id_vehicle: CarFromClient;
+  id_client: {
+    email: string;
+    firstname: string;
+    lastname: string;
+    picture: string;
+    _id: string;
+  };
 };
