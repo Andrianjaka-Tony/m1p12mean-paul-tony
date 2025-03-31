@@ -5,8 +5,8 @@ import { ButtonComponent } from 'src/app/components/button/button.component';
 import { CarFromClient } from 'src/app/models/clients/car.model';
 import { QuoteFromFind } from 'src/app/models/clients/quote.model';
 import { QuoteService } from 'src/app/services/clients/quote.service';
-import { QuoteListComponent } from '../overview/quote-list/quote-list.component';
 import { QuoteDetailsComponent } from '../../components/quote-details/quote-details.component';
+import { QuoteListComponent } from './quote-list/quote-list.component';
 
 @Component({
   selector: 'car-page',

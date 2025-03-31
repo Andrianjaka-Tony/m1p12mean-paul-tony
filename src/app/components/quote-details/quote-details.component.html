@@ -10,8 +10,9 @@
       {{ quote().expected_duration }} heures
     </p>
   </div>
-  <div class="text-3xl translate-y-0.5">
-    {{ quote().price_total | numberFormat }} $
+  <div class="flex flex-col items-end translate-y-0.5">
+    <quote-status [quote]="quote()" />
+    <p class="text-3xl">{{ quote().price_total | numberFormat }} $</p>
   </div>
 </DIV>
 <div class="mt-4 w-full flex flex-col gap-4">

@@ -5,6 +5,7 @@ import {
 } from 'src/app/models/clients/quote.model';
 import { FormatDatePipe } from 'src/app/pipes/date-format.pipe';
 import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';
+import { QuoteStatusComponent } from '../quote-status/quote-status.component';
 
 @Component({
   selector: 'quote-service',
@@ -53,7 +54,12 @@ export class QuoteServiceComponent {
 
 @Component({
   selector: 'quote-details',
-  imports: [QuoteServiceComponent, FormatDatePipe, NumberFormatPipe],
+  imports: [
+    QuoteServiceComponent,
+    FormatDatePipe,
+    NumberFormatPipe,
+    QuoteStatusComponent,
+  ],
   templateUrl: './quote-details.component.html',
   styles: ``,
 })

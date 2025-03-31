@@ -1,6 +1,8 @@
 import { Service } from '../mechanic/services.model';
 import { CarFromClient } from './car.model';
 
+export type Status = 'pending' | '';
+
 export type QuoteAdd = {
   services: {
     id: string;
@@ -14,7 +16,7 @@ export type QuoteAdd = {
 
 export type ServiceDetail = {
   _id: string;
-  status: 'pending' | '';
+  status: Status;
   begin_at: string | null;
   workers: any[];
   service: Service;
@@ -27,7 +29,7 @@ export type QuoteFromFind = {
   services_details: ServiceDetail[];
   price_total: number;
   created_at: string;
-  status: 'pending' | '';
+  status: Status;
   label: string;
   expected_duration: number;
   replies: any[];
