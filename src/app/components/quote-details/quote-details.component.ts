@@ -6,10 +6,11 @@ import {
 import { FormatDatePipe } from 'src/app/pipes/date-format.pipe';
 import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';
 import { QuoteStatusComponent } from '../quote-status/quote-status.component';
+import { BadgeComponent } from '../badge/badge.component';
 
 @Component({
   selector: 'quote-service',
-  imports: [NumberFormatPipe],
+  imports: [NumberFormatPipe, BadgeComponent],
   template: `
     <div
       class="font-light relative p-4 text-sm bg-[#111] border border-[#333] rounded-lg cursor-pointer duration-200 hover:border-[#555]"
@@ -28,7 +29,14 @@ import { QuoteStatusComponent } from '../quote-status/quote-status.component';
       </div>
       <div class="w-full mt-4 flex justify-between">
         <div class="flex flex-col">
-          <p class="text-lg">{{ detail().service.label }}</p>
+          <div class="text-lg flex items-end gap-4">
+            <span>{{ detail().service.label }}</span>
+            <div class="-translate-y-1">
+              @if (detail().status === "pending") {
+              <badge color="gray" text="En attente" />
+              }
+            </div>
+          </div>
           <p class="text-sm opacity-70">
             {{ detail().service.category.label }} - Environ
             {{ detail().service.default_duration * detail().quantity }} heures
