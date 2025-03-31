@@ -62,4 +62,9 @@ export class CarPage implements OnInit {
         this.selectedQuote.set(response.data.devis);
       });
   }
+
+  refetchSelectedQuote(quoteId: string) {
+    this.selectedQuoteId.set(quoteId);
+    this.findSelectedQuote();
+  }
 }

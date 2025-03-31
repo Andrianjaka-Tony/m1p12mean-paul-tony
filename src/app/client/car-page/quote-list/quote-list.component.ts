@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output, WritableSignal } from '@angular/core';
 import { QuoteFromFind } from 'src/app/models/clients/quote.model';
 import { QuoteCardComponent } from '../quote-card/quote-card.component';
 
@@ -10,4 +10,7 @@ import { QuoteCardComponent } from '../quote-card/quote-card.component';
 })
 export class QuoteListComponent {
   readonly quotes = input.required<QuoteFromFind[]>();
+  readonly selectedQuoteId = input.required<WritableSignal<string>>();
+
+  readonly clicked = output<string>();
 }
