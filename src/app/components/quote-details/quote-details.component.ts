@@ -29,7 +29,7 @@ import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';
         <div class="flex flex-col">
           <p class="text-lg">{{ detail().service.label }}</p>
           <p class="text-sm opacity-70">
-            {{ detail().service.category.label }} -
+            {{ detail().service.category.label }} - Environ
             {{ detail().service.default_duration * detail().quantity }} heures
           </p>
         </div>
