@@ -21,7 +21,9 @@
     <div class="mt-1">
       <div class="flex items-end gap-4">
         <p>{{ quote().label }}</p>
-        <quote-status [quote]="quote()" />
+        <div class="mb-[1.1px]">
+          <quote-status [quote]="quote()" />
+        </div>
       </div>
       <p class="opacity-70 mt-0.5">
         {{ quote().created_at | formatDate }} -
