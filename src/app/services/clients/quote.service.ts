@@ -40,10 +40,18 @@ export class QuoteService {
 
   findQuoteById(id: string) {
     const headers = createHeaders();
-    console.log(id);
 
     return this.http.get<Response<{ devis: QuoteFromFind }>>(
       `${apiUrl}/api/devis/details/${id}`,
+      { headers }
+    );
+  }
+
+  findQuotesJustCreated() {
+    const headers = createHeaders();
+
+    return this.http.get<Response<{ devis: QuoteFromFind[] }>>(
+      `${apiUrl}/api/devis/created?page=1&size=1000`,
       { headers }
     );
   }

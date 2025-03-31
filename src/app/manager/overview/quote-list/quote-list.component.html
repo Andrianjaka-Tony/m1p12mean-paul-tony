@@ -1,0 +1,5 @@
+<div class="w-full grid grid-cols-3 gap-5">
+  @for (quote of quotes(); track $index) {
+  <quote-card [quote]="quote" />
+  }
+</div>
