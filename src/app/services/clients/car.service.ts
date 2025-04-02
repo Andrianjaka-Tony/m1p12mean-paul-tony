@@ -42,4 +42,13 @@ export class CarService {
       { headers }
     );
   }
+
+  findById(id: string) {
+    const headers = createHeaders();
+
+    return this.http.get<Response<CarFromClient>>(
+      `${apiUrl}/api/client_vehicle/vehicle/${id}`,
+      { headers }
+    );
+  }
 }

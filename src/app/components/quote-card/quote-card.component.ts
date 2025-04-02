@@ -1,12 +1,12 @@
 import { Component, input } from '@angular/core';
-import { BadgeComponent } from '../badge/badge.component';
 import { QuoteFromFind } from 'src/app/models/clients/quote.model';
 import { FormatDatePipe } from 'src/app/pipes/date-format.pipe';
 import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';
+import { QuoteStatusComponent } from '../quote-status/quote-status.component';
 
 @Component({
   selector: 'quote-card',
-  imports: [BadgeComponent, FormatDatePipe, NumberFormatPipe],
+  imports: [FormatDatePipe, NumberFormatPipe, QuoteStatusComponent],
   templateUrl: './quote-card.component.html',
   styles: `
     .quote-card-svg {

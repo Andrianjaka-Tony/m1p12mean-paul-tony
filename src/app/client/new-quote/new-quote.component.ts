@@ -22,6 +22,7 @@ import { QuoteAdd } from 'src/app/models/clients/quote.model';
 import { Response } from 'src/app/models/response.model';
 import { Router } from '@angular/router';
 import { CarFromClient } from 'src/app/models/clients/car.model';
+import { CarService } from 'src/app/services/clients/car.service';
 
 export type ServiceQuantity = {
   [key: string]: number;
@@ -46,11 +47,13 @@ export class NewQuotePage implements OnInit {
   readonly calendar = Calendar;
   readonly check = Check;
 
+  readonly carService = inject(CarService);
   readonly quoteService = inject(QuoteService);
   readonly servicesService = inject(ServicesService);
   readonly route = inject(ActivatedRoute);
   readonly router = inject(Router);
   id: string = '';
+  readonly car = signal<CarFromClient>({} as CarFromClient);
 
   readonly isLoading = signal<boolean>(true);
   readonly page = signal<number>(1);
@@ -78,6 +81,9 @@ export class NewQuotePage implements OnInit {
       }
     });
 
+    this.carService
+      .findById(this.id)
+      .subscribe((response) => this.car.set(response.data));
     this.findAllServices();
     this.findServices();
     this.calculatePrice();

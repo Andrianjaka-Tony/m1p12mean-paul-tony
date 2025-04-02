@@ -7,7 +7,8 @@
         class="h-full flex items-center px-4 bg-[#151515] w-96 border border-[#333] rounded"
       >
         <p class="opacity-70 font-light">
-          Don't forget to change this - Find car by id
+          {{ car().id_brand_vehicle.label }} {{ car().model }} -
+          {{ car().registration_number }}
         </p>
       </div>
       <div class="flex-1 relative">
