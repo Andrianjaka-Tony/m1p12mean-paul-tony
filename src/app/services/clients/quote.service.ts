@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { QuoteAdd, QuoteFromFind } from 'src/app/models/clients/quote.model';
+import { Employee } from 'src/app/models/mechanic/employee.model';
 import { Response } from 'src/app/models/response.model';
 import { createHeaders } from 'src/app/utils/headers';
 import { userDataStoreName } from 'src/app/utils/sotre';
@@ -72,7 +73,29 @@ export class QuoteService {
       `${apiUrl}/api/devis/on/confirm`,
       {
         id_devis: quote._id,
-        begin_at: new Date(),
+        begin_at: new Date(new Date().getTime() + 4 * 60 * 60 * 1000),
+      },
+      { headers }
+    );
+  }
+
+  findAllEmployeCompatiblesWithATask(taskId: string) {
+    const headers = createHeaders();
+
+    return this.http.get<Response<Employee[]>>(
+      `${apiUrl}/api/services_details_in_devis/task/service/${taskId}/mechanic`,
+      { headers }
+    );
+  }
+
+  assignTask(taskId: string, employeeId: string) {
+    const headers = createHeaders();
+
+    return this.http.put<Response<undefined>>(
+      `${apiUrl}/api/devis/service/assign`,
+      {
+        id_service_details: taskId,
+        workers: [employeeId],
       },
       { headers }
     );

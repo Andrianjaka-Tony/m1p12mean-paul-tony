@@ -16,9 +16,11 @@
   <quote-details [quote]="quote()" />
 
   <div class="w-full flex justify-end mt-6">
+    @if (quote().status === "pending") {
     <button-component (click)="accept()" class="flex items-center gap-3">
       <lucide-angular [img]="check" class="w-4 h-4" />
       Accepter le devis
     </button-component>
+    }
   </div>
 </div>
