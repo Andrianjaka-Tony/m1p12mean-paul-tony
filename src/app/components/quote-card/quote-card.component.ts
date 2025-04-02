@@ -1,5 +1,4 @@
 import { Component, input } from '@angular/core';
-import { BadgeComponent } from '../badge/badge.component';
 import { QuoteFromFind } from 'src/app/models/clients/quote.model';
 import { FormatDatePipe } from 'src/app/pipes/date-format.pipe';
 import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';

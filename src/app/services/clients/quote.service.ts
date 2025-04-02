@@ -82,7 +82,12 @@ export class QuoteService {
       `${apiUrl}/api/devis/on/confirm`,
       {
         id_devis: quote._id,
-        begin_at: new Date(new Date().getTime() + 4 * 60 * 60 * 1000),
+        begin_at: new Date(
+          Math.max(
+            new Date(quote.created_at).getTime() + 4 * 60 * 60 * 1000,
+            new Date().getTime() + 4 * 60 * 60 * 1000
+          )
+        ),
       },
       { headers }
     );
