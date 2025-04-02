@@ -39,6 +39,15 @@ export class QuoteService {
     );
   }
 
+  findAllByClient() {
+    const headers = createHeaders();
+
+    return this.http.get<Response<{ devis: QuoteFromFind[] }>>(
+      `${apiUrl}/api/devis/client?page=1&limit=1000`,
+      { headers }
+    );
+  }
+
   findQuoteById(id: string) {
     const headers = createHeaders();
 

@@ -5,6 +5,7 @@ import { OverviewHeaderComponent } from './overview-header/overview-header.compo
 import { CarService } from 'src/app/services/clients/car.service';
 import { CarFromClient } from 'src/app/models/clients/car.model';
 import { QuoteFromFind } from 'src/app/models/clients/quote.model';
+import { QuoteService } from 'src/app/services/clients/quote.service';
 
 @Component({
   selector: 'overview-page',
@@ -14,6 +15,7 @@ import { QuoteFromFind } from 'src/app/models/clients/quote.model';
 })
 export class OverviewPage implements OnInit {
   readonly carService = inject(CarService);
+  readonly quoteService = inject(QuoteService);
 
   readonly cars = signal<CarFromClient[]>([]);
   readonly isLoadingCars = signal<boolean>(true);
@@ -21,6 +23,7 @@ export class OverviewPage implements OnInit {
   readonly quotes = signal<QuoteFromFind[]>([]);
 
   ngOnInit(): void {
+    this.findQuotes();
     this.findCars();
   }
 
@@ -29,6 +32,12 @@ export class OverviewPage implements OnInit {
     this.carService.findCarsByClient().subscribe((response) => {
       this.isLoadingCars.set(false);
       this.cars.set(response.data);
+    });
+  }
+
+  findQuotes() {
+    this.quoteService.findAllByClient().subscribe((response) => {
+      this.quotes.set(response.data.devis);
     });
   }
 }
