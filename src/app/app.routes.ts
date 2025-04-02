@@ -25,6 +25,6 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./client/client.component').then((m) => m.ClientRoute),
     children: clientRoutes,
-    // canActivateChild: [RouteProtectionGuard],
+    canActivateChild: [RouteProtectionGuard],
   },
 ];
