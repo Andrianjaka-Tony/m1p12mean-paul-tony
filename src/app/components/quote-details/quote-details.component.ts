@@ -15,19 +15,23 @@ import { BadgeComponent } from '../badge/badge.component';
     <div
       class="font-light relative p-4 text-sm bg-[#111] border border-[#333] rounded-lg cursor-pointer duration-200 hover:border-[#555]"
     >
-      <div class="flex items-center gap-3">
+      @for(worker of detail().workers; track $index) {
+      <div class="flex items-center gap-3 mb-4">
         <div class="w-12 aspect-square rounded-full bg-[#222]">
           <img
             class="h-full w-full rounded-full object-cover"
-            src="https://res.cloudinary.com/dxvb6pnu2/image/upload/f_auto/q_auto/iqkwjjymzoetwf6saemo?_a=BAMCkGTG0"
+            src="{{ worker.id_user.picture }}"
           />
         </div>
         <div class="flex flex-col">
-          <p class="text-lg">John Doe</p>
-          <p class="opacity-70">{{ 'angolaina@gmail.com' }}</p>
+          <p class="text-lg">
+            {{ worker.id_user.lastname }} {{ worker.id_user.firstname }}
+          </p>
+          <p class="opacity-70">{{ worker.id_user.email }}</p>
         </div>
       </div>
-      <div class="w-full mt-4 flex justify-between">
+      }
+      <div class="w-full flex justify-between">
         <div class="flex flex-col">
           <div class="text-lg flex items-end gap-4">
             <span>{{ detail().service.label }}</span>
