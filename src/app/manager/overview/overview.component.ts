@@ -11,7 +11,7 @@ import { QuoteListComponent } from './quote-list/quote-list.component';
 })
 export class OverviewPage implements OnInit {
   readonly quoteService = inject(QuoteService);
-  readonly quotes = signal<QuoteFromFind[]>([]);
+  readonly waitingQuotes = signal<QuoteFromFind[]>([]);
 
   ngOnInit(): void {
     this.findQuotes();
@@ -19,7 +19,7 @@ export class OverviewPage implements OnInit {
 
   findQuotes() {
     this.quoteService.findQuotesJustCreated().subscribe((response) => {
-      this.quotes.set(response.data.devis);
+      this.waitingQuotes.set(response.data.devis);
     });
   }
 }

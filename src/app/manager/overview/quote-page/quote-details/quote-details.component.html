@@ -1,0 +1,21 @@
+<DIV class="flex w-full justify-between items-end">
+  <div class="flex flex-col gap-0.5 font-light">
+    <h2 class="text-xl">
+      {{ quote().label }} - {{ quote().id_vehicle.id_brand_vehicle.label }}
+      {{ quote().id_vehicle.model }}
+    </h2>
+    <p class="text-sm opacity-70">
+      {{ quote().created_at | formatDate }} - Environ
+      {{ quote().expected_duration }} heures
+    </p>
+  </div>
+  <div class="flex flex-col items-end translate-y-0.5">
+    <quote-status [quote]="quote()" />
+    <p class="text-3xl">{{ quote().price_total | numberFormat }} $</p>
+  </div>
+</DIV>
+<div class="mt-4 w-full flex flex-col gap-4">
+  @for (detail of quote().services_details; track $index) {
+  <quote-service [detail]="detail" />
+  }
+</div>

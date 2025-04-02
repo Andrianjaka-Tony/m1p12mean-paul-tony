@@ -55,4 +55,17 @@ export class QuoteService {
       { headers }
     );
   }
+
+  acceptQuote(quote: QuoteFromFind) {
+    const headers = createHeaders();
+
+    return this.http.put<Response<undefined>>(
+      `${apiUrl}/api/devis/on/confirm`,
+      {
+        id_devis: quote._id,
+        begin_at: new Date(),
+      },
+      { headers }
+    );
+  }
 }
