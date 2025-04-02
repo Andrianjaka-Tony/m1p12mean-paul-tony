@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -14,15 +14,17 @@ import { catchError, finalize } from 'rxjs';
 import { Response } from '../../models/response.model';
 import { SignService } from '../../services/auth/sign.service';
 import { toast } from '../../components/toast/toast.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'sign-in',
   imports: [LucideAngularModule, ReactiveFormsModule, NgClass],
   templateUrl: './sign-in.component.html',
 })
-export class SigninPage {
+export class SigninPage implements OnInit {
   readonly signService = inject(SignService);
   readonly signinService = inject(SignInService);
+  readonly route = inject(ActivatedRoute);
 
   readonly chrome = Chrome;
 
@@ -36,6 +38,18 @@ export class SigninPage {
       Validators.minLength(8),
     ]),
   });
+
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      const email = params['email'] || '';
+      const password = params['password'] || '';
+
+      this.signinForm.setValue({
+        email,
+        password,
+      });
+    });
+  }
 
   async handleSubmit() {
     this.isSubmitted.set(true);
