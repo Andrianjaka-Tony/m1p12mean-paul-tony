@@ -1,0 +1,85 @@
+<div class="px-8 py-6">
+  <h2 class="opacity-90">Effectuer un nouveau devis</h2>
+
+  <form class="w-full mt-6" [formGroup]="formGroup" (ngSubmit)="handleSubmit()">
+    <div class="flex w-full h-11 gap-3">
+      <div
+        class="h-full flex items-center px-4 bg-[#151515] w-96 border border-[#333] rounded"
+      >
+        <p class="opacity-70 font-light">
+          Don't forget to change this - Find car by id
+        </p>
+      </div>
+      <div class="flex-1 relative">
+        <div
+          class="absolute pointer-events-none top-0 left-0 h-full px-4 flex items-center justify-center"
+        >
+          <lucide-angular [img]="receipt" class="h-4 w-4 opacity-80" />
+        </div>
+        <input
+          class="w-full pl-11 h-full outline-none border border-[#333] duration-200 font-light rounded hover:border-[#555] focus:border-[#777]"
+          placeholder="Intitulé du devis"
+          name="label"
+          formControlName="label"
+        />
+      </div>
+      <div class="relative">
+        <input
+          type="datetime-local"
+          class="px-4 h-full outline-none border border-[#333] duration-200 font-light rounded hover:border-[#555] focus:border-[#777]"
+          name="created_at"
+          formControlName="created_at"
+        />
+        <lucide-angular
+          [img]="calendar"
+          class="absolute top-1/2 right-2 h-4 w-4 -translate-y-1/2 pointer-events-none"
+        />
+      </div>
+    </div>
+
+    <div class="mt-6 px-6 py-5 border border-[#333] rounded-lg">
+      <h3 class="text-xl">Services</h3>
+      <p class="text-sm opacity-70 mt-1">
+        Parmi ces services proposés, choisissez ceux qui vous correspondent
+      </p>
+      <div class="w-full mt-6 select-none">
+        <services-list
+          [services]="services()"
+          [isLoading]="isLoading()"
+          (afterChange)="findServices()"
+          [quantities]="quantities"
+          (add)="add($event)"
+          (remove)="remove($event)"
+        />
+        <div class="mt-4 w-full opacity-80 flex justify-between items-center">
+          <div class="font-light flex items-end leading-[1] gap-4">
+            <span class="text-3xl flex items-end gap-2">
+              {{ (calculatedPrice() * 95) / 100 | numberFormat }} $
+              <span class="text-sm translate-y-[-1px]"> avec abonnement </span>
+            </span>
+            <span class="text-xl opacity-70">
+              {{ calculatedPrice() | numberFormat }} $
+            </span>
+          </div>
+          <state-pagination
+            (change)="findServices()"
+            [pageSignal]="page"
+            [pageable]="pageable()"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full mt-6 flex justify-end">
+      <button-component
+        class="flex items-center gap-2 duration-200"
+        size="default"
+        type="submit"
+        [ngClass]="[isSending() ? 'opacity-70' : 'cursor-pointer']"
+      >
+        <lucide-angular [img]="check" class="h-4 w-4" />
+        <span>Terminer</span>
+      </button-component>
+    </div>
+  </form>
+</div>

@@ -11,6 +11,16 @@ export const clientRoutes: Routes = [
     loadComponent: () =>
       import('./overview/overview.component').then((m) => m.OverviewPage),
   },
+  {
+    path: 'car/:id',
+    loadComponent: () =>
+      import('./car-page/car-page.component').then((m) => m.CarPage),
+  },
+  {
+    path: 'car/quote/:id',
+    loadComponent: () =>
+      import('./new-quote/new-quote.component').then((m) => m.NewQuotePage),
+  },
   // {
   //   path: 'clients',
   //   loadComponent: () =>

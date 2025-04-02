@@ -1,0 +1,9 @@
+<div class="w-full flex flex-col gap-5">
+  @for (quote of quotes(); track $index) {
+  <quote-card
+    [quote]="quote"
+    [selectedQuoteId]="selectedQuoteId()"
+    (clicked)="clicked.emit($event)"
+  />
+  }
+</div>

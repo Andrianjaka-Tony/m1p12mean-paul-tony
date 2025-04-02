@@ -19,7 +19,9 @@
     <div class="mt-1">
       <div class="flex items-end gap-4">
         <p>{{ quote().label }}</p>
-        <badge color="blue" class="mb-[0.39px]" text="En cours" />
+        <div class="-mt-[1.1px]">
+          <quote-status [quote]="quote()" />
+        </div>
       </div>
       <p class="opacity-70 mt-0.5">{{ quote().created_at | formatDate }}</p>
     </div>
@@ -28,4 +30,9 @@
     <p class="opacity-70 mb-0.5">{{ quote().id_vehicle.model }}</p>
     <p class="text-xl">{{ quote().price_total | numberFormat }} $</p>
   </div>
+  <a
+    routerLink="/manager/overview/{{ quote()._id }}"
+    href="/manager/overview/{{ quote()._id }}"
+    class="absolute inset-0"
+  ></a>
 </div>

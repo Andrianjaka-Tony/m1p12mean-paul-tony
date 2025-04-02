@@ -1,4 +1,4 @@
-import { Component, inject, input, output } from '@angular/core';
+import { Component, input, output, WritableSignal } from '@angular/core';
 
 import {
   Ellipsis,
@@ -7,10 +7,8 @@ import {
   Settings,
   Trash2,
 } from 'lucide-angular';
-import { EmployeeService } from 'src/app/services/mechanic/employee.service';
 import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';
-import { Router } from '@angular/router';
-import { ServiceCategory } from 'src/app/models/mechanic/services.model';
+import { Service } from 'src/app/models/mechanic/services.model';
 import { SkeletonComponent } from 'src/app/components/skeleton/skeleton.component';
 import {
   TableBodyComponent,
@@ -20,17 +18,11 @@ import {
   TableHeaderComponent,
   TableRowComponent,
 } from 'src/app/components/table/table.component';
-import {
-  PopoverCloseComponent,
-  PopoverComponent,
-  PopoverContentComponent,
-  PopoverItemComponent,
-  PopoverItemsContainerComponent,
-  PopoverTriggerComponent,
-} from 'src/app/components/popover/popover.component';
+import { QuantityButtonsComponent } from '../quantity-buttons/quantity-buttons.component';
+import { ServiceQuantity } from '../new-quote.component';
 
 @Component({
-  selector: 'service-categories-list',
+  selector: 'services-list',
   imports: [
     TableComponent,
     TableHeaderComponent,
@@ -39,28 +31,25 @@ import {
     TableRowComponent,
     TableCellComponent,
     SkeletonComponent,
-    PopoverComponent,
-    PopoverTriggerComponent,
-    PopoverContentComponent,
-    PopoverItemsContainerComponent,
-    PopoverItemComponent,
-    PopoverCloseComponent,
     LucideAngularModule,
+    NumberFormatPipe,
+    QuantityButtonsComponent,
   ],
-  templateUrl: './service-categories-list.component.html',
+  templateUrl: './services-list.component.html',
   styles: ``,
 })
-export class ServiceCategoriesListComponent {
-  readonly employeeService = inject(EmployeeService);
-  readonly router = inject(Router);
-
+export class ServicesListComponent {
   readonly eye = Eye;
   readonly settings = Settings;
   readonly trash = Trash2;
   readonly ellipsis = Ellipsis;
 
+  readonly add = output<string>();
+  readonly remove = output<string>();
+
   readonly isLoading = input.required<boolean>();
-  readonly serviceCategories = input.required<ServiceCategory[]>();
+  readonly services = input.required<Service[]>();
+  readonly quantities = input.required<WritableSignal<ServiceQuantity>>();
 
   // readonly isUpdating = signal<boolean>(false);
   // readonly defaultEmployeeToUpdate = signal<Employee>({} as Employee);
@@ -70,9 +59,5 @@ export class ServiceCategoriesListComponent {
   // closeUpdate() {
   //   this.defaultEmployeeToUpdate.set({} as Employee);
   //   this.isUpdating.set(false);
-  // }
-
-  // goToProfile(id: string | undefined) {
-  //   this.router.navigate([`/manager/mechanics/employees/profile/${id}`]);
   // }
 }

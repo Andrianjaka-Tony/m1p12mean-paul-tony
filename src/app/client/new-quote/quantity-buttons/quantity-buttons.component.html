@@ -1,0 +1,19 @@
+<div class="flex items-center gap-4 text-sm">
+  <div class="flex gap-2.5 items-center">
+    <span
+      class="p-1 bg-[#222] rounded cursor-pointer"
+      [ngClass]="{ 'opacity-50 pointer-events-none': quantity() === 0 }"
+      [attr.tabindex]="quantity() === 0 ? '-1' : null"
+      (click)="remove.emit(service())"
+    >
+      <lucide-angular [img]="minus" class="h-4 w-4"></lucide-angular>
+    </span>
+    <span>{{ quantity() }}</span>
+    <span
+      (click)="add.emit(service())"
+      class="p-1 bg-[#222] rounded cursor-pointer"
+    >
+      <lucide-angular [img]="plus" class="h-4 w-4"></lucide-angular>
+    </span>
+  </div>
+</div>

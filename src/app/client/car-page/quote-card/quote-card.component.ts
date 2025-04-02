@@ -1,12 +1,13 @@
-import { Component, input } from '@angular/core';
-import { BadgeComponent } from '../badge/badge.component';
+import { Component, input, output, WritableSignal } from '@angular/core';
 import { QuoteFromFind } from 'src/app/models/clients/quote.model';
 import { FormatDatePipe } from 'src/app/pipes/date-format.pipe';
 import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';
+import { QuoteStatusComponent } from '../../../components/quote-status/quote-status.component';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'quote-card',
-  imports: [BadgeComponent, FormatDatePipe, NumberFormatPipe],
+  imports: [FormatDatePipe, NumberFormatPipe, QuoteStatusComponent, NgClass],
   templateUrl: './quote-card.component.html',
   styles: `
     .quote-card-svg {
@@ -19,4 +20,7 @@ import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';
 })
 export class QuoteCardComponent {
   readonly quote = input.required<QuoteFromFind>();
+  readonly selectedQuoteId = input.required<WritableSignal<string>>();
+
+  readonly clicked = output<string>();
 }

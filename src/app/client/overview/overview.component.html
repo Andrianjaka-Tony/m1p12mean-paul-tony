@@ -1,9 +1,9 @@
 <div class="px-8 py-6">
-  <overview-header />
+  <overview-header (afterSubmit)="findCars()" />
   <div class="mt-8 flex gap-8">
     <div class="w-1/3">
       <h2 class="text-lg mb-4">Activités</h2>
-      <quote-list />
+      <quote-list [quotes]="quotes()" />
     </div>
     <div class="w-2/3">
       <h2 class="text-lg mb-4">Véhicules</h2>
