@@ -8,5 +8,14 @@
     }
     <quote-list [quotes]="waitingQuotes()" />
   </div>
+
   <page-title title="Devis acceptés" />
+  <div class="w-full px-20">
+    @if (acceptedQuotes().length === 0) {
+    <div class="h-60 flex items-center justify-center">
+      <p class="text-lg opacity-80">Aucun devis accepté</p>
+    </div>
+    }
+    <quote-list [quotes]="acceptedQuotes()" />
+  </div>
 </div>

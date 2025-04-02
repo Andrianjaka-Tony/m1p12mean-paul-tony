@@ -1,3 +1,5 @@
 @if (quote().status === "pending") {
 <badge color="gray" text="En attente" />
+} @if (quote().status === "accepted") {
+<badge color="purple" text="Accepté" />
 }

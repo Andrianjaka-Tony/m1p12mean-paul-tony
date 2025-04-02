@@ -56,6 +56,15 @@ export class QuoteService {
     );
   }
 
+  findQuotesAccepted() {
+    const headers = createHeaders();
+
+    return this.http.get<Response<{ devis: QuoteFromFind[] }>>(
+      `${apiUrl}/api/devis/accept?page=1&size=1000`,
+      { headers }
+    );
+  }
+
   acceptQuote(quote: QuoteFromFind) {
     const headers = createHeaders();
 
