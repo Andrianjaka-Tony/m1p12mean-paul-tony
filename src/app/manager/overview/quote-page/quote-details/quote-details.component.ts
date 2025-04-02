@@ -1,4 +1,4 @@
-import { Component, inject, input, signal } from '@angular/core';
+import { Component, inject, input, OnInit, signal } from '@angular/core';
 import { BadgeComponent } from 'src/app/components/badge/badge.component';
 import { QuoteStatusComponent } from 'src/app/components/quote-status/quote-status.component';
 import {
@@ -71,7 +71,7 @@ import { toast } from 'src/app/components/toast/toast.component';
           @for( employee of employees(); track $index) {
           <div
             class="flex items-center gap-3 p-3 bg-[#111] duration-200 hover:bg-[#222] rounded-lg cursor-pointer"
-            (click)="update(employee._id || '')"
+            (click)="update(employee)"
           >
             <div class="w-10 aspect-square rounded-full bg-[#222]">
               <img
@@ -94,18 +94,22 @@ import { toast } from 'src/app/components/toast/toast.component';
   `,
   styles: ``,
 })
-export class QuoteServiceComponent {
+export class QuoteServiceComponent implements OnInit {
   readonly quoteService = inject(QuoteService);
 
   readonly detail = input.required<ServiceDetail>();
-  readonly worker = signal<Employee>({} as Employee);
+  readonly workers = signal<Employee[]>([] as Employee[]);
   readonly employees = signal<Employee[]>([]);
 
   readonly isUpdating = signal<boolean>(false);
 
+  ngOnInit(): void {
+    this.workers.set(this.detail().workers);
+  }
+
   openModal() {
     this.isUpdating.set(true);
-    if (this.employees().length === 0) {
+    if (this.employees().length === 0 && this.workers().length === 0) {
       this.quoteService
         .findAllEmployeCompatiblesWithATask(this.detail()._id)
         .subscribe((response) => {
@@ -118,9 +122,9 @@ export class QuoteServiceComponent {
     this.isUpdating.set(!this.isUpdating());
   }
 
-  update(employeeId: string) {
+  update(employee: Employee) {
     this.quoteService
-      .assignTask(this.detail()._id, employeeId)
+      .assignTask(this.detail()._id, employee._id || '')
       .pipe(
         catchError((error) => {
           toast(
@@ -137,6 +141,7 @@ export class QuoteServiceComponent {
           'Assignation réussie',
           "L'assignation a bien été effectuée"
         );
+        this.workers.set([employee]);
         this.toggleModal();
       });
   }

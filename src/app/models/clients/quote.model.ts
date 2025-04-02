@@ -1,3 +1,4 @@
+import { Employee } from '../mechanic/employee.model';
 import { Service } from '../mechanic/services.model';
 import { CarFromClient } from './car.model';
 
@@ -18,7 +19,7 @@ export type ServiceDetail = {
   _id: string;
   status: Status;
   begin_at: string | null;
-  workers: any[];
+  workers: Employee[];
   service: Service;
   quantity: number;
   id_devis: string;
