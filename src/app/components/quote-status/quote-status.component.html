@@ -2,4 +2,6 @@
 <badge color="gray" text="En attente" />
 } @if (quote().status === "accepted") {
 <badge color="purple" text="Accepté" />
+} @if (quote().status === "in_progress") {
+<badge color="blue" text="EN cours" />
 }

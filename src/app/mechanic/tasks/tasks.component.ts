@@ -3,18 +3,11 @@ import { ServiceDetail } from 'src/app/models/clients/quote.model';
 import { QuoteService } from 'src/app/services/clients/quote.service';
 import { BadgeComponent } from '../../components/badge/badge.component';
 import { NumberFormatPipe } from 'src/app/pipes/number-format.pipe';
-import { ButtonComponent } from '../../components/button/button.component';
 import { Check, LucideAngularModule } from 'lucide-angular';
-import { toast } from 'src/app/components/toast/toast.component';
 
 @Component({
   selector: 'overview-page',
-  imports: [
-    BadgeComponent,
-    NumberFormatPipe,
-    ButtonComponent,
-    LucideAngularModule,
-  ],
+  imports: [BadgeComponent, NumberFormatPipe, LucideAngularModule],
   templateUrl: './tasks.component.html',
   styles: ``,
 })
