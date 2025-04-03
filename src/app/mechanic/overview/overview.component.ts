@@ -51,4 +51,13 @@ export class OverviewPage implements OnInit {
       );
     });
   }
+
+  finishTask(task: ServiceDetail) {
+    this.quoteService.finishTask(task._id).subscribe((response) => {
+      toast('success', 'Tâche terminée', 'La tâche a bien été terminée');
+      this.tasksStarted.set(
+        this.tasksStarted().filter((t) => t._id !== task._id)
+      );
+    });
+  }
 }

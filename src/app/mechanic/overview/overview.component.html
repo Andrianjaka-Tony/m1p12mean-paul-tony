@@ -34,7 +34,7 @@
           size="default"
           variant="secondary"
           class="flex items-center gap-2.5"
-          (click)="startTask(detail)"
+          (click)="finishTask(detail)"
         >
           <lucide-angular [img]="check" class="h-3 w-3" />
           Terminer
@@ -77,11 +77,12 @@
         </div>
       </div>
 
-      <div class="flex gap-2 mt-4 w-fit" (click)="startTask(detail)">
+      <div class="flex gap-2 mt-4 w-fit">
         <button-component
           size="sm"
           variant="secondary"
           class="flex items-center gap-2.5"
+          (click)="startTask(detail)"
         >
           <lucide-angular [img]="check" class="h-3 w-3" />
           Commencer
