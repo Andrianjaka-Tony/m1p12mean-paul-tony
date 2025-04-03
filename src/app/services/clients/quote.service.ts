@@ -136,4 +136,18 @@ export class QuoteService {
       { headers: header }
     );
   }
+
+  startTask(taskId: string) {
+    const header = createHeaders();
+
+    const user = JSON.parse(
+      localStorage.getItem(userDataStoreName) || '{}'
+    ) as { _id: string };
+
+    return this.http.put<Response<ServiceDetail[]>>(
+      `${apiUrl}/api/services_details_in_devis/start`,
+      { id_task: taskId, id_user: user._id },
+      { headers: header }
+    );
+  }
 }
