@@ -27,4 +27,12 @@ export const routes: Routes = [
     children: clientRoutes,
     canActivateChild: [RouteProtectionGuard],
   },
+  {
+    path: 'client',
+    pathMatch: 'prefix',
+    loadComponent: () =>
+      import('./mechanic/mechanic.component').then((m) => m.MechanicRoute),
+    children: clientRoutes,
+    canActivateChild: [RouteProtectionGuard],
+  },
 ];
