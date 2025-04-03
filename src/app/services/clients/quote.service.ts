@@ -127,4 +127,13 @@ export class QuoteService {
       { headers: header }
     );
   }
+
+  findStartedTasks() {
+    const header = createHeaders();
+
+    return this.http.get<Response<ServiceDetail[]>>(
+      `${apiUrl}/api/services_details_in_devis/tasks/started`,
+      { headers: header }
+    );
+  }
 }

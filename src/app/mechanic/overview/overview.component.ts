@@ -21,16 +21,23 @@ export class OverviewPage implements OnInit {
   readonly check = Check;
 
   readonly quoteService = inject(QuoteService);
-  readonly details = signal<ServiceDetail[]>([]);
+  readonly tasksStarted = signal<ServiceDetail[]>([]);
+  readonly tasksNotStarted = signal<ServiceDetail[]>([]);
 
   ngOnInit(): void {
+    this.findStartedTasks();
     this.findNonStartedTasks();
+  }
+
+  findStartedTasks() {
+    this.quoteService.findStartedTasks().subscribe((response) => {
+      this.tasksStarted.set(response.data);
+    });
   }
 
   findNonStartedTasks() {
     this.quoteService.findNonStartedTasks().subscribe((response) => {
-      this.details.set(response.data);
-      console.log(response.data);
+      this.tasksNotStarted.set(response.data);
     });
   }
 }
