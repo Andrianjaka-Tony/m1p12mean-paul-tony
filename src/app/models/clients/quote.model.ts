@@ -2,7 +2,7 @@ import { Employee } from '../mechanic/employee.model';
 import { Service } from '../mechanic/services.model';
 import { CarFromClient } from './car.model';
 
-export type Status = 'pending' | 'accepted' | '';
+export type Status = 'pending' | 'accepted' | 'in_progress' | 'completed' | '';
 
 export type QuoteAdd = {
   services: {

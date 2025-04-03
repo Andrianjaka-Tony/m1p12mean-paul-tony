@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, output, Output } from '@angular/core';
 
 @Component({
   selector: 'button-component',
@@ -23,7 +23,7 @@ export class ButtonComponent {
   @Input() class = '';
   @Input() type = 'button';
 
-  @Output() click = new EventEmitter<Event>();
+  click = output();
 
   get buttonClasses(): string {
     return [

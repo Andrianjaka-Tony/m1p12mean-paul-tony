@@ -38,6 +38,10 @@ import { BadgeComponent } from '../badge/badge.component';
             <div class="-translate-y-1">
               @if (detail().status === "pending") {
               <badge color="gray" text="En attente" />
+              } @if (detail().status === "in_progress") {
+              <badge color="blue" text="En cours" />
+              } @if (detail().status === "completed") {
+              <badge color="green" text="Terminé" />
               }
             </div>
           </div>

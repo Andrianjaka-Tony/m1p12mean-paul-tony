@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, OnInit } from '@angular/core';
 import { BadgeComponent } from '../badge/badge.component';
 import { QuoteFromFind } from 'src/app/models/clients/quote.model';
 
@@ -8,6 +8,10 @@ import { QuoteFromFind } from 'src/app/models/clients/quote.model';
   templateUrl: './quote-status.component.html',
   styles: ``,
 })
-export class QuoteStatusComponent {
+export class QuoteStatusComponent implements OnInit {
   readonly quote = input.required<QuoteFromFind>();
+
+  ngOnInit(): void {
+    console.log(this.quote());
+  }
 }

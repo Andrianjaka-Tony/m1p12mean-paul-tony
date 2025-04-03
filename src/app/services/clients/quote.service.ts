@@ -1,6 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { QuoteAdd, QuoteFromFind } from 'src/app/models/clients/quote.model';
+import {
+  QuoteAdd,
+  QuoteFromFind,
+  ServiceDetail,
+} from 'src/app/models/clients/quote.model';
 import { Employee } from 'src/app/models/mechanic/employee.model';
 import { Response } from 'src/app/models/response.model';
 import { createHeaders } from 'src/app/utils/headers';
@@ -112,6 +116,61 @@ export class QuoteService {
         workers: [employeeId],
       },
       { headers }
+    );
+  }
+
+  findNonStartedTasks() {
+    const header = createHeaders();
+
+    return this.http.get<Response<ServiceDetail[]>>(
+      `${apiUrl}/api/services_details_in_devis/tasks/not-started`,
+      { headers: header }
+    );
+  }
+
+  findStartedTasks() {
+    const header = createHeaders();
+
+    return this.http.get<Response<ServiceDetail[]>>(
+      `${apiUrl}/api/services_details_in_devis/tasks/started`,
+      { headers: header }
+    );
+  }
+
+  findAllTasks() {
+    const header = createHeaders();
+
+    return this.http.get<Response<ServiceDetail[]>>(
+      `${apiUrl}/api/services_details_in_devis/tasks`,
+      { headers: header }
+    );
+  }
+
+  startTask(taskId: string) {
+    const header = createHeaders();
+
+    const user = JSON.parse(
+      localStorage.getItem(userDataStoreName) || '{}'
+    ) as { _id: string };
+
+    return this.http.put<Response<ServiceDetail[]>>(
+      `${apiUrl}/api/services_details_in_devis/start`,
+      { id_task: taskId, id_user: user._id },
+      { headers: header }
+    );
+  }
+
+  finishTask(taskId: string) {
+    const header = createHeaders();
+
+    const user = JSON.parse(
+      localStorage.getItem(userDataStoreName) || '{}'
+    ) as { _id: string };
+
+    return this.http.put<Response<ServiceDetail[]>>(
+      `${apiUrl}/api/services_details_in_devis/finished`,
+      { id_task: taskId, id_user: user._id },
+      { headers: header }
     );
   }
 }

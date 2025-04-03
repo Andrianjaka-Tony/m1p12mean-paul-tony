@@ -28,6 +28,7 @@ export class OverviewPage implements OnInit {
   findAcceptedQuotes() {
     this.quoteService.findQuotesAccepted().subscribe((response) => {
       this.acceptedQuotes.set(response.data.devis);
+      console.log(response.data.devis);
     });
   }
 }
