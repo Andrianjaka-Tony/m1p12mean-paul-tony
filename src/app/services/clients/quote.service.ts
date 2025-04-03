@@ -137,6 +137,15 @@ export class QuoteService {
     );
   }
 
+  findAllTasks() {
+    const header = createHeaders();
+
+    return this.http.get<Response<ServiceDetail[]>>(
+      `${apiUrl}/api/services_details_in_devis/tasks`,
+      { headers: header }
+    );
+  }
+
   startTask(taskId: string) {
     const header = createHeaders();
 

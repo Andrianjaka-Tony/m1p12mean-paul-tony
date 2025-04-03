@@ -11,4 +11,9 @@ export const mechanicRoutes: Routes = [
     loadComponent: () =>
       import('./overview/overview.component').then((m) => m.OverviewPage),
   },
+  {
+    path: 'tasks',
+    loadComponent: () =>
+      import('./tasks/tasks.component').then((m) => m.TasksPage),
+  },
 ];

@@ -21,7 +21,7 @@ export class MechanicRoute {
     },
     {
       href: '/mechanic/tasks',
-      label: 'Tâches',
+      label: 'Toutes les tâches',
     },
   ];
 }
