@@ -37,7 +37,6 @@ export class QuotePage implements OnInit {
   findQuote() {
     this.quoteService.findQuoteById(this.id).subscribe((response) => {
       this.quote.set(response.data.devis);
-      console.log(response.data.devis);
     });
   }
 

@@ -1,3 +1,47 @@
 <div class="px-8 py-6">
-  <div class="text-2xl">Hello from mechanic</div>
+  <div class="text-2xl mb-8">Tâches en attente</div>
+  <div class="flex flex-col gap-4">
+    @for (detail of details(); track $index) {
+    <div
+      class="font-light relative p-4 text-sm bg-[#111] border border-[#333] rounded-lg cursor-pointer duration-200 hover:border-[#555]"
+    >
+      <div class="w-full flex justify-between">
+        <div class="flex flex-col">
+          <div class="text-lg flex items-end gap-4">
+            <span>{{ detail.service.label }}</span>
+            <div class="-translate-y-1">
+              @if (detail.status === "pending") {
+              <badge color="gray" text="En attente" />
+              }
+            </div>
+          </div>
+          <p class="text-sm opacity-70">
+            Environ
+            {{ detail.service.default_duration * detail.quantity }} heures
+          </p>
+        </div>
+        <div class="flex flex-col items-end">
+          <p class="text-lg">
+            {{ detail.service.price * detail.quantity | numberFormat }} $
+          </p>
+          <p class="text-sm opacity-70">
+            Quantité : {{ detail.quantity }} - Prix unitaire :
+            {{ detail.service.price }} $
+          </p>
+        </div>
+      </div>
+
+      <div class="flex gap-2 mt-4">
+        <button-component
+          size="sm"
+          variant="secondary"
+          class="flex items-center gap-2.5"
+        >
+          <lucide-angular [img]="check" class="h-3 w-3" />
+          Commencer
+        </button-component>
+      </div>
+    </div>
+    }
+  </div>
 </div>

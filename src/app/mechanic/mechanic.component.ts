@@ -7,7 +7,7 @@ import { PrivateNacigationLink } from '../components/private-navigation/private-
   selector: 'app-manager',
   imports: [RouterOutlet, PrivateNavigationComponent],
   template: `
-    <private-navigation role="Client" [links]="links" />
+    <private-navigation role="Mécanicien" [links]="links" />
     <div class="px-5">
       <router-outlet />
     </div>
