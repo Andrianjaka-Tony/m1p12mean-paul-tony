@@ -43,4 +43,7 @@ export type QuoteFromFind = {
     picture: string;
     _id: string;
   };
+  details?: {
+    progress?: number;
+  };
 };

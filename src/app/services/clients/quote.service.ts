@@ -55,7 +55,7 @@ export class QuoteService {
   findQuoteById(id: string) {
     const headers = createHeaders();
 
-    return this.http.get<Response<{ devis: QuoteFromFind }>>(
+    return this.http.get<Response<QuoteFromFind>>(
       `${apiUrl}/api/devis/details/${id}`,
       { headers }
     );
@@ -75,6 +75,24 @@ export class QuoteService {
 
     return this.http.get<Response<{ devis: QuoteFromFind[] }>>(
       `${apiUrl}/api/devis/accept?page=1&size=1000`,
+      { headers }
+    );
+  }
+
+  findQuotesInProgress() {
+    const headers = createHeaders();
+
+    return this.http.get<Response<{ devis: QuoteFromFind[] }>>(
+      `${apiUrl}/api/devis/started?page=1&size=1000`,
+      { headers }
+    );
+  }
+
+  findQuotesCompleted() {
+    const headers = createHeaders();
+
+    return this.http.get<Response<{ devis: QuoteFromFind[] }>>(
+      `${apiUrl}/api/devis/completed?page=1&size=1000`,
       { headers }
     );
   }
