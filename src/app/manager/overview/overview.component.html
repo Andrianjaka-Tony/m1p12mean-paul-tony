@@ -1,21 +1,71 @@
-<div class="w-full text-[#ccc]">
-  <page-title title="Devis en attente" />
-  <div class="w-full px-20">
+<div class="px-20 py-10 flex gap-10">
+  <div
+    [ngClass]="[activeTab() == 'waiting' ? 'opacity-100' : 'opacity-60']"
+    class="cursor-pointer"
+    (click)="updateTab('waiting')"
+  >
+    En attente
+  </div>
+  <div
+    [ngClass]="[activeTab() == 'accepted' ? 'opacity-100' : 'opacity-60']"
+    class="cursor-pointer"
+    (click)="updateTab('accepted')"
+  >
+    Acceptés
+  </div>
+  <div
+    [ngClass]="[activeTab() == 'in progress' ? 'opacity-100' : 'opacity-60']"
+    class="cursor-pointer"
+    (click)="updateTab('in progress')"
+  >
+    En progression
+  </div>
+  <div
+    [ngClass]="[activeTab() == 'completed' ? 'opacity-100' : 'opacity-60']"
+    class="cursor-pointer"
+    (click)="updateTab('completed')"
+  >
+    Terminés
+  </div>
+</div>
+<div class="w-full mt-8 text-[#ccc] px-20">
+  @if (isLoading()) {
+  <div class="w-full flex justify-center py-48">Chargement...</div>
+  } @if (!isLoading()) { @if (activeTab() === "waiting") {
+  <div class="w-full">
     @if (waitingQuotes().length === 0) {
-    <div class="h-60 flex items-center justify-center">
-      <p class="text-lg opacity-80">Aucun devis en attente</p>
+    <div class="w-full flex justify-center py-48">
+      <p class="opacity-80">Aucun devis en attente</p>
     </div>
     }
     <quote-list [quotes]="waitingQuotes()" />
   </div>
-
-  <page-title title="Devis acceptés" />
-  <div class="w-full px-20">
+  } @if (activeTab() === "accepted") {
+  <div class="w-full">
     @if (acceptedQuotes().length === 0) {
-    <div class="h-60 flex items-center justify-center">
-      <p class="text-lg opacity-80">Aucun devis accepté</p>
+    <div class="w-full flex justify-center py-48">
+      <p class="opacity-80">Aucun devis accepté</p>
     </div>
     }
     <quote-list [quotes]="acceptedQuotes()" />
   </div>
+  } @if (activeTab() === "in progress") {
+  <div class="w-full">
+    @if (inProgressQuotes().length === 0) {
+    <div class="w-full flex justify-center py-48">
+      <p class="opacity-80">Aucun devis en cours</p>
+    </div>
+    }
+    <quote-list [quotes]="inProgressQuotes()" />
+  </div>
+  } @if (activeTab() === "completed") {
+  <div class="w-full">
+    @if (completedQuotes().length === 0) {
+    <div class="w-full flex justify-center py-48">
+      <p class="opacity-80">Aucun devis terminé</p>
+    </div>
+    }
+    <quote-list [quotes]="completedQuotes()" />
+  </div>
+  } }
 </div>

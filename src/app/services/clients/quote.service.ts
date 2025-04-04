@@ -79,6 +79,24 @@ export class QuoteService {
     );
   }
 
+  findQuotesInProgress() {
+    const headers = createHeaders();
+
+    return this.http.get<Response<{ devis: QuoteFromFind[] }>>(
+      `${apiUrl}/api/devis/started?page=1&size=1000`,
+      { headers }
+    );
+  }
+
+  findQuotesCompleted() {
+    const headers = createHeaders();
+
+    return this.http.get<Response<{ devis: QuoteFromFind[] }>>(
+      `${apiUrl}/api/devis/completed?page=1&size=1000`,
+      { headers }
+    );
+  }
+
   acceptQuote(quote: QuoteFromFind) {
     const headers = createHeaders();
 
