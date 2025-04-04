@@ -59,7 +59,7 @@ export class CarPage implements OnInit {
     this.quoteService
       .findQuoteById(this.selectedQuoteId())
       .subscribe((response) => {
-        this.selectedQuote.set(response.data.devis);
+        this.selectedQuote.set(response.data);
       });
   }
 
